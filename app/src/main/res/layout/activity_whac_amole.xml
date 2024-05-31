@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".game.WhacAMoleActivity">
+
+    <TextView
+        android:id="@+id/countDownTimerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="30.000"
+        android:textSize="30dp"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toTopOf="@+id/guide_timer_text_top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/scoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="40dp"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toTopOf="@+id/guide_score_text_top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/firstMoleBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mole_hole"
+        android:adjustViewBounds="true"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintTop_toTopOf="@id/guide_top"
+        app:layout_constraintBottom_toBottomOf="@id/guide_top2"
+        app:layout_constraintLeft_toLeftOf="@id/guide_left"
+        app:layout_constraintRight_toRightOf="@id/guide_right"/>
+
+    <ImageView
+        android:id="@+id/secondMoleBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mole_hole"
+        android:adjustViewBounds="true"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintTop_toTopOf="@id/guide_top"
+        app:layout_constraintBottom_toBottomOf="@id/guide_top2"
+        app:layout_constraintLeft_toRightOf="@id/firstMoleBtn"
+        app:layout_constraintRight_toLeftOf="@id/thirdMoleBtn"/>
+
+    <ImageView
+        android:id="@+id/thirdMoleBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mole_hole"
+        android:adjustViewBounds="true"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintTop_toTopOf="@id/guide_top"
+        app:layout_constraintBottom_toBottomOf="@id/guide_top2"
+        app:layout_constraintLeft_toLeftOf="@id/guide_left"
+        app:layout_constraintRight_toRightOf="@id/guide_right"/>
+
+    <ImageView
+        android:id="@+id/fourthMoleBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mole_hole"
+        android:adjustViewBounds="true"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintTop_toBottomOf="@id/firstMoleBtn"
+        app:layout_constraintBottom_toBottomOf="@id/guide_top3"
+        app:layout_constraintLeft_toLeftOf="@id/guide_left"
+        app:layout_constraintRight_toRightOf="@id/guide_right"/>
+
+    <ImageView
+        android:id="@+id/fifthMoleBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mole_hole"
+        android:adjustViewBounds="true"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintTop_toBottomOf="@id/secondMoleBtn"
+        app:layout_constraintBottom_toBottomOf="@id/guide_top3"
+        app:layout_constraintLeft_toRightOf="@id/fourthMoleBtn"
+        app:layout_constraintRight_toLeftOf="@id/sixthMoleBtn"/>
+
+    <ImageView
+        android:id="@+id/sixthMoleBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mole_hole"
+        android:adjustViewBounds="true"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintTop_toBottomOf="@id/thirdMoleBtn"
+        app:layout_constraintBottom_toBottomOf="@id/guide_top3"
+        app:layout_constraintLeft_toLeftOf="@id/guide_left"
+        app:layout_constraintRight_toRightOf="@id/guide_right"/>
+
+    <ImageView
+        android:id="@+id/seventhMoleBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mole_hole"
+        android:adjustViewBounds="true"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintTop_toTopOf="@id/guide_top"
+        app:layout_constraintBottom_toBottomOf="@id/guide_bottom"
+        app:layout_constraintLeft_toLeftOf="@id/guide_left"
+        app:layout_constraintRight_toRightOf="@id/guide_right"/>
+
+    <ImageView
+        android:id="@+id/eigthMoleBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mole_hole"
+        android:adjustViewBounds="true"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintTop_toTopOf="@id/guide_top"
+        app:layout_constraintBottom_toBottomOf="@id/guide_bottom"
+        app:layout_constraintLeft_toRightOf="@id/seventhMoleBtn"
+        app:layout_constraintRight_toLeftOf="@id/ninethMoleBtn"/>
+
+    <ImageView
+        android:id="@+id/ninethMoleBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/mole_hole"
+        android:adjustViewBounds="true"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintTop_toTopOf="@id/guide_top"
+        app:layout_constraintBottom_toBottomOf="@id/guide_bottom"
+        app:layout_constraintLeft_toLeftOf="@id/guide_left"
+        app:layout_constraintRight_toRightOf="@id/guide_right"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_top"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35">
+    </androidx.constraintlayout.widget.Guideline>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_top2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.55">
+    </androidx.constraintlayout.widget.Guideline>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_top3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75">
+    </androidx.constraintlayout.widget.Guideline>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_bottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95">
+    </androidx.constraintlayout.widget.Guideline>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_left"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05">
+    </androidx.constraintlayout.widget.Guideline>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_right"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95">
+    </androidx.constraintlayout.widget.Guideline>
+
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/holeFieldLinLay"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="vertical"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/scoreText"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent">-->
+
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/firstHoleLineLinLay"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="horizontal"-->
+    <!--            android:padding="15dp">-->
+
+    <!--            <ImageButton-->
+    <!--                android:id="@+id/firstMoleBtn"-->
+    <!--                android:layout_width="95dp"-->
+    <!--                android:layout_height="130dp"-->
+    <!--                android:layout_gravity="bottom"-->
+    <!--                android:layout_weight="1"-->
+    <!--                android:background="@android:color/transparent"-->
+    <!--                android:clickable="false"-->
+
+    <!--                android:padding="5dp"-->
+    <!--                android:src="@drawable/ic_mole_hole" />-->
+
+    <!--            <ImageButton-->
+    <!--                android:id="@+id/secondMoleBtn"-->
+    <!--                android:layout_width="95dp"-->
+    <!--                android:layout_height="130dp"-->
+    <!--                android:layout_gravity="bottom"-->
+    <!--                android:layout_weight="1"-->
+    <!--                android:background="@android:color/transparent"-->
+    <!--                android:clickable="false"-->
+    <!--                android:padding="5dp"-->
+    <!--                android:src="@drawable/ic_mole_hole" />-->
+
+    <!--            <ImageButton-->
+    <!--                android:id="@+id/thirdMoleBtn"-->
+    <!--                android:layout_width="95dp"-->
+    <!--                android:layout_height="130dp"-->
+    <!--                android:layout_gravity="bottom"-->
+    <!--                android:layout_weight="1"-->
+    <!--                android:background="@android:color/transparent"-->
+    <!--                android:clickable="false"-->
+    <!--                android:padding="5dp"-->
+    <!--                android:src="@drawable/ic_mole_hole" />-->
+
+    <!--        </LinearLayout>-->
+
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/secondHoleLineLinLay"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="horizontal"-->
+    <!--            android:padding="10dp">-->
+
+    <!--            <ImageButton-->
+    <!--                android:id="@+id/fourthMoleBtn"-->
+    <!--                android:layout_width="95dp"-->
+    <!--                android:layout_height="130dp"-->
+    <!--                android:layout_gravity="bottom"-->
+    <!--                android:layout_weight="1"-->
+    <!--                android:background="@android:color/transparent"-->
+    <!--                android:clickable="false"-->
+    <!--                android:padding="5dp"-->
+    <!--                android:src="@drawable/ic_mole_hole" />-->
+
+    <!--            <ImageButton-->
+    <!--                android:id="@+id/fifthMoleBtn"-->
+    <!--                android:layout_width="95dp"-->
+    <!--                android:layout_height="130dp"-->
+    <!--                android:layout_gravity="bottom"-->
+    <!--                android:layout_weight="1"-->
+    <!--                android:background="@android:color/transparent"-->
+    <!--                android:clickable="false"-->
+    <!--                android:padding="5dp"-->
+    <!--                android:src="@drawable/ic_mole_hole" />-->
+
+    <!--            <ImageButton-->
+    <!--                android:id="@+id/sixthMoleBtn"-->
+    <!--                android:layout_width="95dp"-->
+    <!--                android:layout_height="130dp"-->
+    <!--                android:layout_gravity="bottom"-->
+    <!--                android:layout_weight="1"-->
+    <!--                android:background="@android:color/transparent"-->
+    <!--                android:clickable="false"-->
+    <!--                android:padding="5dp"-->
+    <!--                android:src="@drawable/ic_mole_hole" />-->
+
+    <!--        </LinearLayout>-->
+
+    <!--        <LinearLayout-->
+    <!--            android:id="@+id/thirdHoleLineLinLay"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="horizontal"-->
+    <!--            android:padding="10dp">-->
+
+    <!--            <ImageButton-->
+    <!--                android:id="@+id/seventhMoleBtn"-->
+    <!--                android:layout_width="95dp"-->
+    <!--                android:layout_height="130dp"-->
+    <!--                android:layout_gravity="bottom"-->
+    <!--                android:layout_weight="1"-->
+    <!--                android:background="@android:color/transparent"-->
+    <!--                android:clickable="false"-->
+    <!--                android:padding="5dp"-->
+    <!--                android:src="@drawable/ic_mole_hole" />-->
+
+    <!--            <ImageButton-->
+    <!--                android:id="@+id/eigthMoleBtn"-->
+    <!--                android:layout_width="95dp"-->
+    <!--                android:layout_height="130dp"-->
+    <!--                android:layout_gravity="bottom"-->
+    <!--                android:layout_weight="1"-->
+    <!--                android:background="@android:color/transparent"-->
+    <!--                android:clickable="false"-->
+    <!--                android:padding="5dp"-->
+    <!--                android:src="@drawable/ic_mole_hole" />-->
+
+    <!--            <ImageButton-->
+    <!--                android:id="@+id/ninethMoleBtn"-->
+    <!--                android:layout_width="95dp"-->
+    <!--                android:layout_height="130dp"-->
+    <!--                android:layout_gravity="bottom"-->
+    <!--                android:layout_weight="1"-->
+    <!--                android:background="@android:color/transparent"-->
+    <!--                android:clickable="false"-->
+    <!--                android:padding="5dp"-->
+    <!--                android:src="@drawable/ic_mole_hole" />-->
+
+    <!--        </LinearLayout>-->
+
+    <!--    </LinearLayout>-->
+
+    <com.corporation8793.dementia.game.pulse_countdown.PulseCountDown
+        android:id="@+id/pulseCountDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3"
+        android:textSize="50dp"
+        app:pc_startValue="3"
+        app:pc_endValue="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_timer_text_top"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.008">
+    </androidx.constraintlayout.widget.Guideline>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_score_text_top"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.055">
+    </androidx.constraintlayout.widget.Guideline>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
