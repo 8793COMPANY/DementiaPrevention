@@ -8,6 +8,35 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+<<<<<<< HEAD
+        android:background="@color/white" >
+
+        <Button
+            android:id="@+id/seoul"
+            android:text="seoul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"></Button>
+
+        <Button
+            android:id="@+id/daegu"
+            android:text="daegu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="100dp"
+            app:layout_constraintLeft_toLeftOf="parent"></Button>
+
+        <Button
+            android:id="@+id/gwangju"
+            android:text="gwangu"
+            android:layout_marginLeft="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"></Button>
+=======
         android:background="#2E8BD5">
 
         <ProgressBar
@@ -67,6 +96,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
 
+>>>>>>> 82edb761c14c8da33bf7ca83a0d627ab3920d2b8
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include

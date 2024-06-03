@@ -6,6 +6,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+<<<<<<< HEAD
+import android.widget.Button;
+
+import com.opencsv.exceptions.CsvException;
+
+import java.io.IOException;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button seoul, daegu, gwangju;
+=======
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
@@ -31,11 +42,43 @@ public class MainActivity extends AppCompatActivity {
     // 기본 3초로 설정
     private static final Long SET_TIME = 3L;
 
+>>>>>>> 82edb761c14c8da33bf7ca83a0d627ab3920d2b8
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+<<<<<<< HEAD
+        try {
+            Region.loadData(MainActivity.this);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (CsvException e) {
+            throw new RuntimeException(e);
+        }
+
+        seoul = findViewById(R.id.seoul);
+        daegu = findViewById(R.id.daegu);
+        gwangju = findViewById(R.id.gwangju);
+
+        Region region = new Region();
+
+        seoul.setOnClickListener(v->{
+            region.check_region("서울특별시");
+        });
+
+        daegu.setOnClickListener(v->{
+            region.check_region("대구광역시");
+        });
+
+
+        gwangju.setOnClickListener(v->{
+            region.check_region("경기도");
+        });
+
+
+
+=======
         progressBar = findViewById(R.id.progressBar);
         startBtn = findViewById(R.id.startBtn);
         whacAMoleBtn = findViewById(R.id.whacAMoleBtn);
@@ -161,5 +204,6 @@ public class MainActivity extends AppCompatActivity {
         // 현재는 초 단위만 계산
         setTime = time * 1000;
         progressBar.setMax((int) setTime);
+>>>>>>> 82edb761c14c8da33bf7ca83a0d627ab3920d2b8
     }
 }
