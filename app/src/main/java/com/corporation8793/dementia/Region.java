@@ -36,6 +36,8 @@ public class Region {
     public static final int gangwon_do = 51;
     public static final int jeonbuk_do = 52;
 
+    String location = "";
+
     public static Map<String, Set<RegionDetail>> region = new HashMap<>();
     public static void loadData(Activity activity) throws IOException, CsvException {
         AssetManager assetManager = activity.getAssets();
@@ -86,13 +88,16 @@ public class Region {
             Log.e("hi si name", s.si);
             Log.e("hi gu name", s.gu);
             Log.e("hi center point",  s.center_point.longitude+","+s.center_point.latitude);
-
         });
-
-
-
     }
 
+    public String get_location(String name) {
+        region.get(name).forEach(s -> {
+            Log.e("test", s.si);
+            Log.e("test", s.gu);
+            location = Float.toString(s.center_point.longitude) + "," + Float.toString(s.center_point.latitude);
+        });
 
-
+        return location;
+    }
 }

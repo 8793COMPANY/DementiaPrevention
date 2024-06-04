@@ -7,6 +7,4 @@ public class CenterPoint {
         this.latitude = latitude;
         this.longitude = longitude;
     }
-
-
 }

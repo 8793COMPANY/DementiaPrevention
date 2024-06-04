@@ -6,19 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-<<<<<<< HEAD
-import android.widget.Button;
-
-import com.opencsv.exceptions.CsvException;
-
-import java.io.IOException;
-
-public class MainActivity extends AppCompatActivity {
-
-    Button seoul, daegu, gwangju;
-=======
-import android.os.Handler;
-import android.os.Message;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
@@ -27,12 +14,19 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.corporation8793.dementia.game.WhacAMoleActivity;
+import com.opencsv.exceptions.CsvException;
+
+import android.os.Handler;
+import android.os.Message;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
     Button startBtn, whacAMoleBtn, mapBtn;
     TextView timeText;
+    Button seoul, daegu, gwangju;
 
     int count = 0;
 
@@ -42,13 +36,11 @@ public class MainActivity extends AppCompatActivity {
     // 기본 3초로 설정
     private static final Long SET_TIME = 3L;
 
->>>>>>> 82edb761c14c8da33bf7ca83a0d627ab3920d2b8
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-<<<<<<< HEAD
         try {
             Region.loadData(MainActivity.this);
         } catch (IOException e) {
@@ -77,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-=======
         progressBar = findViewById(R.id.progressBar);
         startBtn = findViewById(R.id.startBtn);
         whacAMoleBtn = findViewById(R.id.whacAMoleBtn);
@@ -204,6 +194,5 @@ public class MainActivity extends AppCompatActivity {
         // 현재는 초 단위만 계산
         setTime = time * 1000;
         progressBar.setMax((int) setTime);
->>>>>>> 82edb761c14c8da33bf7ca83a0d627ab3920d2b8
     }
 }

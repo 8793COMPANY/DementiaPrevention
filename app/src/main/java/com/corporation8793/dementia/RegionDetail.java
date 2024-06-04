@@ -6,9 +6,7 @@ import java.util.List;
 
 public class RegionDetail {
 
-
     public String si = "";
-
 
     public String gu = "";
 
@@ -16,6 +14,4 @@ public class RegionDetail {
     public RegionDetail() {
 
     }
-
-
 }
