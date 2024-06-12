@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".game.QuizActivity"
+    android:background="@color/gray_f7f7f7">
+
+    <include
+        android:id="@+id/top_section"
+        layout="@layout/count_time_close_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.16"></include>
+
+
+    <TextView
+        android:id="@+id/quiz_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Q7."
+        android:textSize="25dp"
+        android:textColor="@color/gray_9f9f9f"
+        android:gravity="center"
+        android:fontFamily="@font/pretendard_semibold"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toBottomOf="@+id/top_section"
+        app:layout_constraintBottom_toBottomOf="parent"></TextView>
+
+
+    <ImageView
+        android:id="@+id/quiz_img"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/black"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintWidth_percent="0.35"
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintTop_toBottomOf="@+id/quiz_number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"></ImageView>
+
+
+    <TextView
+        android:id="@+id/quiz_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="토마토는 꽃이 없다?"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:fontFamily="@font/pretendard_semibold"
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintTop_toBottomOf="@+id/quiz_img"
+        app:layout_constraintBottom_toBottomOf="parent"></TextView>
+
+
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/answer1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintWidth_percent="0.9"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintDimensionRatio="614:95"
+        app:layout_constraintTop_toBottomOf="@+id/quiz_text"
+        app:layout_constraintBottom_toTopOf="@+id/answer2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/correct_btn_selector"
+        >
+
+        <ImageView
+            android:id="@+id/answer_icon_1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/check_on_test"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.07"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></ImageView>
+
+
+        <TextView
+            android:id="@+id/answer_text_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주 1~3회"
+            android:textColor="@color/black"
+            android:textSize="23dp"
+            android:fontFamily="@font/pretendard_semibold"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/answer_icon_1"
+            app:layout_constraintRight_toRightOf="parent"
+            ></TextView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/answer2"
+        layout="@layout/check_choice_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintWidth_percent="0.9"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintDimensionRatio="614:100"
+        app:layout_constraintTop_toBottomOf="@+id/answer1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/correct_btn_selector"
+        >
+
+        <ImageView
+            android:id="@+id/answer_icon_2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/check_on_test"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.07"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></ImageView>
+
+
+        <TextView
+            android:id="@+id/answer_text_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="주 1~3회"
+            android:textColor="@color/black"
+            android:textSize="23dp"
+            android:fontFamily="@font/pretendard_semibold"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/answer_icon_2"
+            app:layout_constraintRight_toRightOf="parent"
+            ></TextView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="확인"
+        android:textColor="@color/white"
+        android:background="@drawable/correct_btn_off"
+        android:backgroundTint="@color/mint_00b3bc"
+        app:layout_constraintWidth_percent="0.95"
+        app:layout_constraintDimensionRatio="668:110"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"></androidx.appcompat.widget.AppCompatButton>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
