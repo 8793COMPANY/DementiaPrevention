@@ -2,6 +2,7 @@ package com.corporation8793.dementia;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.corporation8793.dementia.game.WhacAMoleActivity;
+import com.corporation8793.dementia.util.Application;
 import com.opencsv.exceptions.CsvException;
 
 import android.os.Handler;
@@ -40,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Application.getInstance();
+        Application.getStandardSize(MainActivity.this);
 
         try {
             Region.loadData(MainActivity.this);

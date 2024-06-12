@@ -6,43 +6,179 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/whac_amole_background"
     tools:context=".game.WhacAMoleActivity">
+
+    <ImageView
+        android:id="@+id/cancel_btn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/whac_amole_cancel_btn"
+        app:layout_constraintHeight_percent="0.078"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toTopOf="@+id/guide_cancel_btn_top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/guide_cancel_btn_left"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ImageView
+        android:id="@+id/star_first"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/whac_amole_star_full"
+        app:layout_constraintHeight_percent="0.039"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toTopOf="@+id/guide_star_top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/guide_star_left"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ImageView
+        android:id="@+id/star_second"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/whac_amole_star_full"
+        app:layout_constraintHeight_percent="0.039"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toTopOf="@+id/guide_star_top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/star_first"
+        app:layout_constraintRight_toLeftOf="@+id/star_third" />
+
+    <ImageView
+        android:id="@+id/star_third"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/whac_amole_star_full"
+        app:layout_constraintHeight_percent="0.039"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toTopOf="@+id/guide_star_top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/guide_star_right" />
+
+    <TextView
+        android:id="@+id/scoreText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/whac_amole_score_board"
+        android:gravity="center|end"
+        android:fontFamily="@font/pretendard_black"
+        android:text="20"
+        android:textColor="#4f2218"
+        android:letterSpacing="0.1"
+        app:layout_constraintWidth_percent="0.289"
+        app:layout_constraintHeight_percent="0.059"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintTop_toTopOf="@+id/star_third"
+        app:layout_constraintBottom_toBottomOf="@+id/star_third"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/guide_score_right" />
+
+    <ImageView
+        android:id="@+id/scoreTrophy"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/whac_amole_score_trophy"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintHeight_percent="0.063"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toTopOf="@+id/star_third"
+        app:layout_constraintBottom_toBottomOf="@+id/star_third"
+        app:layout_constraintLeft_toLeftOf="@+id/guide_score_left"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ProgressBar
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:indeterminate="false"
+        android:progressDrawable="@drawable/whac_amole_progressbar_custom"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintWidth_percent="0.139"
+        app:layout_constraintTop_toTopOf="@+id/timer_progressbar"
+        app:layout_constraintBottom_toBottomOf="@+id/timer_progressbar"
+        app:layout_constraintLeft_toLeftOf="@+id/timer_progressbar"
+        app:layout_constraintRight_toRightOf="@+id/timer_progressbar" />
+
+    <com.jackandphantom.circularprogressbar.CircleProgressbar
+        android:id="@+id/timer_progressbar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:cpb_roundedCorner="true"
+        app:cpb_backgroundProgressWidth="4"
+        app:cpb_backgroundProgressColor="#d8d8d8"
+        app:cpb_foregroundProgressWidth="10"
+        app:cpb_foregroundProgressColor="#00b3bc"
+        app:cpb_progress="100"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintWidth_percent="0.153"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toTopOf="@+id/guide_top_timer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/guide_score_right" />
 
     <TextView
         android:id="@+id/countDownTimerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="30.000"
-        android:textSize="30dp"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintTop_toTopOf="@+id/guide_timer_text_top"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        android:fontFamily="@font/pretendard_semibold"
+        android:textColor="#000000"
+        android:text="30초"
+        app:layout_constraintTop_toTopOf="@+id/timer_progressbar"
+        app:layout_constraintBottom_toBottomOf="@+id/timer_progressbar"
+        app:layout_constraintLeft_toLeftOf="@+id/timer_progressbar"
+        app:layout_constraintRight_toRightOf="@+id/timer_progressbar" />
 
-    <TextView
-        android:id="@+id/scoreText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:textSize="40dp"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintTop_toTopOf="@+id/guide_score_text_top"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <TextView-->
+<!--        android:id="@+id/countDownTimerText"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="30.000"-->
+<!--        android:textSize="30dp"-->
+<!--        app:layout_constraintVertical_bias="0.2"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/guide_cancel_btn_top"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent" />-->
+
+<!--    <ProgressBar-->
+<!--        android:id="@+id/timer_progressbar"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
+<!--        android:indeterminate="false"-->
+<!--        android:progressDrawable="@drawable/whac_amole_progressbar_custom"-->
+<!--        android:progress="40"-->
+<!--        app:layout_constraintDimensionRatio="1:1"-->
+<!--        app:layout_constraintWidth_percent="0.153"-->
+<!--        app:layout_constraintHorizontal_bias="1"-->
+<!--        app:layout_constraintVertical_bias="0"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/guide_top_timer"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="@+id/guide_score_right" />-->
 
     <ImageView
         android:id="@+id/firstMoleBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/mole_hole"
+        android:src="@drawable/whac_amole_mole_hole"
         android:adjustViewBounds="true"
-        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintWidth_percent="0.322"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintVertical_bias="1"
-        app:layout_constraintTop_toTopOf="@id/guide_top"
-        app:layout_constraintBottom_toBottomOf="@id/guide_top2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guide_first_line"
         app:layout_constraintLeft_toLeftOf="@id/guide_left"
         app:layout_constraintRight_toRightOf="@id/guide_right"/>
 
@@ -50,12 +186,12 @@
         android:id="@+id/secondMoleBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/mole_hole"
+        android:src="@drawable/whac_amole_mole_hole"
         android:adjustViewBounds="true"
-        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintWidth_percent="0.322"
         app:layout_constraintVertical_bias="1"
-        app:layout_constraintTop_toTopOf="@id/guide_top"
-        app:layout_constraintBottom_toBottomOf="@id/guide_top2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guide_first_line"
         app:layout_constraintLeft_toRightOf="@id/firstMoleBtn"
         app:layout_constraintRight_toLeftOf="@id/thirdMoleBtn"/>
 
@@ -63,13 +199,13 @@
         android:id="@+id/thirdMoleBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/mole_hole"
+        android:src="@drawable/whac_amole_mole_hole"
         android:adjustViewBounds="true"
-        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintWidth_percent="0.322"
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintVertical_bias="1"
-        app:layout_constraintTop_toTopOf="@id/guide_top"
-        app:layout_constraintBottom_toBottomOf="@id/guide_top2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guide_first_line"
         app:layout_constraintLeft_toLeftOf="@id/guide_left"
         app:layout_constraintRight_toRightOf="@id/guide_right"/>
 
@@ -77,13 +213,13 @@
         android:id="@+id/fourthMoleBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/mole_hole"
+        android:src="@drawable/whac_amole_mole_hole"
         android:adjustViewBounds="true"
-        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintWidth_percent="0.322"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintVertical_bias="1"
         app:layout_constraintTop_toBottomOf="@id/firstMoleBtn"
-        app:layout_constraintBottom_toBottomOf="@id/guide_top3"
+        app:layout_constraintBottom_toBottomOf="@id/guide_second_line"
         app:layout_constraintLeft_toLeftOf="@id/guide_left"
         app:layout_constraintRight_toRightOf="@id/guide_right"/>
 
@@ -91,12 +227,12 @@
         android:id="@+id/fifthMoleBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/mole_hole"
+        android:src="@drawable/whac_amole_mole_hole"
         android:adjustViewBounds="true"
-        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintWidth_percent="0.322"
         app:layout_constraintVertical_bias="1"
         app:layout_constraintTop_toBottomOf="@id/secondMoleBtn"
-        app:layout_constraintBottom_toBottomOf="@id/guide_top3"
+        app:layout_constraintBottom_toBottomOf="@id/guide_second_line"
         app:layout_constraintLeft_toRightOf="@id/fourthMoleBtn"
         app:layout_constraintRight_toLeftOf="@id/sixthMoleBtn"/>
 
@@ -104,13 +240,13 @@
         android:id="@+id/sixthMoleBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/mole_hole"
+        android:src="@drawable/whac_amole_mole_hole"
         android:adjustViewBounds="true"
-        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintWidth_percent="0.322"
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintVertical_bias="1"
         app:layout_constraintTop_toBottomOf="@id/thirdMoleBtn"
-        app:layout_constraintBottom_toBottomOf="@id/guide_top3"
+        app:layout_constraintBottom_toBottomOf="@id/guide_second_line"
         app:layout_constraintLeft_toLeftOf="@id/guide_left"
         app:layout_constraintRight_toRightOf="@id/guide_right"/>
 
@@ -118,13 +254,13 @@
         android:id="@+id/seventhMoleBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/mole_hole"
+        android:src="@drawable/whac_amole_mole_hole"
         android:adjustViewBounds="true"
-        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintWidth_percent="0.322"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintVertical_bias="1"
-        app:layout_constraintTop_toTopOf="@id/guide_top"
-        app:layout_constraintBottom_toBottomOf="@id/guide_bottom"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guide_third_line"
         app:layout_constraintLeft_toLeftOf="@id/guide_left"
         app:layout_constraintRight_toRightOf="@id/guide_right"/>
 
@@ -132,12 +268,12 @@
         android:id="@+id/eigthMoleBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/mole_hole"
+        android:src="@drawable/whac_amole_mole_hole"
         android:adjustViewBounds="true"
-        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintWidth_percent="0.322"
         app:layout_constraintVertical_bias="1"
-        app:layout_constraintTop_toTopOf="@id/guide_top"
-        app:layout_constraintBottom_toBottomOf="@id/guide_bottom"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guide_third_line"
         app:layout_constraintLeft_toRightOf="@id/seventhMoleBtn"
         app:layout_constraintRight_toLeftOf="@id/ninethMoleBtn"/>
 
@@ -145,46 +281,85 @@
         android:id="@+id/ninethMoleBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/mole_hole"
+        android:src="@drawable/whac_amole_mole_hole"
         android:adjustViewBounds="true"
-        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintWidth_percent="0.322"
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintVertical_bias="1"
-        app:layout_constraintTop_toTopOf="@id/guide_top"
-        app:layout_constraintBottom_toBottomOf="@id/guide_bottom"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guide_third_line"
         app:layout_constraintLeft_toLeftOf="@id/guide_left"
         app:layout_constraintRight_toRightOf="@id/guide_right"/>
 
+    <ImageView
+        android:id="@+id/flower_img"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/whac_amole_flower"
+        android:adjustViewBounds="true"
+        app:layout_constraintHeight_percent="0.051"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toTopOf="@id/guide_top_flower"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/guide_left_flower"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/guide_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/mole_guide_text"
+        android:gravity="center"
+        android:fontFamily="@font/pretendard_semibold"
+        android:text="@string/mole_guide_text"
+        android:textColor="#000000"
+        app:layout_constraintWidth_percent="0.583"
+        app:layout_constraintHeight_percent="0.053"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toTopOf="@+id/guide_top_guide_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+<!--    <androidx.constraintlayout.widget.Guideline-->
+<!--        android:id="@+id/guide_top"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintGuide_percent="0.35">-->
+<!--    </androidx.constraintlayout.widget.Guideline>-->
+
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_top"
+        android:id="@+id/guide_first_line"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35">
+        app:layout_constraintGuide_percent="0.439">
     </androidx.constraintlayout.widget.Guideline>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_top2"
+        android:id="@+id/guide_second_line"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.55">
+        app:layout_constraintGuide_percent="0.646">
     </androidx.constraintlayout.widget.Guideline>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_top3"
+        android:id="@+id/guide_third_line"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75">
+        app:layout_constraintGuide_percent="0.86">
     </androidx.constraintlayout.widget.Guideline>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_bottom"
+        android:id="@+id/guide_top_guide_text"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95">
+        app:layout_constraintGuide_percent="0.9">
     </androidx.constraintlayout.widget.Guideline>
 
     <androidx.constraintlayout.widget.Guideline
@@ -192,7 +367,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05">
+        app:layout_constraintGuide_percent="0.031">
     </androidx.constraintlayout.widget.Guideline>
 
     <androidx.constraintlayout.widget.Guideline
@@ -200,7 +375,31 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95">
+        app:layout_constraintGuide_percent="0.978">
+    </androidx.constraintlayout.widget.Guideline>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_top_timer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.113">
+    </androidx.constraintlayout.widget.Guideline>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_left_flower"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.291">
+    </androidx.constraintlayout.widget.Guideline>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_top_flower"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.61">
     </androidx.constraintlayout.widget.Guideline>
 
     <!--    <LinearLayout-->
@@ -346,8 +545,9 @@
         android:id="@+id/pulseCountDown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendard_semibold"
         android:text="3"
-        android:textSize="50dp"
+        android:textSize="60dp"
         app:pc_startValue="3"
         app:pc_endValue="0"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -356,19 +556,67 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_timer_text_top"
+        android:id="@+id/guide_cancel_btn_top"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.008">
+        app:layout_constraintGuide_percent="0.023">
     </androidx.constraintlayout.widget.Guideline>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guide_score_text_top"
+        android:id="@+id/guide_cancel_btn_left"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.042">
+    </androidx.constraintlayout.widget.Guideline>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_star_top"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.055">
+        app:layout_constraintGuide_percent="0.043">
     </androidx.constraintlayout.widget.Guideline>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_star_left"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.386">
+    </androidx.constraintlayout.widget.Guideline>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_star_right"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.617">
+    </androidx.constraintlayout.widget.Guideline>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_score_left"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.636">
+    </androidx.constraintlayout.widget.Guideline>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_score_right"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.958">
+    </androidx.constraintlayout.widget.Guideline>
+
+<!--    <androidx.constraintlayout.widget.Guideline-->
+<!--        android:id="@+id/guide_score_text_top"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintGuide_percent="0.055">-->
+<!--    </androidx.constraintlayout.widget.Guideline>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

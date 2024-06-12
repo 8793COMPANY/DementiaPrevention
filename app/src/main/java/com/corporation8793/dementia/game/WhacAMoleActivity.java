@@ -9,14 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -24,17 +21,22 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.corporation8793.dementia.MainActivity;
 import com.corporation8793.dementia.game.pulse_countdown.OnCountdownCompleted;
 import com.corporation8793.dementia.game.pulse_countdown.PulseCountDown;
 import com.corporation8793.dementia.R;
+import com.corporation8793.dementia.util.Application;
+import com.corporation8793.dementia.util.DisplayFontSize;
+import com.jackandphantom.circularprogressbar.CircleProgressbar;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class WhacAMoleActivity extends AppCompatActivity {
 
-    TextView countDownTimerText, scoreText;
+    TextView countDownTimerText, scoreText, guide_text;
     //    ImageButton firstMole, secondMole, thirdMole, fourthMole, fifthMole, sixthMole, seventhMole, eighthMole, ninethMole;
+    ImageView cancel_btn, star_first, star_second, star_third;
     ImageView firstMole, secondMole, thirdMole, fourthMole, fifthMole, sixthMole, seventhMole, eighthMole, ninethMole;
 
     ArrayList<Integer> availableMoleIdArrayList = new ArrayList<>();
@@ -44,8 +46,14 @@ public class WhacAMoleActivity extends AppCompatActivity {
 
     private static final int GAME_TIME = 30000;
 
+    // 기본 30초로 설정
+//    private static final Long SET_TIME = 30L;
+//    long baseTime;
+//    long setTime;
+
     PulseCountDown startGameCountDownTimer;
     CountDownTimer mainCountDownTimer;
+    CircleProgressbar timer_progressbar;
 
     boolean moleIsActive = false, countDownWorks = false;
     long curSeconds = 0, curMillies = 0;
@@ -55,13 +63,10 @@ public class WhacAMoleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_whac_amole);
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-//            return insets;
-//        });
+
+        // 네비게이션바 숨기기
+        Application.FullScreenMode(WhacAMoleActivity.this);
 
         // 변수 설정
         initUiElements();
@@ -69,15 +74,31 @@ public class WhacAMoleActivity extends AppCompatActivity {
         // 두더지 비활성화
         disableHoles();
 
+        // 두더지 초기화
         fillMolesArrayList(0);
 
         // 30초 타이머 설정
         startPulse(GAME_TIME);
+
+        cancel_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(WhacAMoleActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void initUiElements() {
         countDownTimerText = findViewById(R.id.countDownTimerText);
         scoreText = findViewById(R.id.scoreText);
+        guide_text = findViewById(R.id.guide_text);
+
+        cancel_btn = findViewById(R.id.cancel_btn);
+        star_first = findViewById(R.id.star_first);
+        star_second = findViewById(R.id.star_second);
+        star_third = findViewById(R.id.star_third);
 
         firstMole = findViewById(R.id.firstMoleBtn);
         secondMole = findViewById(R.id.secondMoleBtn);
@@ -90,16 +111,23 @@ public class WhacAMoleActivity extends AppCompatActivity {
         ninethMole = findViewById(R.id.ninethMoleBtn);
 
         startGameCountDownTimer = findViewById(R.id.pulseCountDown);
+        timer_progressbar = findViewById(R.id.timer_progressbar);
 
-        for (int i = 0; i < moleIdArray.length; i++) {
-//            ImageButton imageButton = findViewById(moleIdArray[i]);
-//            imageButton.setImageResource(R.drawable.mole_hole);
-            ImageView imageView = findViewById(moleIdArray[i]);
-            imageView.setImageResource(R.drawable.mole_hole);
-        }
+        // 모든 두더지 홀 기본 이미지 적용
+        defaultHoles();
+
+
+        countDownTimerText.setTextSize(DisplayFontSize.font_size_x_36);
+        scoreText.setTextSize(DisplayFontSize.font_size_x_34);
+        scoreText.setPadding(0, 0, (int) DisplayFontSize.font_size_x_30, 0);
+        guide_text.setTextSize(DisplayFontSize.font_size_x_34);
+
+        star_first.setEnabled(true);
+        star_second.setEnabled(true);
+        star_third.setEnabled(true);
     }
 
-    // 게임 시작 시 모든 두더지 홀 사용 안 함
+    // 모든 두더지 홀 사용 안 함
     private void disableHoles() {
         firstMole.setEnabled(false);
         secondMole.setEnabled(false);
@@ -112,7 +140,30 @@ public class WhacAMoleActivity extends AppCompatActivity {
         ninethMole.setEnabled(false);
     }
 
-    // 사용 가능한 두더지 배열 목록 값 초기화
+    // 모든 두더지 홀 사용 함
+    private void ableHoles() {
+        firstMole.setEnabled(true);
+        secondMole.setEnabled(true);
+        thirdMole.setEnabled(true);
+        fourthMole.setEnabled(true);
+        fifthMole.setEnabled(true);
+        sixthMole.setEnabled(true);
+        seventhMole.setEnabled(true);
+        eighthMole.setEnabled(true);
+        ninethMole.setEnabled(true);
+    }
+
+    // 모든 두더지 홀 기본 이미지 적용
+    private void defaultHoles() {
+        for (int i = 0; i < moleIdArray.length; i++) {
+//            ImageButton imageButton = findViewById(moleIdArray[i]);
+//            imageButton.setImageResource(R.drawable.mole_hole);
+            ImageView imageView = findViewById(moleIdArray[i]);
+            imageView.setImageResource(R.drawable.whac_amole_mole_hole);
+        }
+    }
+
+        // 사용 가능한 두더지 배열 목록 값 초기화
     private void fillMolesArrayList(int notAvailableMoleId) {
         for (int i = 0; i < moleIdArray.length; i++) {
             availableMoleIdArrayList.add(moleIdArray[i]);
@@ -130,15 +181,17 @@ public class WhacAMoleActivity extends AppCompatActivity {
             @Override
             public void completed() {
                 startTimer(time);
+                //timeStart();
             }
         });
     }
 
     // 게임 타이머 시작
     private void startTimer(int time){
-
         // Interval - 1 second
         // Timer - 30 seconds
+        timer_progressbar.setMaxProgress((float) time);
+
         mainCountDownTimer = new CountDownTimer(time, 1) {
             public void onTick(long millisUntilFinished) {
                 countDownWorks = true;
@@ -155,7 +208,7 @@ public class WhacAMoleActivity extends AppCompatActivity {
 
                 // seconds 포맷
                 if (String.valueOf(seconds).length() < 2)
-                    stringSeconds += "  " + seconds;
+                    stringSeconds += "" + seconds;
                 else if (String.valueOf(seconds).length() == 2)
                     stringSeconds += seconds;
 
@@ -167,24 +220,151 @@ public class WhacAMoleActivity extends AppCompatActivity {
                 else if (String.valueOf(millies).length() == 3)
                     stringMillies += millies;
 
-                if (seconds < 10 && seconds > 3)
-                    countDownTimerText.setTextColor(getResources().getColor(R.color.black));
-                else if (seconds <=3)
-                    countDownTimerText.setTextColor(getResources().getColor(R.color.white));
+//                if (seconds < 10 && seconds > 3)
+//                    countDownTimerText.setTextColor(getResources().getColor(R.color.black));
+//                else if (seconds <=3)
+//                    countDownTimerText.setTextColor(getResources().getColor(R.color.white));
 
-                countDownTimerText.setText(stringSeconds + "." + stringMillies);
+                //countDownTimerText.setText(stringSeconds + "." + stringMillies);
 
                 if(!moleIsActive)
                     showMole();
+
+                Log.e("test", millisUntilFinished+"");
+
+                countDownTimerText.setText(stringSeconds + "초");
+                timer_progressbar.setProgress(millisUntilFinished);
             }
 
             // 게임이 끝나면 0.000
             public void onFinish() {
-                countDownTimerText.setText("0.000");
-                startResultActivity();
+                countDownTimerText.setText("0초");
+                timer_progressbar.setProgress(0);
+                // 결과 페이지로 이동
+                //startResultActivity();
             }
         }.start();
     }
+
+//    @SuppressLint("HandlerLeak")
+//    Handler handler = new Handler() {
+//        @Override
+//        public void handleMessage(@NonNull Message msg) {
+//            String time = setTimeOut();
+//            Log.e("test", time);
+//
+////            String[] split_time = time.split(":");
+////            String real_time;
+////
+////            if (split_time[1].indexOf("0") == 0) {
+////                if (!time.equals("00:00")) {
+////                    String[] remove_zero = split_time[1].split("0");
+////                    real_time = remove_zero[1];
+////                } else {
+////                    real_time = "0";
+////                }
+////            } else {
+////                real_time = split_time[1];
+////            }
+////
+////            countDownTimerText.setText(real_time + "초");
+//
+//            // 0초가 되면
+//            if (time.equals("00:00")) {
+//                // 타이머 초기화
+//                timeReset();
+//            } else {
+//                // 0초가 아니면
+//                handler.sendEmptyMessage(0);
+//            }
+//        }
+//    };
+//
+//    // 시간 시작
+//    public void timeStart() {
+//        // 기본 30초로 설정
+//        setTime(SET_TIME);
+//
+//        baseTime = SystemClock.elapsedRealtime();
+//
+//        handler.sendEmptyMessage(0);
+//    }
+//
+//    public void setTime(Long time) {
+//        // 분단위 : * 1000 * 60 + 초단위 : * 1000
+//        // 현재는 초 단위만 계산
+//        setTime = time * 1000;
+//        timer_progressbar.setMaxProgress((float) setTime);
+//    }
+//
+//    // 시간 초기화
+//    public void timeReset() {
+//        //핸들러 메세지 전달 종료
+//        handler.removeCallbacksAndMessages(null);
+//
+//        //long 변환한 시간 초기화
+//        setTime = 0;
+//
+//        //프로그레스바 프로그레스 초기화
+//        timer_progressbar.setProgress((float) 0);
+//    }
+//
+//    @SuppressLint("DefaultLocale")
+//    public String setTimeOut() {
+//        long now = SystemClock.elapsedRealtime();
+//        long outTime = baseTime - now + setTime;
+//
+//        long min = outTime / 1000 / 60;
+//        long sec = outTime / 1000 % 60;
+//
+//        // 0.1초 단위가 남아있을때 초가 넘어가서 0.5초에도 0초로 표시 되기 때문에
+//        // 0.1초 단위를 계산해서 초가 60초 이하일때 0.1초 단위가 남아 있으면 초가 변경되지 않도록 세팅
+//        if (outTime % 1000 / 10 != 0) {
+//            sec += 1;
+//
+//            if (sec == 60) {
+//                sec = 0;
+//                min += 1;
+//            }
+//        }
+//
+//        // 시간 확인
+//        String easy_outTime = String.format("%02d:%02d", min, sec);
+//
+//        Log.e("test2", easy_outTime);
+//        Log.e("test2", timer_progressbar.getMaxProgress() - ((float) ((now - baseTime) + (setTime/1000)))+"");
+//
+//        String[] split_time = easy_outTime.split(":");
+//        String real_time;
+//
+//        if (split_time[1].indexOf("0") == 0) {
+//            if (!easy_outTime.equals("00:00")) {
+//                String[] remove_zero = split_time[1].split("0");
+//                real_time = remove_zero[1];
+//            } else {
+//                real_time = "0";
+//            }
+//        } else {
+//            real_time = split_time[1];
+//        }
+//
+//        countDownTimerText.setText(real_time + "초");
+//
+//
+//        // 늘어나는 경우
+//        //timer_progressbar.setProgress((int) ((now - baseTime) + (setTime/1000)));
+//        // 줄어드는 경우
+//        if ((timer_progressbar.getMaxProgress() - ((float) ((now - baseTime) + (setTime/1000)))) < 0) {
+//            Log.e("test2", "on");
+//            timer_progressbar.setProgress(0);
+//            countDownTimerText.setText("0초");
+//        } else {
+//            Log.e("test2", "off");
+//            timer_progressbar.setProgress(timer_progressbar.getMaxProgress() - ((float) ((now - baseTime) + (setTime/1000))));
+//        }
+//
+//        return easy_outTime;
+//    }
 
     // 게임 시작
     private void showMole(){
@@ -208,6 +388,10 @@ public class WhacAMoleActivity extends AppCompatActivity {
         // 랜덤 두더지가 나오기
 //        ImageButton activeMole
 //                = findViewById(availableMoleIdArrayList.get(new Random().nextInt(availableMoleIdArrayList.size())));
+
+        // 모든 두더지 활성화
+        ableHoles();
+
         ImageView activeMole
                 = findViewById(availableMoleIdArrayList.get(new Random().nextInt(availableMoleIdArrayList.size())));
 
@@ -215,7 +399,7 @@ public class WhacAMoleActivity extends AppCompatActivity {
         // 자원 해제할 수 있는 방법/ gif 가 끝나는 시간 알 수 있는 방법
         // 액티비티가 종료되지 않았을 경우에만 실행
         if (!WhacAMoleActivity.this.isDestroyed()) {
-            Glide.with(WhacAMoleActivity.this).load(R.drawable.mole_up).placeholder(R.drawable.mole_hole)
+            Glide.with(WhacAMoleActivity.this).load(R.drawable.mole_up).placeholder(R.drawable.whac_amole_mole_hole).override(Target.SIZE_ORIGINAL)
                     .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).addListener(new RequestListener<Drawable>() {
                         @Override
                         public boolean onLoadFailed(@Nullable GlideException e, @Nullable Object model, @NonNull Target<Drawable> target, boolean isFirstResource) {
@@ -255,9 +439,9 @@ public class WhacAMoleActivity extends AppCompatActivity {
 
                 //activeMole.setImageResource(R.drawable.ic_mole_hole);
 
-                activeMole.setImageResource(R.drawable.mole_hole);
+                activeMole.setImageResource(R.drawable.whac_amole_mole_hole);
 
-                activeMole.setEnabled(false);
+                //activeMole.setEnabled(false);
                 moleIsActive = false;
             }
         };
@@ -287,7 +471,6 @@ public class WhacAMoleActivity extends AppCompatActivity {
 
         // 두더지 버튼 리스너
         for (int i=0; i< moleIdArray.length; i++){
-
 //            boolean innerTntMoleStatus = tntMole;
 //            boolean innerGoldenMoleStatus = goldenMole;
 
@@ -301,16 +484,42 @@ public class WhacAMoleActivity extends AppCompatActivity {
                     if (!imageButton.isEnabled()) {
                         return;
                     } else {
-                        //imageButton.setImageResource(R.drawable.ic_mole_hole);
+                        if (activeMole == imageButton) {
+                            //imageButton.setImageResource(R.drawable.ic_mole_hole);
 
-                        imageButton.setImageResource(R.drawable.mole_hit);
+                            imageButton.setImageResource(R.drawable.mole_hit);
 
-                        scoreText.setText(String.valueOf(Integer.parseInt(scoreText.getText().toString()) + 1));
-                        imageButton.setEnabled(false);
+                            scoreText.setText(String.valueOf(Integer.parseInt(scoreText.getText().toString()) + 1));
+                            imageButton.setEnabled(false);
 
-                        new Handler().postDelayed(() -> {
-                            imageButton.setImageResource(R.drawable.mole_hole);
-                        },200);
+                            new Handler().postDelayed(() -> {
+                                imageButton.setImageResource(R.drawable.whac_amole_mole_hole);
+                            },200);
+                        } else {
+                            // 두더지가 아닌 홀을 누르면 별 감점
+                            if (star_third.isEnabled()) { // 첫번째 별 활성화시
+                                // 첫번째 별 차감
+                                star_third.setEnabled(false);
+                                star_third.setImageResource(R.drawable.whac_amole_star_empty);
+                            } else if (star_second.isEnabled()) { // 두번째 별 활성화시
+                                // 두번째 별 차감
+                                star_second.setEnabled(false);
+                                star_second.setImageResource(R.drawable.whac_amole_star_empty);
+                            } else if (star_first.isEnabled()) { // 세번째 별 활성화시
+                                // 세번째 별 차감
+                                star_first.setEnabled(false);
+                                star_first.setImageResource(R.drawable.whac_amole_star_empty);
+
+                                // 두더지 홀 비활성화 및 초기화
+                                defaultHoles();
+                                disableHoles();
+
+                                // 모든 별이 비활성화
+                                // 타이머 취소하고 게임 끝내기
+                                mainCountDownTimer.cancel();
+                                Toast.makeText(getApplicationContext(), "GAME OVER", Toast.LENGTH_SHORT).show();
+                            }
+                        }
                     }
 
                     // Finish game if we click on mole with tnt
@@ -344,6 +553,8 @@ public class WhacAMoleActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        mainCountDownTimer.cancel();
+        if (mainCountDownTimer != null) {
+            mainCountDownTimer.cancel();
+        }
     }
 }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DementiaPrevention</string>
+
+    <string name="mole_guide_text">두더지를 잡아보세요</string>
 </resources>

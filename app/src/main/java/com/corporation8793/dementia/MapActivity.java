@@ -2,18 +2,23 @@ package com.corporation8793.dementia;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.PointF;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraUpdate;
+import com.naver.maps.map.LocationSource;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
@@ -34,6 +39,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     FusedLocationSource locationSource;
     private static final int PERMISSION_REQUEST_CODE = 100;
     private static final String[] PERMISSIONS = { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION };
+
+    double lat, lnt;
+    boolean firstCheck = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,9 +129,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             fragmentManager.beginTransaction().add(R.id.naverMap, mapFragment).commit();
         }
 
-        mapFragment.getMapAsync(this);
-
         locationSource = new FusedLocationSource(this, PERMISSION_REQUEST_CODE);
+
+        mapFragment.getMapAsync(this);
 
     }
 
@@ -137,36 +145,158 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         Log.e("test", "onMapReady");
 
-        int size = 15;
-        double lat, lnt;
-
-        if (locationSource.getLastLocation() != null) {
-            lat = locationSource.getLastLocation().getLatitude();
-            lnt = locationSource.getLastLocation().getLongitude();
-
-            for (int i = 0; i < size; i++) {
-                Marker[] markers = new Marker[size];
-                markers[i] = new Marker();
-
-                Random randomInt = new Random();
-                int randomIntValue = randomInt.nextInt(20);
-
-                markers[i].setPosition(new LatLng(lat + (double) randomIntValue, lnt + (double) randomIntValue));
-                markers[i].setMap(mNaverMap);
-
-                int finalI = i;
-
-                markers[i].setOnClickListener(new Overlay.OnClickListener() {
-                    @Override
-                    public boolean onClick(@NonNull Overlay overlay) {
-                        Toast.makeText(getApplicationContext(), "마커 " + finalI + " 클릭", Toast.LENGTH_SHORT).show();
-                        return false;
-                    }
-                });
-            }
+        if (mNaverMap.getLocationSource() != null) {
+            mNaverMap.getLocationSource().activate(new LocationSource.OnLocationChangedListener() {
+                @Override
+                public void onLocationChanged(@Nullable Location location) {
+                    Log.e("test", "activate");
+                }
+            });
         } else {
-            Log.e("test", "getLastLocation is null");
+            Log.e("test", "deactivate");
         }
+
+        mNaverMap.setOnMapClickListener(new NaverMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(@NonNull PointF pointF, @NonNull LatLng latLng) {
+                Log.e("test", "onMapClick");
+                Log.e("test", "onMapClick : " + latLng.latitude);
+                Log.e("test", "onMapClick : " + latLng.longitude);
+            }
+        });
+
+        mNaverMap.addOnLocationChangeListener(new NaverMap.OnLocationChangeListener() {
+            @Override
+            public void onLocationChange(@NonNull Location location) {
+//                Log.e("test", "onLocationChange");
+//                Log.e("test", "onLocationChange : " + mNaverMap.getCameraPosition().target.latitude);
+//                Log.e("test", "onLocationChange : " + mNaverMap.getCameraPosition().target.longitude);
+
+            }
+        });
+
+        Marker marker = new Marker();
+        marker.setPosition(new LatLng(mNaverMap.getCameraPosition().target.latitude, mNaverMap.getCameraPosition().target.longitude));
+        marker.setMap(mNaverMap);
+
+        int size = 15;
+
+        Log.e("test", "check : " + size);
+        Log.e("test", "check2 : " + mNaverMap.getCameraPosition().target.latitude);
+        Log.e("test", "check3 : " + mNaverMap.getCameraPosition().target.longitude);
+
+        mNaverMap.addOnLoadListener(new NaverMap.OnLoadListener() {
+            @Override
+            public void onLoad() {
+                Log.e("test", "onLoad()");
+
+                if (locationSource.getLastLocation() != null) {
+                    Log.e("test", "getLastLocation not null");
+
+                    lat = locationSource.getLastLocation().getLatitude();
+                    lnt = locationSource.getLastLocation().getLongitude();
+
+                    Marker marker = new Marker();
+                    marker.setPosition(new LatLng(lat, lnt));
+                    marker.setMap(mNaverMap);
+
+                    for (int i = 0; i < size; i++) {
+                        Log.e("test", "for : " + i);
+
+                        Marker[] markers = new Marker[size];
+                        markers[i] = new Marker();
+
+                        markers[i].setPosition(new LatLng(lat + Math.random(), lnt + Math.random()));
+                        markers[i].setMap(mNaverMap);
+
+                        int finalI = i;
+
+                        markers[i].setOnClickListener(new Overlay.OnClickListener() {
+                            @Override
+                            public boolean onClick(@NonNull Overlay overlay) {
+                                Toast.makeText(getApplicationContext(), "마커 " + finalI + " 클릭", Toast.LENGTH_SHORT).show();
+                                return false;
+                            }
+                        });
+                    }
+                } else {
+                    Log.e("test", "getLastLocation is null");
+                }
+            }
+        });
+
+        // 지도의 카메라 위치 변경시 발생하는 리스너
+//        mNaverMap.addOnCameraChangeListener(new NaverMap.OnCameraChangeListener() {
+//            @Override
+//            public void onCameraChange(int i, boolean b) {
+//                if (locationSource.getLastLocation() != null) {
+//                    Log.e("test", "getLastLocation not null");
+//
+//                    lat = locationSource.getLastLocation().getLatitude();
+//                    lnt = locationSource.getLastLocation().getLongitude();
+//                } else {
+//                    Log.e("test", "getLastLocation is null");
+//                }
+//            }
+//        });
+
+//        Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (locationSource.getLastLocation() != null) {
+//                    Log.e("test", "getLastLocation not null");
+//
+//                    lat = locationSource.getLastLocation().getLatitude();
+//                    lnt = locationSource.getLastLocation().getLongitude();
+//
+//                    Marker marker = new Marker();
+//                    marker.setPosition(new LatLng(lat, lnt));
+//                    marker.setMap(mNaverMap);
+//
+//                    for (int i = 0; i < size; i++) {
+//                        Log.e("test", "for : " + i);
+//
+//                        Marker[] markers = new Marker[size];
+//                        markers[i] = new Marker();
+//
+//                        Random randomInt = new Random();
+//                        int randomIntValue = randomInt.nextInt(5);
+//
+////                    markers[i].setPosition(new LatLng(naverMap.getCamera
+////                    Position().target.latitude + (double) randomIntValue,
+////                            naverMap.getCameraPosition().target.longitude + (double) randomIntValue));
+//
+////            markers[i].setPosition(new LatLng(mNaverMap.getCameraPosition().target.latitude + (double) randomIntValue,
+////                    mNaverMap.getCameraPosition().target.longitude + (double) randomIntValue));
+////            markers[i].setMap(mNaverMap);
+//                        markers[i].setPosition(new LatLng(lat + Math.random(), lnt + Math.random()));
+//                        markers[i].setMap(mNaverMap);
+//
+//                        int finalI = i;
+//
+//                        markers[i].setOnClickListener(new Overlay.OnClickListener() {
+//                            @Override
+//                            public boolean onClick(@NonNull Overlay overlay) {
+//                                Toast.makeText(getApplicationContext(), "마커 " + finalI + " 클릭", Toast.LENGTH_SHORT).show();
+//                                return false;
+//                            }
+//                        });
+//                    }
+//                } else {
+//                    Log.e("test", "getLastLocation is null");
+//                }
+//            }
+//        }, 2000);
+
+//        if (locationSource.getLastLocation() != null) {
+//            Log.e("test", "getLastLocation not null");
+//
+//            lat = locationSource.getLastLocation().getLatitude();
+//            lnt = locationSource.getLastLocation().getLongitude();
+//        } else {
+//            Log.e("test", "getLastLocation is null");
+//        }
     }
 
     @Override
@@ -175,8 +305,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                mNaverMap.setLocationTrackingMode(LocationTrackingMode.Follow
-                );
+                mNaverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
             }
         }
     }
