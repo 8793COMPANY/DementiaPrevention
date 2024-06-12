@@ -57,6 +57,12 @@ dependencies {
     implementation 'com.naver.maps:map-sdk:3.16.2'
 
 
+
     implementation 'com.squareup.retrofit2:retrofit:2.11.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
+
+    // 현재 위치 가져오기
+    implementation 'com.google.android.gms:play-services-location:21.3.0'
+    implementation 'io.github.fornewid:naver-map-location:21.0.2'
+
 }
