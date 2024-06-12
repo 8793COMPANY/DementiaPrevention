@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ThreeChoiceFragment">
+
+    <TextView
+        android:id="@+id/question_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Q7."
+        android:textSize="25dp"
+        android:textColor="@color/gray_9f9f9f"
+        android:gravity="center"
+        android:fontFamily="@font/pretendard_semibold"
+        app:layout_constraintVertical_bias="0.01"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"></TextView>
+    
+    
+    <ImageView
+        android:id="@+id/question_img"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/black"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintWidth_percent="0.35"
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintTop_toBottomOf="@+id/question_number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"></ImageView>
+
+
+    <TextView
+        android:id="@+id/question_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="음주는 얼마나 자주하시나요?"
+        android:textSize="25dp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:fontFamily="@font/pretendard_semibold"
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintTop_toBottomOf="@+id/question_img"
+        app:layout_constraintBottom_toBottomOf="parent"></TextView>
+        
+
+
+
+    <include
+        android:id="@+id/choice1"
+        layout="@layout/check_choice_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:choice="@{false}"
+        app:layout_constraintVertical_bias="0.55"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintWidth_percent="0.9"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintDimensionRatio="614:95"
+        app:layout_constraintTop_toBottomOf="@+id/question_text"
+        app:layout_constraintBottom_toTopOf="@+id/choice2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"></include>
+
+
+    <include
+        android:id="@+id/choice2"
+        layout="@layout/check_choice_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:choice="@{false}"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintWidth_percent="0.9"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintDimensionRatio="614:100"
+        app:layout_constraintTop_toBottomOf="@+id/choice1"
+        app:layout_constraintBottom_toTopOf="@+id/choice3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"></include>
+
+
+    <include
+        android:id="@+id/choice3"
+        layout="@layout/check_choice_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:choice="@{false}"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintDimensionRatio="614:100"
+        app:layout_constraintTop_toBottomOf="@+id/choice2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"></include>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

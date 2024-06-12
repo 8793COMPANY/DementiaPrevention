@@ -30,6 +30,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures{
+        dataBinding true
+    }
 }
 
 dependencies {
@@ -51,6 +55,11 @@ dependencies {
 
     // 네이버 지도
     implementation 'com.naver.maps:map-sdk:3.16.2'
+
+
+
+    implementation 'com.squareup.retrofit2:retrofit:2.11.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
 
     // 현재 위치 가져오기
     implementation 'com.google.android.gms:play-services-location:21.3.0'

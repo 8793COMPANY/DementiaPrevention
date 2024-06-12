@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".game.OrderNumberGame">
+
+    <include
+        android:id="@+id/top_section"
+        layout="@layout/count_time_close_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.16"></include>
+
+    <TextView
+        android:id="@+id/game_explain_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:fontFamily="@font/pretendard_semibold"
+        android:text="숫자 순서에 맞게 클릭해보세요"
+        android:textSize="23dp"
+        app:layout_constraintVertical_bias="0.07"
+        app:layout_constraintTop_toBottomOf="@+id/top_section"
+        app:layout_constraintBottom_toBottomOf="parent"></TextView>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_left"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.07"></androidx.constraintlayout.widget.Guideline>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_right"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.93"></androidx.constraintlayout.widget.Guideline>
+
+
+    <GridLayout
+        android:id="@+id/number_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintLeft_toLeftOf="@+id/guide_left"
+        app:layout_constraintRight_toRightOf="@+id/guide_right"
+        app:layout_constraintVertical_bias="0.55"
+        app:layout_constraintTop_toBottomOf="@+id/game_explain_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:rowCount="3"
+        android:columnCount="3">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+
+            <Button
+                android:id="@+id/first"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/green_c8ff71"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintWidth_percent="0.28"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_row="0"
+                android:layout_column="0"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/fourth"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/second"
+                ></Button>
+
+            <Button
+                android:id="@+id/second"
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/green_c8ff71"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintWidth_percent="0.28"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_row="0"
+                android:layout_column="1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/fifth"
+                app:layout_constraintLeft_toRightOf="@+id/first"
+                app:layout_constraintRight_toLeftOf="@+id/third"
+                ></Button>
+
+            <Button
+                android:id="@+id/third"
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/green_c8ff71"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintWidth_percent="0.28"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_row="0"
+                android:layout_column="2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/sixth"
+                app:layout_constraintLeft_toRightOf="@+id/second"
+                app:layout_constraintRight_toRightOf="parent"
+                ></Button>
+
+
+<!--            <Button-->
+<!--                android:layout_rowWeight="1"-->
+<!--                android:layout_columnWeight="1"-->
+<!--                android:layout_row="1"-->
+<!--                android:layout_column="0"></Button>-->
+
+<!--            <Button-->
+<!--                android:layout_rowWeight="1"-->
+<!--                android:layout_columnWeight="1"-->
+<!--                android:layout_row="1"-->
+<!--                android:layout_column="1"></Button>-->
+
+<!--            <Button-->
+<!--                android:layout_rowWeight="1"-->
+<!--                android:layout_columnWeight="1"-->
+<!--                android:layout_row="1"-->
+<!--                android:layout_column="2"></Button>-->
+
+
+            <Button
+                android:id="@+id/fourth"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/green_c8ff71"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintWidth_percent="0.28"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_row="1"
+                android:layout_column="0"
+                app:layout_constraintTop_toBottomOf="@+id/first"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/fifth"
+                app:layout_constraintBottom_toTopOf="@+id/seventh"
+                ></Button>
+
+            <Button
+                android:id="@+id/fifth"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/green_c8ff71"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintWidth_percent="0.28"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_row="1"
+                android:layout_column="1"
+                app:layout_constraintTop_toBottomOf="@+id/second"
+                app:layout_constraintBottom_toTopOf="@+id/eighth"
+                app:layout_constraintLeft_toRightOf="@+id/fourth"
+                app:layout_constraintRight_toLeftOf="@+id/sixth"
+                ></Button>
+
+            <Button
+                android:id="@+id/sixth"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/green_c8ff71"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintWidth_percent="0.28"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_row="1"
+                android:layout_column="2"
+                app:layout_constraintTop_toBottomOf="@+id/third"
+                app:layout_constraintBottom_toTopOf="@+id/ninth"
+                app:layout_constraintLeft_toRightOf="@+id/fifth"
+                app:layout_constraintRight_toRightOf="parent"
+                ></Button>
+
+<!--            <Button-->
+<!--                android:layout_rowWeight="1"-->
+<!--                android:layout_columnWeight="1"-->
+<!--                android:layout_row="0"-->
+<!--                android:layout_column="1"></Button>-->
+
+<!--            <Button-->
+<!--                android:layout_rowWeight="1"-->
+<!--                android:layout_columnWeight="1"-->
+<!--                android:layout_row="0"-->
+<!--                android:layout_column="2"></Button>-->
+
+
+            <Button
+                android:id="@+id/seventh"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:textColor="@color/black"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintWidth_percent="0.28"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_row="2"
+                android:layout_column="0"
+                app:layout_constraintTop_toBottomOf="@+id/fourth"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/eighth"
+                app:layout_constraintBottom_toBottomOf="parent"
+                ></Button>
+
+            <Button
+                android:id="@+id/eighth"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:textColor="@color/black"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintWidth_percent="0.28"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_row="2"
+                android:layout_column="1"
+                app:layout_constraintTop_toBottomOf="@+id/fifth"
+                app:layout_constraintLeft_toRightOf="@+id/seventh"
+                app:layout_constraintRight_toLeftOf="@+id/ninth"
+                app:layout_constraintBottom_toBottomOf="parent"
+                ></Button>
+
+            <Button
+                android:id="@+id/ninth"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:textColor="@color/black"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintWidth_percent="0.28"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_row="2"
+                android:layout_column="2"
+                app:layout_constraintTop_toBottomOf="@+id/sixth"
+                app:layout_constraintLeft_toRightOf="@+id/eighth"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                ></Button>
+
+
+<!--            <Button-->
+<!--                android:layout_rowWeight="1"-->
+<!--                android:layout_columnWeight="1"-->
+<!--                android:layout_row="2"-->
+<!--                android:layout_column="0"></Button>-->
+
+<!--            <Button-->
+<!--                android:layout_rowWeight="1"-->
+<!--                android:layout_columnWeight="1"-->
+<!--                android:layout_row="2"-->
+<!--                android:layout_column="1"></Button>-->
+
+<!--            <Button-->
+<!--                android:layout_rowWeight="1"-->
+<!--                android:layout_columnWeight="1"-->
+<!--                android:layout_row="2"-->
+<!--                android:layout_column="2"></Button>-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+    </GridLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
