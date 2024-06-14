@@ -1,32 +1,19 @@
 package com.corporation8793.dementia;
 
-import static android.provider.Settings.Secure.getString;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
+import com.corporation8793.dementia.chat.ChatActivity;
 import com.corporation8793.dementia.databinding.ActivityMainBinding;
-import com.corporation8793.dementia.databinding.HomeFuncBtnLayoutBinding;
-import com.corporation8793.dementia.game.OrderNumberGame;
-import com.corporation8793.dementia.game.WhacAMoleActivity;
+import com.corporation8793.dementia.game.SelectGameActivity;
 import com.opencsv.exceptions.CsvException;
-
-import android.os.Handler;
-import android.os.Message;
 
 import java.io.IOException;
 
@@ -49,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
 
+        Init.settingTTS(getApplicationContext());
+
         ActivityMainBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
 
 
@@ -65,17 +54,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
         binding.gameBtn.btn.setOnClickListener(v->{
-            Intent intent = new Intent(MainActivity.this, OrderNumberGame.class);
+            Intent intent = new Intent(MainActivity.this, SelectGameActivity.class);
             startActivity(intent);
         });
 
 
         binding.findCenterBtn.btn.setOnClickListener(v->{
-
+            Intent intent = new Intent(MainActivity.this, MapActivity.class);
+            startActivity(intent);
         });
 
         binding.chatBtn.btn.setOnClickListener(v->{
-
+            Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+            startActivity(intent);
         });
 
 
@@ -95,4 +86,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Init.destroyTTS();
+    }
 }

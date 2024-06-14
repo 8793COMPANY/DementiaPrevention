@@ -15,14 +15,31 @@
     <color name="gray_9f9f9f">#9f9f9f</color>
     <color name="gray_d0d0d0">#d0d0d0</color>
     <color name="gray_dbdbdb">#dbdbdb</color>
+    <color name="gray_eef2f5">#eef2f5</color>
+    <color name="gray_868686">#868686</color>
+    <color name="gray_707070">#707070</color>
 
 
     <color name="mint_00b3bc">#00b3bc</color>
     <color name="mint_eafeff">#eafeff</color>
+    <color name="mint_80d9de">#80d9de</color>
+    <color name="mint_77d9d9">#77d9d9</color>
 
     <color name="green_c8ff71">#c8ff71</color>
 
 
     <color name="red_ff0200">#ff0200</color>
     <color name="red_ffedeb">#ffedeb</color>
+    <color name="red_e2846a">#e2846a</color>
+    
+    
+    <color name="yellow_fdcb24">#fdcb24</color>
+
+    <color name="green_abe048">#abe048</color>
+
+
+    <color name="blue_4da1ee">#4da1ee</color>
+    <color name="blue_5ad3ff">#5ad3ff</color>
+    <color name="blue_00baff">#00baff</color>
+
 </resources>

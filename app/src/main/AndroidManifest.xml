@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -16,17 +17,30 @@
         android:theme="@style/Theme.DementiaPrevention"
         tools:targetApi="31">
         <activity
-            android:name=".game.QuizActivity"
+            android:name=".game.SelectGameActivity"
             android:exported="false" />
         <activity
-            android:name=".game.OrderNumberGame"
+            android:name=".game.find_different_color.FindDifferentColorGame"
+            android:exported="false" />
+        <activity
+            android:name=".DiagnosticResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".game.find_same_thing.FindSameThingGame"
+            android:exported="false" />
+        <activity
+            android:name=".game.quiz.QuizActivity"
+            android:exported="false" />
+        <activity
+            android:name=".game.order_number.OrderNumberGame"
             android:exported="false" />
         <activity
             android:name=".QuestionnaireActivity"
             android:exported="true" />
         <activity
             android:name=".chat.ChatActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustUnspecified|adjustPan" />
         <activity
             android:name=".MapActivity"
             android:exported="false" />

@@ -28,9 +28,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ff0200" />
-                            <entry key="outputName" value="quiz_incorrect_icon" />
-                            <entry key="sourceFile" value="C:\Users\Genie\Documents\아까치매\진단아이콘.svg" />
+                            <entry key="outputName" value="clap_icon" />
+                            <entry key="sourceFile" value="C:\Users\Genie\Documents\아까치매\박수.svg" />
                           </map>
                         </option>
                       </PersistentState>

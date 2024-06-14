@@ -79,6 +79,8 @@ public class ThreeChoiceFragment extends Fragment {
         binding.questionText.setText(question_text);
 
 
+
+
         binding.choice1.choice.setOnClickListener(v->{
             Log.e("~~","choice1 click");
             if(binding.choice1.getChoice()){
@@ -122,7 +124,7 @@ public class ThreeChoiceFragment extends Fragment {
             }
         });
 
-
+        ((QuestionnaireActivity)getActivity()).speakText(question_text);
 
         return binding.getRoot();
     }

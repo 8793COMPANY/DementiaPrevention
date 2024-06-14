@@ -7,13 +7,16 @@ import android.graphics.Path
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.View
 import com.corporation8793.dementia.R
+import java.util.Random
 
 
 internal class Cell(context: Context,
                     var index: Int,
                     var text: String,
+                     var number_list : Int,
                     private var regularCellBackground: Drawable?,
                     private var regularDotColor: Int,
                     private var regularDotRadiusRatio: Float,
@@ -34,6 +37,8 @@ internal class Cell(context: Context,
     private var currentDegree: Float = -1f
     private var indicatorPath: Path = Path()
 
+    val color_list: List<Int> = listOf(R.color.red_e2846a, R.color.yellow_fdcb24, R.color.green_abe048, R.color.blue_4da1ee, R.color.mint_77d9d9, R.color.gray_f5f5f5)
+
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         var cellWidth = MeasureSpec.getSize(widthMeasureSpec) / columnCount
         var cellHeight = cellWidth
@@ -52,9 +57,12 @@ internal class Cell(context: Context,
                         background: Drawable?,
                         dotColor: Int,
                         radiusRation: Float) {
+
         var radius = getRadius()
         var centerX = width / 2
         var centerY = height / 2
+
+        Log.e("check","in")
 
         if (background is ColorDrawable) {
             paint.color = background.color
@@ -65,7 +73,10 @@ internal class Cell(context: Context,
             background?.draw(canvas!!)
         }
 
-        paint.color = resources.getColor(R.color.errorColor)
+//        val random = Random()
+//        val num = random.nextInt(5)
+
+        paint.color = resources.getColor(color_list.get(number_list))
         paint.style = Paint.Style.FILL
         canvas?.drawCircle(centerX.toFloat(), centerY.toFloat(), radius * radiusRation, paint)
 
