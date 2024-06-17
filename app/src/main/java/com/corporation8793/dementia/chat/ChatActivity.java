@@ -1,11 +1,13 @@
 package com.corporation8793.dementia.chat;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -42,7 +44,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.activity_test);
         GPT_KEY =  getString(R.string.GPT_KEY);
 
         headers.put("Content-Type", "application/json");
@@ -56,7 +58,10 @@ public class ChatActivity extends AppCompatActivity {
         service = retrofit.create(GptService.class);
 
         text_input_box = findViewById(R.id.text_input_box);
-        send_btn = findViewById(R.id.send_btn);
+//        send_btn = findViewById(R.id.send_btn);
+
+//        Toolbar toolbar = findViewById (R.id.toolbar);
+//        setSupportActionBar (toolbar); //액티비티의 앱바(App Bar)로 지정
 
 
         chatting = (RecyclerView)findViewById(R.id.chatting_view);
@@ -85,16 +90,16 @@ public class ChatActivity extends AppCompatActivity {
         });
 
 
-        send_btn.setOnClickListener(v->{
-            if (text_input_box.getText().toString().trim().equals("")){
-
-            }else{
-                chat_list.add(new ChatModel(1,text_input_box.getText().toString()));
-                adapter.notifyItemInserted(chat_list.size()-1);
-                send_text_msg(text_input_box.getText().toString());
-                text_input_box.setText("");
-            }
-        });
+//        send_btn.setOnClickListener(v->{
+//            if (text_input_box.getText().toString().trim().equals("")){
+//
+//            }else{
+//                chat_list.add(new ChatModel(1,text_input_box.getText().toString()));
+//                adapter.notifyItemInserted(chat_list.size()-1);
+//                send_text_msg(text_input_box.getText().toString());
+//                text_input_box.setText("");
+//            }
+//        });
 
 
 //

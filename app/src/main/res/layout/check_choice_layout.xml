@@ -5,9 +5,17 @@
 
     <data>
         <import type="android.view.View"/>
+
+
+        <variable
+            name="choiceText"
+            type="String" />
+
         <variable
             name="choice"
             type="java.lang.Boolean" />
+
+
     </data>
 
 
@@ -24,7 +32,7 @@
         android:id="@+id/choice_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="주 1~3회"
+        android:text="@{choiceText}"
         android:textColor="@color/black"
         android:textSize="23dp"
         android:fontFamily="@font/pretendard_semibold"

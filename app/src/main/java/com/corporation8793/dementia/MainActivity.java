@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 
 import com.corporation8793.dementia.chat.ChatActivity;
 import com.corporation8793.dementia.databinding.ActivityMainBinding;
+import com.corporation8793.dementia.diagnose.QuestionnaireActivity;
 import com.corporation8793.dementia.game.SelectGameActivity;
 import com.opencsv.exceptions.CsvException;
 
