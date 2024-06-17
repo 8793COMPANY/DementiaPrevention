@@ -20,7 +20,13 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.corporation8793.dementia.chat.ChatActivity;
 import com.corporation8793.dementia.databinding.ActivityMainBinding;
+import com.corporation8793.dementia.game.SelectGameActivity;
+import com.corporation8793.dementia.databinding.HomeFuncBtnLayoutBinding;
+import com.corporation8793.dementia.game.FindSameColorAndTextActivity;
+import com.corporation8793.dementia.game.WhacAMoleActivity;
+import com.corporation8793.dementia.util.Application;
 import com.corporation8793.dementia.databinding.HomeFuncBtnLayoutBinding;
 import com.corporation8793.dementia.game.FindSameColorAndTextActivity;
 import com.corporation8793.dementia.game.OrderNumberGame;
@@ -57,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
 
+        Init.settingTTS(getApplicationContext());
+
         ActivityMainBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
 
 
@@ -73,20 +81,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
         binding.gameBtn.btn.setOnClickListener(v->{
-            Intent intent = new Intent(MainActivity.this, OrderNumberGame.class);
+            Intent intent = new Intent(MainActivity.this, SelectGameActivity.class);
             startActivity(intent);
         });
 
 
         binding.findCenterBtn.btn.setOnClickListener(v->{
-            // 같은 이름 색상 맞추기 게임
-            Intent intent = new Intent(MainActivity.this, FindSameColorAndTextActivity.class);
+            Intent intent = new Intent(MainActivity.this, MapActivity.class);
             startActivity(intent);
         });
 
         binding.chatBtn.btn.setOnClickListener(v->{
-            // 지도 화면
-            Intent intent = new Intent(MainActivity.this, MapActivity.class);
+            Intent intent = new Intent(MainActivity.this, ChatActivity.class);
             startActivity(intent);
         });
 
@@ -251,5 +257,11 @@ public class MainActivity extends AppCompatActivity {
         // 현재는 초 단위만 계산
         setTime = time * 1000;
         progressBar.setMax((int) setTime);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Init.destroyTTS();
     }
 }

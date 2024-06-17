@@ -72,6 +72,7 @@ public class ChatActivity extends AppCompatActivity {
 
         adapter = new ChatAdapter(chat_list); // chatArrayList를 어댑터로 연결, 회원의 이메일도 넘김
         chatting.setAdapter(adapter); // 리사이클뷰에 어댑터를 설정
+        chatting.addItemDecoration(new ChatItemDecoration(10));
 
 
 

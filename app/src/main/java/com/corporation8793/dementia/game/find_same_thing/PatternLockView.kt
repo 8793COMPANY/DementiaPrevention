@@ -11,6 +11,7 @@ import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.widget.GridLayout
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.corporation8793.dementia.R
 import java.util.Random
@@ -21,9 +22,9 @@ class PatternLockView : GridLayout {
     companion object {
         const val DEFAULT_RADIUS_RATIO = 0.3f
         const val DEFAULT_LINE_WIDTH = 2f // unit: dp
-        const val DEFAULT_SPACING = 24f // unit: dp
-        const val DEFAULT_ROW_COUNT = 3
-        const val DEFAULT_COLUMN_COUNT = 3
+        const val DEFAULT_SPACING = 12f // unit: dp
+        const val DEFAULT_ROW_COUNT = 4
+        const val DEFAULT_COLUMN_COUNT = 4
         const val DEFAULT_ERROR_DURATION = 400 // unit: ms
         const val DEFAULT_HIT_AREA_PADDING_RATIO = 0.2f
         const val DEFAULT_INDICATOR_SIZE_RATIO = 0.2f
@@ -43,6 +44,8 @@ class PatternLockView : GridLayout {
     private var errorCellBackground: Drawable? = null
     private var errorDotColor: Int = 0
     private var errorDotRadiusRatio: Float = 0f
+
+    private var textview : TextView? = null
 
     /**
      * determine the line's style
@@ -125,10 +128,14 @@ class PatternLockView : GridLayout {
             MotionEvent.ACTION_DOWN -> {
                 var hitCell = getHitCell(event.x.toInt(), event.y.toInt())
                 if (hitCell == null) {
+                    Log.e("click", "cell null")
                     return false
                 } else {
+//                    selectedCells.clear()
                     onPatternListener?.onStarted()
                     notifyCellSelected(hitCell)
+//                    selectedCells.add(hitCell)
+                    Log.e("click", "not null")
                 }
             }
             MotionEvent.ACTION_MOVE -> handleActionMove(event)
@@ -220,10 +227,12 @@ class PatternLockView : GridLayout {
 
     private fun setupCells() {
         val random = Random()
+        val value: List<Int> = listOf(0, 0, 4, 4, 3,2,1,0,3,0, 4, 4, 3,2,1,0)
+        var count = 0;
         for(i in 0..(plvRowCount-1)) {
             for(j in 0..(plvColumnCount-1)) {
-
-                var cell = Cell(context, i * plvColumnCount + j,(random.nextInt(9) + 1).toString(),
+                Log.e("hello index", ((i+1)*(j+1) -1 ).toString())
+                var cell = Cell(context, i * plvColumnCount + j,"",value.get(count),
                         regularCellBackground, regularDotColor, regularDotRadiusRatio,
                         selectedCellBackground, selectedDotColor, selectedDotRadiusRatio,
                         errorCellBackground, errorDotColor, errorDotRadiusRatio,
@@ -233,6 +242,7 @@ class PatternLockView : GridLayout {
                 addView(cell)
 
                 cells.add(cell)
+                count++
             }
         }
     }
@@ -289,26 +299,43 @@ class PatternLockView : GridLayout {
     }
 
     private fun onFinish() {
+        Log.e("in","onfinish")
         lastX = 0f
         lastY = 0f
 
-        var current_text = selectedCells.get(0).text
-        var current_index = selectedCells.get(0).index
+
         var count =0
-//        selectedCells.toList().forEachIndexed { index, cell ->  }
-        selectedCells.toList().forEach {
-            if (current_text.equals(it.text)){
-                count++
-            }else{
-                onError()
+        var first_cell = selectedCells.get(0)
+
+        var correct_cell_size = selectedCells.stream().filter{
+            it.number_list == first_cell.number_list
+        }.count().toInt()
+
+        Log.e("correct size",correct_cell_size.toString())
+        if (correct_cell_size == selectedCells.size){
+            if(first_cell.number_list == 5){
+                reset()
                 return
             }
-            current_index = it.index
-            current_text = it.text
-        }
+            Log.e("result","정답")
+            linePaint.color = resources.getColor(R.color.blue_4da1ee)
+            for(cell in selectedCells) {
+                cell.number_list = 5
+                cell.text = "x"
+            }
+            invalidate()
 
+            postDelayed({
+                reset()
+            }, errorDuration.toLong())
+        }else{
+            onError()
+            return
+        }
         if (count == selectedCells.size)
             reset()
+
+        finish_game()
 
 //        var isCorrect = onPatternListener?.onComplete(generateSelectedIds())
 //        if (isCorrect != null && isCorrect) {
@@ -316,6 +343,17 @@ class PatternLockView : GridLayout {
 //        } else {
 //            onError()
 //        }
+    }
+
+    fun finish_game() {
+
+        var all_cell_size = cells.stream().filter{
+            it.number_list == 5
+        }.count().toInt()
+
+        if (all_cell_size == cells.size){
+            textview?.setText("게임 끝")
+        }
     }
 
     private fun generateSelectedIds() : ArrayList<Int> {
@@ -345,6 +383,10 @@ class PatternLockView : GridLayout {
 
     fun setOnPatternListener(listener: OnPatternListener) {
         onPatternListener = listener
+    }
+
+    fun setTextView(view: TextView){
+        textview = view
     }
 
     interface OnPatternListener {

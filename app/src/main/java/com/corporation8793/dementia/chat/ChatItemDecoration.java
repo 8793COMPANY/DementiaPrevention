@@ -1,0 +1,26 @@
+package com.corporation8793.dementia.chat;
+
+import android.graphics.Rect;
+import android.util.Log;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+public class ChatItemDecoration extends RecyclerView.ItemDecoration {
+    private final int divHeight;
+
+    public ChatItemDecoration(int divHeight){
+        this.divHeight = divHeight;
+    }
+
+
+    @Override
+    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+        super.getItemOffsets(outRect, view, parent, state);
+        Log.e("position",parent.getChildAdapterPosition(view)+"");
+            outRect.bottom = divHeight;
+
+    }
+
+}

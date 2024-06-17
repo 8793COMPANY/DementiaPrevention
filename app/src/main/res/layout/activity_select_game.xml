@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".game.SelectGameActivity">
+
+    <include
+        android:id="@+id/top_section"
+        layout="@layout/title_section_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:titleText="@{`뇌 기능 게임`}"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.1"></include>
+
+    <include
+        android:id="@+id/whack_a_mole"
+        layout="@layout/game_list_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:gameTitle="@{`두더지 게임`}"
+        app:highScore="@{`최고점수 : 420`}"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintWidth_percent="0.42"
+        app:layout_constraintDimensionRatio="720:120"
+        app:layout_constraintTop_toBottomOf="@+id/top_section"/>
+
+    <include
+        android:id="@+id/order_number_game"
+        layout="@layout/game_list_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:gameTitle="@{`순서 게임`}"
+        app:highScore="@{`최고점수 : 420`}"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintWidth_percent="0.42"
+        app:layout_constraintDimensionRatio="720:120"
+        app:layout_constraintTop_toBottomOf="@+id/whack_a_mole"/>
+
+
+
+
+
+    <include
+        android:id="@+id/find_different_color_game"
+        layout="@layout/game_list_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:gameTitle="@{`다른 색상 찾기`}"
+        app:highScore="@{`최고점수 : 420`}"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintWidth_percent="0.42"
+        app:layout_constraintDimensionRatio="720:120"
+        app:layout_constraintTop_toBottomOf="@+id/order_number_game"/>
+
+    <include
+        android:id="@+id/select_right_color_name"
+        layout="@layout/game_list_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:gameTitle="@{`색상 일치 게임`}"
+        app:highScore="@{`최고점수 : 420`}"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintWidth_percent="0.42"
+        app:layout_constraintDimensionRatio="720:120"
+        app:layout_constraintTop_toBottomOf="@+id/find_different_color_game"/>
+
+    <include
+        android:id="@+id/quiz_game"
+        layout="@layout/game_list_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:gameTitle="@{`ox 퀴즈`}"
+        app:highScore="@{`최고점수 : 420`}"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintWidth_percent="0.42"
+        app:layout_constraintDimensionRatio="720:120"
+        app:layout_constraintTop_toBottomOf="@+id/select_right_color_name"/>
+
+
+
+    <include
+        android:id="@+id/color_puzzle"
+        layout="@layout/game_list_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:gameTitle="@{`색상 퍼즐`}"
+        app:highScore="@{`최고점수 : 420`}"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintWidth_percent="0.42"
+        app:layout_constraintDimensionRatio="720:120"
+        app:layout_constraintTop_toBottomOf="@+id/quiz_game"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--    <Button-->
+<!--        android:id="@+id/select_right_color_name"-->
+<!--        android:text="색상 맞추기"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/color_puzzle"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        ></Button>-->
+
+
+<!--    <Button-->
+<!--        android:id="@+id/quiz_game"-->
+<!--        android:text="OX퀴즈"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/select_right_color_name"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        ></Button>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/order_number_game"-->
+<!--        android:text="순서대로 누르기"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/quiz_game"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        ></Button>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/find_different_color_game"-->
+<!--        android:text="다른 색상 찾기"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/order_number_game"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        ></Button>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
