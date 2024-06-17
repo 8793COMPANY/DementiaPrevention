@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".game.FindSameColorAndTextActivity">
+
+        <include
+            android:id="@+id/top_section"
+            layout="@layout/count_time_close_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.236"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/game_explain_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="적혀있는 이름과 색상이\n일치하는 버튼을 누르세요"
+            android:textColor="#000000"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintTop_toBottomOf="@+id/top_section"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <Button
+            android:id="@+id/first"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/start_color"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.236"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintTop_toTopOf="@+id/guide_top"
+            app:layout_constraintBottom_toBottomOf="@+id/guide_bottom"
+            app:layout_constraintLeft_toLeftOf="@+id/guide_left"
+            app:layout_constraintRight_toRightOf="@+id/guide_right" />
+
+        <Button
+            android:id="@+id/second"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/start_color"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.236"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintTop_toTopOf="@+id/guide_top"
+            app:layout_constraintBottom_toBottomOf="@+id/guide_bottom"
+            app:layout_constraintLeft_toRightOf="@+id/first"
+            app:layout_constraintRight_toLeftOf="@+id/third" />
+
+        <Button
+            android:id="@+id/third"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/start_color"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.236"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintTop_toTopOf="@+id/guide_top"
+            app:layout_constraintBottom_toBottomOf="@+id/guide_bottom"
+            app:layout_constraintLeft_toLeftOf="@+id/guide_left"
+            app:layout_constraintRight_toRightOf="@+id/guide_right" />
+
+        <Button
+            android:id="@+id/fourth"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/start_color"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.236"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintTop_toBottomOf="@+id/first"
+            app:layout_constraintBottom_toTopOf="@+id/seventh"
+            app:layout_constraintLeft_toLeftOf="@+id/guide_left"
+            app:layout_constraintRight_toRightOf="@+id/guide_right" />
+
+        <Button
+            android:id="@+id/fifth"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/start_color"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.236"
+            app:layout_constraintTop_toBottomOf="@+id/second"
+            app:layout_constraintBottom_toTopOf="@+id/eighth"
+            app:layout_constraintLeft_toRightOf="@+id/fourth"
+            app:layout_constraintRight_toLeftOf="@+id/sixth" />
+
+        <Button
+            android:id="@+id/sixth"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/start_color"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.236"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintTop_toBottomOf="@+id/third"
+            app:layout_constraintBottom_toTopOf="@+id/ninth"
+            app:layout_constraintLeft_toLeftOf="@+id/guide_left"
+            app:layout_constraintRight_toRightOf="@+id/guide_right" />
+
+        <Button
+            android:id="@+id/seventh"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/start_color"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.236"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintTop_toTopOf="@+id/guide_top"
+            app:layout_constraintBottom_toBottomOf="@+id/guide_bottom"
+            app:layout_constraintLeft_toLeftOf="@+id/guide_left"
+            app:layout_constraintRight_toRightOf="@+id/guide_right" />
+
+        <Button
+            android:id="@+id/eighth"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/start_color"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.236"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintTop_toTopOf="@+id/guide_top"
+            app:layout_constraintBottom_toBottomOf="@+id/guide_bottom"
+            app:layout_constraintLeft_toRightOf="@+id/seventh"
+            app:layout_constraintRight_toLeftOf="@+id/ninth" />
+
+        <Button
+            android:id="@+id/ninth"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/start_color"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.236"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintVertical_bias="1"
+            app:layout_constraintTop_toTopOf="@+id/guide_top"
+            app:layout_constraintBottom_toBottomOf="@+id/guide_bottom"
+            app:layout_constraintLeft_toLeftOf="@+id/guide_left"
+            app:layout_constraintRight_toRightOf="@+id/guide_right" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_top"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.412">
+        </androidx.constraintlayout.widget.Guideline>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_bottom"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.887">
+        </androidx.constraintlayout.widget.Guideline>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_left"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.07">
+        </androidx.constraintlayout.widget.Guideline>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_right"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.93">
+        </androidx.constraintlayout.widget.Guideline>
+
+        <com.corporation8793.dementia.game.pulse_countdown.PulseCountDown
+            android:id="@+id/pulseCountDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="3"
+            android:textSize="60dp"
+            app:pc_startValue="3"
+            app:pc_endValue="0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

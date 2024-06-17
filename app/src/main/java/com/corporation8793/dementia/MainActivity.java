@@ -4,6 +4,7 @@ import static android.provider.Settings.Secure.getString;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -12,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 
 import com.corporation8793.dementia.databinding.ActivityMainBinding;
 import com.corporation8793.dementia.databinding.HomeFuncBtnLayoutBinding;
+import com.corporation8793.dementia.game.FindSameColorAndTextActivity;
 import com.corporation8793.dementia.game.OrderNumberGame;
 import com.corporation8793.dementia.game.WhacAMoleActivity;
 import com.corporation8793.dementia.util.Application;
@@ -76,16 +79,20 @@ public class MainActivity extends AppCompatActivity {
 
 
         binding.findCenterBtn.btn.setOnClickListener(v->{
-
+            // 같은 이름 색상 맞추기 게임
+            Intent intent = new Intent(MainActivity.this, FindSameColorAndTextActivity.class);
+            startActivity(intent);
         });
 
         binding.chatBtn.btn.setOnClickListener(v->{
-
+            // 지도 화면
+            Intent intent = new Intent(MainActivity.this, MapActivity.class);
+            startActivity(intent);
         });
 
 
         menu_btn.setOnClickListener(v->{
-            drawerLayout.openDrawer(Gravity.END);
+            drawerLayout.openDrawer(GravityCompat.END);
         });
 
         Application.getInstance();

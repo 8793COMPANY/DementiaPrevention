@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/close/baseline_close_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/arrow_drop_down/baseline_arrow_drop_down_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,8 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="ff0200" />
-                            <entry key="outputName" value="quiz_incorrect_icon" />
+                            <entry key="color" value="00b3bc" />
+                            <entry key="outputName" value="baseline_arrow_drop_down_24" />
                             <entry key="sourceFile" value="C:\Users\Genie\Documents\아까치매\진단아이콘.svg" />
                           </map>
                         </option>

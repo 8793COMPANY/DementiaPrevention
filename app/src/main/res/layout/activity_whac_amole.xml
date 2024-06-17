@@ -547,7 +547,6 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/pretendard_semibold"
         android:text="3"
-        android:textSize="60dp"
         app:pc_startValue="3"
         app:pc_endValue="0"
         app:layout_constraintBottom_toBottomOf="parent"

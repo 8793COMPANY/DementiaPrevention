@@ -116,11 +116,11 @@ public class WhacAMoleActivity extends AppCompatActivity {
         // 모든 두더지 홀 기본 이미지 적용
         defaultHoles();
 
-
         countDownTimerText.setTextSize(DisplayFontSize.font_size_x_36);
         scoreText.setTextSize(DisplayFontSize.font_size_x_34);
         scoreText.setPadding(0, 0, (int) DisplayFontSize.font_size_x_30, 0);
         guide_text.setTextSize(DisplayFontSize.font_size_x_34);
+        startGameCountDownTimer.setTextSize(DisplayFontSize.font_size_x_60);
 
         star_first.setEnabled(true);
         star_second.setEnabled(true);
