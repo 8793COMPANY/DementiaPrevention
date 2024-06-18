@@ -69,6 +69,62 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="141:41"
+        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintVertical_bias="0.7"
+        app:layout_constraintTop_toTopOf="@+id/diagnose_result_progress"
+        app:layout_constraintBottom_toTopOf="@+id/result_score_section"
+        app:layout_constraintLeft_toLeftOf="@+id/diagnose_result_progress"
+        app:layout_constraintRight_toRightOf="@+id/diagnose_result_progress">
+
+
+        <ImageView
+            android:id="@+id/first"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            android:background="@drawable/empty_star_icon"
+            app:layout_constraintWidth_percent="0.3"
+            app:layout_constraintDimensionRatio="43:41"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/second"
+            app:layout_constraintBottom_toBottomOf="parent"></ImageView>
+
+
+        <ImageView
+            android:id="@+id/second"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/empty_star_icon"
+            app:layout_constraintWidth_percent="0.3"
+            app:layout_constraintDimensionRatio="43:41"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/first"
+            app:layout_constraintRight_toLeftOf="@+id/third"
+            app:layout_constraintBottom_toBottomOf="parent"></ImageView>
+
+
+        <ImageView
+            android:id="@+id/third"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/empty_star_icon"
+            app:layout_constraintWidth_percent="0.3"
+            app:layout_constraintDimensionRatio="43:41"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/second"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"></ImageView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/result_score_section"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintVertical_bias="0.65"
@@ -96,7 +152,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_medium"
-            android:text="/10"
+            android:text="/8"
             android:textSize="25dp"
             android:textColor="@color/gray_9f9f9f"
             app:layout_constraintTop_toTopOf="parent"
@@ -122,8 +178,10 @@
 
 
 
+
+
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/choice2"
+        android:id="@+id/go_lately_diagnose_list"
         layout="@layout/check_choice_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -137,13 +195,13 @@
         android:layout_marginBottom="20dp"
         app:layout_constraintDimensionRatio="478:110"
         app:layout_constraintTop_toBottomOf="@+id/result_text"
-        app:layout_constraintBottom_toTopOf="@+id/choice3"
+        app:layout_constraintBottom_toTopOf="@+id/go_main_activity"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"></androidx.appcompat.widget.AppCompatButton>
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/choice3"
+        android:id="@+id/go_main_activity"
         layout="@layout/check_choice_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -156,7 +214,7 @@
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintWidth_percent="0.65"
         app:layout_constraintDimensionRatio="478:110"
-        app:layout_constraintTop_toBottomOf="@+id/choice2"
+        app:layout_constraintTop_toBottomOf="@+id/go_lately_diagnose_list"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"></androidx.appcompat.widget.AppCompatButton>

@@ -19,6 +19,9 @@
     <color name="gray_868686">#868686</color>
     <color name="gray_707070">#707070</color>
     <color name="gray_f4f6fa">#f4f6fa</color>
+    <color name="gray_dde0e2">#dde0e2</color>
+    <color name="gray_a5a5a5">#a5a5a5</color>
+    <color name="gray_535353">#535353</color>
 
 
     <color name="mint_00b3bc">#00b3bc</color>
@@ -32,8 +35,8 @@
     <color name="red_ff0200">#ff0200</color>
     <color name="red_ffedeb">#ffedeb</color>
     <color name="red_e2846a">#e2846a</color>
-    
-    
+
+
     <color name="yellow_fdcb24">#fdcb24</color>
 
     <color name="green_abe048">#abe048</color>
@@ -43,4 +46,19 @@
     <color name="blue_5ad3ff">#5ad3ff</color>
     <color name="blue_00baff">#00baff</color>
 
+    // 같은 이름 색상 찾기 게임
+    <color name="start_color">#ffdab9</color>
+
+    <color name="red_ff0000">#ff0000</color>
+    <color name="orange_ffa500">#ffa500</color>
+    <color name="yellow_ffff00">#ffff00</color>
+    <color name="green_008000">#008000</color>
+    <color name="blue_0000ff">#0000ff</color>
+    <color name="dark_blue_00008b">#00008b</color>
+    <color name="purple_800080">#800080</color>
+    <color name="white_ffffff">#ffffff</color>
+    <color name="pink_ff5999">#ff5999</color>
+    <color name="light_green_99ee90">#90ee90</color>
+    <color name="sky_blue_5bccff">#5bccff</color>
+    <color name="brown_8a4b08">#8a4b08</color>
 </resources>

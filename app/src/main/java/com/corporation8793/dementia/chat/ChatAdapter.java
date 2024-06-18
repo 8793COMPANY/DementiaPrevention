@@ -16,6 +16,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     private ArrayList<ChatModel> mDataset;
 
     public static final int USER = 1;
+    public static final int DATE = 2;
     public ChatAdapter(ArrayList<ChatModel> dataSet) {
         mDataset = dataSet;
     }
@@ -25,6 +26,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public int getItemViewType(int position) {
         if (mDataset.get(position).type == USER){
             return 1;
+        }else if(mDataset.get(position).type == DATE){
+            return 2;
         }else{
             return 0;
         }
@@ -42,6 +45,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         if (viewType == USER){
             view = LayoutInflater.from(viewGroup.getContext())
                     .inflate(R.layout.user_message_itemview, viewGroup, false);
+        }
+
+        if (viewType == DATE){
+            view = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.date_message_itemview, viewGroup, false);
         }
 
         return new ViewHolder(view);

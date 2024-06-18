@@ -91,6 +91,7 @@ public class ThreeChoiceFragment extends Fragment {
             Log.e("~~","choice1 click");
             if(binding.choice1.getChoice()){
                 ((QuestionnaireActivity)getActivity()).next_end_btn.setEnabled(false);
+                ((QuestionnaireActivity)getActivity()).current_answer = binding.choice1.getChoiceText();
                 binding.choice1.setChoice(false);
                 binding.choice1.choice.setSelected(false);
             }else{
@@ -98,6 +99,7 @@ public class ThreeChoiceFragment extends Fragment {
                 binding.choice1.setChoice(true);
                 binding.choice1.choice.setSelected(true);
                 ((QuestionnaireActivity)getActivity()).next_end_btn.setEnabled(true);
+                ((QuestionnaireActivity)getActivity()).current_answer = "";
             }
         });
 
@@ -105,6 +107,7 @@ public class ThreeChoiceFragment extends Fragment {
             Log.e("~~","choice2 click");
             if(binding.choice2.getChoice()){
                 ((QuestionnaireActivity)getActivity()).next_end_btn.setEnabled(false);
+                ((QuestionnaireActivity)getActivity()).current_answer = binding.choice2.getChoiceText();
                 binding.choice2.setChoice(false);
                 binding.choice2.choice.setSelected(false);
             }else{
@@ -112,6 +115,7 @@ public class ThreeChoiceFragment extends Fragment {
                 binding.choice2.setChoice(true);
                 binding.choice2.choice.setSelected(true);
                 ((QuestionnaireActivity)getActivity()).next_end_btn.setEnabled(true);
+                ((QuestionnaireActivity)getActivity()).current_answer = "";
             }
         });
 
@@ -120,6 +124,7 @@ public class ThreeChoiceFragment extends Fragment {
             Log.e("~~","choice3 click");
             if(binding.choice3.getChoice()){
                 ((QuestionnaireActivity)getActivity()).next_end_btn.setEnabled(false);
+                ((QuestionnaireActivity)getActivity()).current_answer = binding.choice3.getChoiceText();
                 binding.choice3.setChoice(false);
                 binding.choice3.choice.setSelected(false);
             }else{
@@ -127,6 +132,7 @@ public class ThreeChoiceFragment extends Fragment {
                 binding.choice3.setChoice(true);
                 binding.choice3.choice.setSelected(true);
                 ((QuestionnaireActivity)getActivity()).next_end_btn.setEnabled(true);
+                ((QuestionnaireActivity)getActivity()).current_answer = "";
             }
         });
 

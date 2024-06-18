@@ -64,6 +64,11 @@ public class QuestionnaireActivity extends AppCompatActivity {
 
     int [] choice_count ={3,2,2,2,2,2,2,2};
 
+    public String [] answer_list = {"하지않음","아니요","아니요","아니요","아니요","아니요","아니요","아니요"};
+
+    int answer_count = 0;
+     static String current_answer = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,14 +137,36 @@ public class QuestionnaireActivity extends AppCompatActivity {
 
 
         next_end_btn.setOnClickListener(v->{
-            current_pos++;
-            timeReset();
-            transaction_fragment();
-            counting_rest.setText(current_pos+"/"+quiz_size);
-            next_end_btn.setEnabled(false);
+            Log.e("check value answer_list", answer_list[current_pos-1]);
+            Log.e("check value current_answer", current_answer);
+            if (answer_list[current_pos-1].equals(current_answer)){
+
+                answer_count++;
+            }
+
+
+            if (current_pos >= 8){
+                timeReset();
+                finish();
+                Intent intent = new Intent(QuestionnaireActivity.this, DiagnosticResultActivity.class);
+                intent.putExtra("rating",answer_count);
+                startActivity(intent);
+            }else{
+                current_pos++;
+                timeReset();
+                transaction_fragment();
+                counting_rest.setText(current_pos+"/"+quiz_size);
+                next_end_btn.setEnabled(false);
+            }
+
+
         });
 
 
+    }
+
+    void setCurrentAnswer(String str){
+        current_answer = str;
     }
 
     void speakText(String text){

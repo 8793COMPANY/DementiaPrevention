@@ -65,6 +65,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
         android:id="@+id/answer1"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -162,13 +163,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
     
     <androidx.appcompat.widget.AppCompatButton
+        android:enabled="false"
         android:id="@+id/confirm_btn"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="확인"
         android:textColor="@color/white"
-        android:background="@drawable/correct_btn_off"
-        android:backgroundTint="@color/mint_00b3bc"
+        android:background="@drawable/confirm_selector"
         app:layout_constraintVertical_bias="0.9"
         app:layout_constraintWidth_percent="0.95"
         app:layout_constraintDimensionRatio="668:110"

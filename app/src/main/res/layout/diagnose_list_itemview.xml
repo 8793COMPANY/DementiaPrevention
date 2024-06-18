@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/latest_diagnose"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/correct_btn_off"
+    android:backgroundTint="#e0fafc"
+    app:layout_constraintVertical_bias="0.05"
+    app:layout_constraintHeight_percent="0.11"
+    app:layout_constraintTop_toBottomOf="@+id/user_name"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="@+id/guide_left"
+    app:layout_constraintRight_toRightOf="@+id/guide_right">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/middle_guide_center"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"></androidx.constraintlayout.widget.Guideline>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/middle_guide_left"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.06"></androidx.constraintlayout.widget.Guideline>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/middle_guide_right"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95"></androidx.constraintlayout.widget.Guideline>
+
+
+    <ImageView
+        android:id="@+id/diagnose_icon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/latest_diagnose_icon"
+        app:layout_constraintDimensionRatio="41:56"
+        app:layout_constraintWidth_percent="0.06"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/middle_guide_left"
+        app:layout_constraintBottom_toBottomOf="parent"></ImageView>
+
+
+    <TextView
+        android:id="@+id/latest_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendard_light"
+        android:text="2025년 4월 10일"
+        android:textColor="@color/black"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/middle_guide_center"
+        app:layout_constraintLeft_toRightOf="@+id/diagnose_icon"
+        app:layout_constraintRight_toRightOf="parent"
+        ></TextView>
+
+
+    <TextView
+        android:id="@+id/latest_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendard_medium"
+        android:text="치매가 의심돼요/ 우울증이 의심돼요"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toBottomOf="@+id/middle_guide_center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/latest_date"></TextView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

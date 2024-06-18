@@ -2,11 +2,16 @@ package com.corporation8793.dementia.chat;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +22,7 @@ import com.corporation8793.dementia.chat.openai_dto.request.ChatGptMsg;
 import com.corporation8793.dementia.chat.openai_dto.request.ChatGptRequest;
 import com.corporation8793.dementia.chat.openai_dto.request.ChatImage;
 import com.corporation8793.dementia.chat.openai_dto.response.ChatGptResponse;
+import com.google.android.material.appbar.AppBarLayout;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,10 +47,16 @@ public class ChatActivity extends AppCompatActivity {
     GptService service;
     HashMap<String, String> headers = new HashMap<>();
 
+    ConstraintLayout chatting_section;
+
+    AppBarLayout top_section;
+    boolean isOpen = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.activity_chat);
+
         GPT_KEY =  getString(R.string.GPT_KEY);
 
         headers.put("Content-Type", "application/json");
@@ -58,18 +70,25 @@ public class ChatActivity extends AppCompatActivity {
         service = retrofit.create(GptService.class);
 
         text_input_box = findViewById(R.id.text_input_box);
-//        send_btn = findViewById(R.id.send_btn);
+        send_btn = findViewById(R.id.send_btn);
+
+        top_section = findViewById(R.id.top_section);
+
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+        params.height = (get_height() / 1280) * 130;
+        top_section.setLayoutParams(params);
 
 //        Toolbar toolbar = findViewById (R.id.toolbar);
 //        setSupportActionBar (toolbar); //액티비티의 앱바(App Bar)로 지정
 
-
+        chatting_section = findViewById(R.id.chatting_section);
         chatting = (RecyclerView)findViewById(R.id.chatting_view);
         chatting.setHasFixedSize(true); // 변경하지 않음 -> 항목의 높이가 바뀌지 않아야 비용이 적게 드므로 성능이 좋음
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this); // 리사이클러뷰의 레이아웃을 정해줄 레이아웃 매니저
         chatting.setLayoutManager(layoutManager); // 리사이클러뷰에 리니어 레이아웃 매니저를 사용함
 
+        chat_list.add(new ChatModel(2,"2024년 5월 17일 금요일"));
         chat_list.add(new ChatModel(0,"안녕"));
         chat_list.add(new ChatModel(0,"반가워!"));
         chat_list.add(new ChatModel(1,"나도 반가워!"));
@@ -78,6 +97,29 @@ public class ChatActivity extends AppCompatActivity {
         adapter = new ChatAdapter(chat_list); // chatArrayList를 어댑터로 연결, 회원의 이메일도 넘김
         chatting.setAdapter(adapter); // 리사이클뷰에 어댑터를 설정
         chatting.addItemDecoration(new ChatItemDecoration(10));
+
+        chatting_section.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+            Rect rect = new Rect();
+            chatting_section.getWindowVisibleDisplayFrame(rect);
+
+            int rootViewHeight = chatting_section.getRootView().getHeight();
+            int heightDiff = rootViewHeight - rect.height();
+            isOpen = heightDiff > rootViewHeight * 0.25;
+        });
+
+        chatting.addOnLayoutChangeListener(onLayoutChangeListener);
+
+        chatting.getViewTreeObserver().addOnScrollChangedListener(() -> {
+            if(isScrollable() && isOpen){
+                setStackFromEnd();
+                chatting.removeOnLayoutChangeListener(onLayoutChangeListener);
+            }
+        });
+
+
+
+
+
 
 
 
@@ -90,28 +132,20 @@ public class ChatActivity extends AppCompatActivity {
         });
 
 
-//        send_btn.setOnClickListener(v->{
-//            if (text_input_box.getText().toString().trim().equals("")){
-//
-//            }else{
-//                chat_list.add(new ChatModel(1,text_input_box.getText().toString()));
-//                adapter.notifyItemInserted(chat_list.size()-1);
-//                send_text_msg(text_input_box.getText().toString());
-//                text_input_box.setText("");
-//            }
-//        });
+        send_btn.setOnClickListener(v->{
+            if (text_input_box.getText().toString().trim().equals("")){
+
+            }else{
+                chat_list.add(new ChatModel(1,text_input_box.getText().toString()));
+                adapter.notifyItemInserted(chat_list.size()-1);
+                send_text_msg(text_input_box.getText().toString());
+                text_input_box.setText("");
+                chatting.smoothScrollToPosition(chat_list.size()-1);
+            }
+        });
 
 
-//
 
-//
-//
-        //이미지 입력
-
-
-//        ChatGptMsg msg = new ChatGptMsg("user", "안녕 오늘 기분 어때?");  //  chat
-
-//        msgs.add(msg);  // chat 전용 request msg
 
 
 
@@ -119,6 +153,42 @@ public class ChatActivity extends AppCompatActivity {
 
 
     }
+
+    int get_height(){
+        Display display = getWindowManager().getDefaultDisplay();  // in Activity
+        /* getActivity().getWindowManager().getDefaultDisplay() */ // in Fragment
+        Point size = new Point();
+        display.getRealSize(size); // or getSize(size)
+        int width = size.y;
+        return  width;
+    }
+
+    View.OnLayoutChangeListener onLayoutChangeListener = new View.OnLayoutChangeListener() {
+        @Override
+        public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+            if (bottom < oldBottom){
+                chatting.scrollBy(0 , oldBottom - bottom);
+            }
+        }
+    };
+
+
+    boolean isScrollable(){
+        return chatting.canScrollVertically(1) || chatting.canScrollVertically(-1);
+    }
+
+    /**
+     * StackFromEnd 설정
+     * */
+    void setStackFromEnd() {
+        ((LinearLayoutManager)chatting.getLayoutManager()).setStackFromEnd(true);
+    }
+
+
+
+
+
+
 
     void send_img_msg(String msg, String img){
                                                                                     //msg

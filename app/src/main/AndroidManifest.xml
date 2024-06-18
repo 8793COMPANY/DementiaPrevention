@@ -17,16 +17,13 @@
         android:theme="@style/Theme.DementiaPrevention"
         tools:targetApi="31">
         <activity
+            android:name=".diagnose.lately.DiagnoseResultListActivity"
+            android:exported="false" />
+        <activity android:name=".game.FindSameColorAndTextActivity" />
+        <activity
             android:name=".UserInfoActivity"
-            android:exported="true" >
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
+            android:exported="true"
+            android:windowSoftInputMode="adjustNothing"></activity>
         <activity
             android:name=".game.SelectGameActivity"
             android:exported="false" />
@@ -35,7 +32,7 @@
             android:exported="false" />
         <activity
             android:name=".diagnose.DiagnosticResultActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".game.find_same_thing.FindSameThingGame"
             android:exported="false" />
@@ -50,8 +47,7 @@
             android:exported="true" />
         <activity
             android:name=".chat.ChatActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustNothing" />
+            android:exported="true" />
         <activity
             android:name=".MapActivity"
             android:exported="false" />
@@ -69,7 +65,11 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
