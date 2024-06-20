@@ -63,6 +63,10 @@ public class DiagnoseResultListActivity extends AppCompatActivity {
         chart = findViewById(R.id.graph_view);
         close_btn = findViewById(R.id.close_btn);
 
+        close_btn.setOnClickListener(v->{
+            finish();
+        });
+
         WindowManager.LayoutParams params = new WindowManager.LayoutParams();
         params.height = lately_diagnose_progress_size;
 

@@ -282,15 +282,10 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     android:singleLine="true"
-<<<<<<< HEAD
+
                     ></TextView>
-=======
-                    android:enabled="true"
-                    ></EditText>
->>>>>>> bdb660d0db22b8211a7229d05d99169f2f1c1f71
+
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
             <androidx.constraintlayout.widget.ConstraintLayout

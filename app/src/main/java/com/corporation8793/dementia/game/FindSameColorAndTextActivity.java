@@ -1,5 +1,6 @@
 package com.corporation8793.dementia.game;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -56,6 +57,8 @@ public class FindSameColorAndTextActivity extends AppCompatActivity {
 
     int game_count = 0;
     int game_score = 0;
+
+    public static final String FINAL_SCORE_VALUE_EXTRA = "FINAL_SCORE_VALUE_EXTRA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,8 +164,11 @@ public class FindSameColorAndTextActivity extends AppCompatActivity {
                 startTimer(GAME_TIME);
             } else {
                 // 10번 게임이 끝나면 종료
-                Toast.makeText(getApplicationContext(), "GAME END, " + "점수 : " + game_score, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "GAME END, " + "점수 : " + game_score, Toast.LENGTH_SHORT).show();
                 Log.e("test2", "score : " + game_score);
+
+                // 결과 화면으로 이동
+                startResultActivity(game_score);
             }
         });
 
@@ -301,11 +307,24 @@ public class FindSameColorAndTextActivity extends AppCompatActivity {
                     startTimer(GAME_TIME);
                 } else {
                     // 10번 게임이 끝나면 종료
-                    Toast.makeText(getApplicationContext(), "GAME END, " + "점수 : " + game_score, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "GAME END, " + "점수 : " + game_score, Toast.LENGTH_SHORT).show();
                     Log.e("test2", "score : " + game_score);
+
+                    // 결과 화면으로 이동
+                    startResultActivity(game_score);
                 }
             }
         }.start();
+    }
+
+    // Start Result Activity when game is finished
+    private void startResultActivity(int score){
+        Intent intent = new Intent(FindSameColorAndTextActivity.this, ResultActivity.class);
+        intent.putExtra("type", 4);
+        intent.putExtra("size", 10);
+        intent.putExtra("rating", score);
+        startActivity(intent);
+        finish();
     }
 
     @Override

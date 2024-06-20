@@ -91,17 +91,27 @@ public class FindSameThingGame extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        handler = null;
+
+        if (handler != null) {
+            handler.removeCallbacksAndMessages(null);
+        }
     }
 
     void setScore(int score){
         this.score += score;
     }
+
+    void set_right_number(){
+        right_number++;
+    }
+
     void go_result_activity(int rating){
         Intent intent = new Intent(FindSameThingGame.this, ResultActivity.class);
+        intent.putExtra("type", 6);
         intent.putExtra("size",out_size);
-        intent.putExtra("rating",score);
+        intent.putExtra("rating",right_number);
         startActivity(intent);
+        finish();
     }
 
 
@@ -158,9 +168,11 @@ public class FindSameThingGame extends AppCompatActivity {
 //                    finish();
                     timeReset();
                     Intent intent = new Intent(FindSameThingGame.this, ResultActivity.class);
+                    intent.putExtra("type", 6);
                     intent.putExtra("size",out_size);
-                    intent.putExtra("rating",score);
+                    intent.putExtra("rating",right_number);
                     startActivity(intent);
+                    finish();
                 }else{
                     current_pos++;
                     timeReset();

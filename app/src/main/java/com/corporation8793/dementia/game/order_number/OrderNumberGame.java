@@ -65,6 +65,7 @@ public class OrderNumberGame extends AppCompatActivity {
     ConstraintLayout main;
 
     int right_number = 0;
+    boolean cycle_check = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,11 +114,13 @@ public class OrderNumberGame extends AppCompatActivity {
             container.setOnClickListener(v->{
                 Log.e("button text", container.getText().toString());
                 if (count == 8){
-                    right_number++;
-                    current_pos++;
+                    cycle_check = true;
+
+//                    right_number++;
+//                    current_pos++;
                     reset();
                     setting_btn_value(main);
-                    counting_rest.setText(current_pos+"/"+out_size);
+//                    counting_rest.setText(current_pos+"/"+out_size);
                     timeReset();
                     timeStart();
                 }else{
@@ -171,27 +174,50 @@ public class OrderNumberGame extends AppCompatActivity {
             Log.e("test", time);
 //            timeText.setText(time);
 
-            // 0초가 되면
-            if (time.equals("00:00")) {
-                // 타이머 초기화
+            if (cycle_check) {
+                cycle_check = false;
+
                 if (current_pos == out_size){
+                    right_number++;
                     finish();
                     Intent intent = new Intent(OrderNumberGame.this, ResultActivity.class);
+                    intent.putExtra("type", 2);
                     intent.putExtra("size",out_size);
                     intent.putExtra("rating",right_number);
                     startActivity(intent);
                 }else{
+                    right_number++;
                     current_pos++;
-                    timeReset();
                     counting_rest.setText(current_pos+"/"+out_size);
+                    timeReset();
                     reset();
                     setting_btn_value(main);
                     timeStart();
                 }
-
             } else {
-                // 0초가 아니면
-                handler.sendEmptyMessage(0);
+                // 0초가 되면
+                if (time.equals("00:00")) {
+                    // 타이머 초기화
+                    if (current_pos == out_size){
+                        finish();
+                        Intent intent = new Intent(OrderNumberGame.this, ResultActivity.class);
+                        intent.putExtra("type", 2);
+                        intent.putExtra("size",out_size);
+                        intent.putExtra("rating",right_number);
+                        startActivity(intent);
+                    }else{
+                        current_pos++;
+                        timeReset();
+                        counting_rest.setText(current_pos+"/"+out_size);
+                        reset();
+                        setting_btn_value(main);
+                        timeStart();
+                    }
+
+                } else {
+                    // 0초가 아니면
+                    handler.sendEmptyMessage(0);
+                }
             }
 //                if (count < 100) {
 //                    count++;
@@ -263,5 +289,14 @@ public class OrderNumberGame extends AppCompatActivity {
         // 현재는 초 단위만 계산
         setTime = time * 1000;
         time_progress.setMax((int) setTime);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (handler != null) {
+            handler.removeCallbacksAndMessages(null);
+        }
     }
 }

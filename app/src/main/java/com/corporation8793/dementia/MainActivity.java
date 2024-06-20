@@ -66,11 +66,11 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
 
-        if (!MySharedPreferences.getBoolean(getApplicationContext(),"first_check")){
-            Intent intent = new Intent(MainActivity.this, UserInfoActivity.class);
-            startActivity(intent);
-        }
-
+        // 초기
+//        if (!MySharedPreferences.getBoolean(getApplicationContext(),"first_check")){
+//            Intent intent = new Intent(MainActivity.this, UserInfoActivity.class);
+//            startActivity(intent);
+//        }
 
 
         drawerLayout = findViewById(R.id.dl_main);

@@ -396,6 +396,8 @@ class PatternLockView : GridLayout {
             textview?.setText("게임 끝")
             if (control_activity?.current_pos == control_activity?.out_size){
                 postDelayed({
+                    // 정답이면 1점 추가
+                    control_activity?.set_right_number()
 
                     //핸들러 메세지 전달 종료
                     control_activity?.handler?.removeCallbacksAndMessages(null)
@@ -407,7 +409,13 @@ class PatternLockView : GridLayout {
                 postDelayed({
                     init()
                     invalidate()
+
+                    // 정답이면 1점 추가
+                    control_activity?.set_right_number()
                     control_activity?.timeStart()
+
+                    // 문구 변경
+                    textview?.setText("색상이 같은 원들을\n이어보세요!")
                 }, errorDuration.toLong())
             }
 

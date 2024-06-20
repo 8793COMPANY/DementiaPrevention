@@ -86,17 +86,37 @@
 
     <TextView
         android:id="@+id/score_text"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="홍길동님은"
         android:textSize="20dp"
         android:textColor="@color/black"
         android:gravity="center"
         android:fontFamily="@font/pretendard_medium"
+        app:layout_constraintHorizontal_bias="1"
         app:layout_constraintVertical_bias="0.5"
         app:layout_constraintTop_toBottomOf="@+id/result_text"
         app:layout_constraintBottom_toTopOf="@+id/retry_btn"
-        ></TextView>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/guide_center">
+    </TextView>
+
+    <TextView
+        android:id="@+id/high_score_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="홍길동님은"
+        android:textSize="20dp"
+        android:textColor="#9a9a9a"
+        android:gravity="center"
+        android:fontFamily="@font/pretendard_medium"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintTop_toBottomOf="@+id/result_text"
+        app:layout_constraintBottom_toTopOf="@+id/retry_btn"
+        app:layout_constraintLeft_toLeftOf="@+id/guide_center"
+        app:layout_constraintRight_toRightOf="parent">
+    </TextView>
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -138,6 +158,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"></androidx.appcompat.widget.AppCompatButton>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_center"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

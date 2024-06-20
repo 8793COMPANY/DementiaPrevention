@@ -51,6 +51,7 @@ public class QuizActivity extends AppCompatActivity {
     ActivityQuizBinding binding;
 
     int right_number = 0;
+    boolean cycle_check = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,18 +78,26 @@ public class QuizActivity extends AppCompatActivity {
 
         counting_rest.setText(current_pos+"/"+quiz_size);
         quiz_number.setText("Q"+current_pos+".");
+
         close_btn.setOnClickListener(v->{
+            finish();
         });
 
         binding.confirmBtn.setOnClickListener(v->{
             //TODO : 정답 확인 기능 코드 필요
+            cycle_check = true;
+
+            // 정답이면 right_number++ 추가
+            // 우선 확인하면 정답인걸로
+            right_number++;
+
             choice_init();
             binding.confirmBtn.setEnabled(false);
-            current_pos++;
+//            current_pos++;
             timeReset();
             timeStart();
-            counting_rest.setText(current_pos+"/"+quiz_size);
-            quiz_number.setText("Q"+current_pos+".");
+//            counting_rest.setText(current_pos+"/"+quiz_size);
+//            quiz_number.setText("Q"+current_pos+".");
             Random rd = new Random();
             boolean check = rd.nextBoolean();
             setCorrectBtn(check,answer1, answer_text_1, answer_icon_1);
@@ -157,16 +166,19 @@ public class QuizActivity extends AppCompatActivity {
             Log.e("test", time);
 //            timeText.setText(time);
 
-            // 0초가 되면
-            if (time.equals("00:00")) {
-                // 타이머 초기화
+            if (cycle_check) {
+                cycle_check = false;
+
                 if (current_pos == quiz_size){
+                    // 정답이면 right_number++ 추가
                     finish();
                     Intent intent = new Intent(QuizActivity.this, ResultActivity.class);
+                    intent.putExtra("type", 5);
                     intent.putExtra("size",quiz_size);
                     intent.putExtra("rating",right_number);
                     startActivity(intent);
                 }else{
+                    // 정답이면 right_number++ 추가
                     choice_init();
                     binding.confirmBtn.setEnabled(false);
                     current_pos++;
@@ -181,8 +193,34 @@ public class QuizActivity extends AppCompatActivity {
                 }
 
             } else {
-                // 0초가 아니면
-                handler.sendEmptyMessage(0);
+                // 0초가 되면
+                if (time.equals("00:00")) {
+                    // 타이머 초기화
+                    if (current_pos == quiz_size){
+                        finish();
+                        Intent intent = new Intent(QuizActivity.this, ResultActivity.class);
+                        intent.putExtra("type", 5);
+                        intent.putExtra("size",quiz_size);
+                        intent.putExtra("rating",right_number);
+                        startActivity(intent);
+                    }else{
+                        choice_init();
+                        binding.confirmBtn.setEnabled(false);
+                        current_pos++;
+                        timeReset();
+                        timeStart();
+                        counting_rest.setText(current_pos+"/"+quiz_size);
+                        quiz_number.setText("Q"+current_pos+".");
+                        Random rd = new Random();
+                        boolean check = rd.nextBoolean();
+                        setCorrectBtn(check,answer1, answer_text_1, answer_icon_1);
+                        setCorrectBtn(!check, answer2, answer_text_2, answer_icon_2);
+                    }
+
+                } else {
+                    // 0초가 아니면
+                    handler.sendEmptyMessage(0);
+                }
             }
 //                if (count < 100) {
 //                    count++;
@@ -254,5 +292,14 @@ public class QuizActivity extends AppCompatActivity {
         // 현재는 초 단위만 계산
         setTime = time * 1000;
         time_progress.setMax((int) setTime);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (handler != null) {
+            handler.removeCallbacksAndMessages(null);
+        }
     }
 }

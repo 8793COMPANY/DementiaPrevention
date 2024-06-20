@@ -23,6 +23,10 @@ public class SelectGameActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this,R.layout.activity_select_game);
 
+        binding.topSection.closeBtn.setOnClickListener(v->{
+            finish();
+        });
+
         binding.whackAMole.game.setOnClickListener(v->{
             Intent intent = new Intent(SelectGameActivity.this, WhacAMoleActivity.class);
             startActivity(intent);
