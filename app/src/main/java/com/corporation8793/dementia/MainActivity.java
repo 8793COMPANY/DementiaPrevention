@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.corporation8793.dementia.chat.ChatActivity;
 import com.corporation8793.dementia.databinding.ActivityMainBinding;
+import com.corporation8793.dementia.game.FindSameColorAndTextActivity;
 import com.corporation8793.dementia.game.SelectGameActivity;
 import com.corporation8793.dementia.game.WhacAMoleActivity;
 import com.corporation8793.dementia.util.Application;
@@ -68,12 +69,18 @@ public class MainActivity extends AppCompatActivity {
 
         binding.diagnoseBtn.btn.setOnClickListener(v->{
             Log.e("hello","diagnosebtn");
-            Intent intent = new Intent(MainActivity.this, QuestionnaireActivity.class);
+//            Intent intent = new Intent(MainActivity.this, QuestionnaireActivity.class);
+//            startActivity(intent);
+
+            Intent intent = new Intent(MainActivity.this, WhacAMoleActivity.class);
             startActivity(intent);
         });
 
         binding.gameBtn.btn.setOnClickListener(v->{
-            Intent intent = new Intent(MainActivity.this, SelectGameActivity.class);
+//            Intent intent = new Intent(MainActivity.this, SelectGameActivity.class);
+//            startActivity(intent);
+
+            Intent intent = new Intent(MainActivity.this, FindSameColorAndTextActivity.class);
             startActivity(intent);
         });
 
@@ -98,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             Region.loadData(MainActivity.this);
+
+            //MedicalCenter.loadData(MainActivity.this);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (CsvException e) {

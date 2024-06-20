@@ -33,8 +33,8 @@ public class FindSameColorAndTextActivity extends AppCompatActivity {
     Button close_btn;
     ProgressBar time_progress;
 
-    // 게임 기본 시간 6초로 설정
-    private static final int GAME_TIME = 6000;
+    // 게임 기본 시간 10초로 설정
+    private static final int GAME_TIME = 10000;
 
     PulseCountDown startGameCountDownTimer;
     CountDownTimer mainCountDownTimer;
@@ -54,6 +54,9 @@ public class FindSameColorAndTextActivity extends AppCompatActivity {
     String correct_color;
     int correct_color_palette;
 
+    int game_count = 0;
+    int game_score = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +69,9 @@ public class FindSameColorAndTextActivity extends AppCompatActivity {
 
         counting_rest.setTextSize(DisplayFontSize.font_size_x_32);
         close_btn.setTextSize(DisplayFontSize.font_size_x_32);
+
+        // 문항수 초기 세팅
+        counting_rest.setText(game_count + "/10");
 
         close_btn.setOnClickListener(v->{
             finish();
@@ -84,7 +90,7 @@ public class FindSameColorAndTextActivity extends AppCompatActivity {
         // 네비게이션바 숨기기
         Application.FullScreenMode(FindSameColorAndTextActivity.this);
 
-        // 6초 타이머 설정
+        // 10초 타이머 설정
         startPulse(GAME_TIME);
     }
 
@@ -138,11 +144,26 @@ public class FindSameColorAndTextActivity extends AppCompatActivity {
                 mainCountDownTimer.cancel();
             }
 
-            // 다시 문제 출제
-            startGame();
+            game_score++;
 
-            // 타이머 시작
-            startTimer(GAME_TIME);
+            // 10번만 게임 반복
+            if (game_count < 10) {
+                // 게임 카운트 추가
+                game_count++;
+
+                // 문항수 변경
+                counting_rest.setText(game_count + "/10");
+
+                // 다시 문제 출제
+                startGame();
+
+                // 타이머 시작
+                startTimer(GAME_TIME);
+            } else {
+                // 10번 게임이 끝나면 종료
+                Toast.makeText(getApplicationContext(), "GAME END, " + "점수 : " + game_score, Toast.LENGTH_SHORT).show();
+                Log.e("test2", "score : " + game_score);
+            }
         });
 
         // 정답 색상 이름 및 색상 제거
@@ -230,6 +251,10 @@ public class FindSameColorAndTextActivity extends AppCompatActivity {
                 // 타이머 시작
                 startTimer(time);
 
+                // 첫번째 문항
+                game_count++;
+                counting_rest.setText(game_count + "/10");
+
                 // 랜덤 문제 출제
                 startGame();
             }
@@ -251,10 +276,34 @@ public class FindSameColorAndTextActivity extends AppCompatActivity {
 
             // 게임이 끝나면
             public void onFinish() {
-                Toast.makeText(getApplicationContext(), "TIME OVER", Toast.LENGTH_SHORT).show();
-                time_progress.setProgress(0);
+                //Toast.makeText(getApplicationContext(), "TIME OVER", Toast.LENGTH_SHORT).show();
+                //time_progress.setProgress(0);
                 // 결과 페이지로 이동
                 //startResultActivity();
+
+                // 타이머 취소
+                if (mainCountDownTimer != null) {
+                    mainCountDownTimer.cancel();
+                }
+
+                // 10번만 게임 반복
+                if (game_count < 10) {
+                    // 게임 카운트 추가
+                    game_count++;
+
+                    // 문항수 변경
+                    counting_rest.setText(game_count + "/10");
+
+                    // 다시 문제 출제
+                    startGame();
+
+                    // 타이머 시작
+                    startTimer(GAME_TIME);
+                } else {
+                    // 10번 게임이 끝나면 종료
+                    Toast.makeText(getApplicationContext(), "GAME END, " + "점수 : " + game_score, Toast.LENGTH_SHORT).show();
+                    Log.e("test2", "score : " + game_score);
+                }
             }
         }.start();
     }

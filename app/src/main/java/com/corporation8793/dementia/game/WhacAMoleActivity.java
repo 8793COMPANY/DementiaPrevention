@@ -1,5 +1,6 @@
 package com.corporation8793.dementia.game;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -54,9 +55,12 @@ public class WhacAMoleActivity extends AppCompatActivity {
     PulseCountDown startGameCountDownTimer;
     CountDownTimer mainCountDownTimer;
     CircleProgressbar timer_progressbar;
+    Handler gameHandler;
 
     boolean moleIsActive = false, countDownWorks = false;
     long curSeconds = 0, curMillies = 0;
+
+    boolean minusMole = false, touch_check = false;
 
     public static final String FINAL_SCORE_VALUE_EXTRA = "FINAL_SCORE_VALUE_EXTRA";
 
@@ -180,18 +184,34 @@ public class WhacAMoleActivity extends AppCompatActivity {
         startGameCountDownTimer.start(new OnCountdownCompleted() {
             @Override
             public void completed() {
-                startTimer(time);
+                // 타이머 시작
+                //startTimer(time);
                 //timeStart();
+
+                // 두더지 시작
+                gameHandler = new Handler();
+                gameHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(!moleIsActive) {
+                            touch_check = false;
+                            showMole();
+                        }
+
+                        // 반복
+                        gameHandler.postDelayed(this, 0);
+                    }
+                },0);
             }
         });
     }
 
     // 게임 타이머 시작
+    @SuppressLint("HandlerLeak")
     private void startTimer(int time){
         // Interval - 1 second
         // Timer - 30 seconds
         timer_progressbar.setMaxProgress((float) time);
-
         mainCountDownTimer = new CountDownTimer(time, 1) {
             public void onTick(long millisUntilFinished) {
                 countDownWorks = true;
@@ -227,8 +247,8 @@ public class WhacAMoleActivity extends AppCompatActivity {
 
                 //countDownTimerText.setText(stringSeconds + "." + stringMillies);
 
-                if(!moleIsActive)
-                    showMole();
+//                if(!moleIsActive)
+//                    showMole();
 
                 Log.e("test", millisUntilFinished+"");
 
@@ -392,29 +412,59 @@ public class WhacAMoleActivity extends AppCompatActivity {
         // 모든 두더지 활성화
         ableHoles();
 
+        // 두더지가 나올 홀 랜덤으로 정하기
         ImageView activeMole
                 = findViewById(availableMoleIdArrayList.get(new Random().nextInt(availableMoleIdArrayList.size())));
+
+        // 스폐셜 두더지(기본)
+        minusMole = false;
+
+        Random randomMole = new Random();
+        int randomMoleValue = randomMole.nextInt(10);
+
+        // 30% chance to see mole with sunglassesMole
+        if (randomMoleValue == 0 || randomMoleValue == 1 || randomMoleValue == 2)
+            minusMole = true;
 
         // Set mole image
         // 자원 해제할 수 있는 방법/ gif 가 끝나는 시간 알 수 있는 방법
         // 액티비티가 종료되지 않았을 경우에만 실행
         if (!WhacAMoleActivity.this.isDestroyed()) {
-            Glide.with(WhacAMoleActivity.this).load(R.drawable.mole_up).placeholder(R.drawable.whac_amole_mole_hole).override(Target.SIZE_ORIGINAL)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).addListener(new RequestListener<Drawable>() {
-                        @Override
-                        public boolean onLoadFailed(@Nullable GlideException e, @Nullable Object model, @NonNull Target<Drawable> target, boolean isFirstResource) {
-                            return false;
-                        }
-
-                        @Override
-                        public boolean onResourceReady(@NonNull Drawable resource, @NonNull Object model, Target<Drawable> target, @NonNull com.bumptech.glide.load.DataSource dataSource, boolean isFirstResource) {
-                            // gif 재생횟수 : 1번
-                            if (resource instanceof GifDrawable) {
-                                ((GifDrawable) resource).setLoopCount(1);
+            if (minusMole) {
+                Glide.with(WhacAMoleActivity.this).load(R.drawable.basic_mole_up_speed_up).placeholder(R.drawable.whac_amole_mole_hole).override(Target.SIZE_ORIGINAL)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).addListener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, @Nullable Object model, @NonNull Target<Drawable> target, boolean isFirstResource) {
+                                return false;
                             }
-                            return false;
-                        }
-                    }).into(activeMole);
+
+                            @Override
+                            public boolean onResourceReady(@NonNull Drawable resource, @NonNull Object model, Target<Drawable> target, @NonNull com.bumptech.glide.load.DataSource dataSource, boolean isFirstResource) {
+                                // gif 재생횟수 : 1번
+                                if (resource instanceof GifDrawable) {
+                                    ((GifDrawable) resource).setLoopCount(1);
+                                }
+                                return false;
+                            }
+                        }).into(activeMole);
+            } else {
+                Glide.with(WhacAMoleActivity.this).load(R.drawable.sunglasses_mole_up_speed_up).placeholder(R.drawable.whac_amole_mole_hole).override(Target.SIZE_ORIGINAL)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true).addListener(new RequestListener<Drawable>() {
+                            @Override
+                            public boolean onLoadFailed(@Nullable GlideException e, @Nullable Object model, @NonNull Target<Drawable> target, boolean isFirstResource) {
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onResourceReady(@NonNull Drawable resource, @NonNull Object model, Target<Drawable> target, @NonNull com.bumptech.glide.load.DataSource dataSource, boolean isFirstResource) {
+                                // gif 재생횟수 : 1번
+                                if (resource instanceof GifDrawable) {
+                                    ((GifDrawable) resource).setLoopCount(1);
+                                }
+                                return false;
+                            }
+                        }).into(activeMole);
+            }
         }
         //activeMole.setImageResource(R.drawable.ic_mole);
 
@@ -430,6 +480,9 @@ public class WhacAMoleActivity extends AppCompatActivity {
         final Runnable runnable = new Runnable() {
             @Override
             public void run(){
+                Log.e("test2", "runnable on");
+                Log.e("test2", "touch_check : " + touch_check);
+
                 // 두더지 배열 목록을 지운 다음 마지막 두더지 없이 다시 채우기
                 availableMoleIdArrayList.clear();
                 fillMolesArrayList(activeMole.getId());
@@ -443,6 +496,34 @@ public class WhacAMoleActivity extends AppCompatActivity {
 
                 //activeMole.setEnabled(false);
                 moleIsActive = false;
+
+                if (!touch_check) {
+                    // 기본 두더지인 경우는 제외
+                    if (!minusMole) {
+                        if (star_third.isEnabled()) { // 첫번째 별 활성화시
+                            // 첫번째 별 차감
+                            star_third.setEnabled(false);
+                            star_third.setImageResource(R.drawable.whac_amole_star_empty);
+                        } else if (star_second.isEnabled()) { // 두번째 별 활성화시
+                            // 두번째 별 차감
+                            star_second.setEnabled(false);
+                            star_second.setImageResource(R.drawable.whac_amole_star_empty);
+                        } else if (star_first.isEnabled()) { // 세번째 별 활성화시
+                            // 세번째 별 차감
+                            star_first.setEnabled(false);
+                            star_first.setImageResource(R.drawable.whac_amole_star_empty);
+
+                            // 두더지 홀 비활성화 및 초기화
+                            defaultHoles();
+                            disableHoles();
+
+                            // 모든 별이 비활성화
+                            gameHandler.removeCallbacksAndMessages(null);
+
+                            Toast.makeText(getApplicationContext(), "GAME OVER", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
             }
         };
 
@@ -458,14 +539,14 @@ public class WhacAMoleActivity extends AppCompatActivity {
         if (randomTimeValue == 0 || randomTimeValue == 1) {
             Log.e("test", "10%");
             // 10% chance
-            handler.postDelayed(runnable, 1500);
+            handler.postDelayed(runnable, 1750);
         } else if (randomTimeValue == 2) {
             Log.e("test", "5%");
             // 5% chance
-            handler.postDelayed(runnable, 1000);
+            handler.postDelayed(runnable, 1500);
         } else {
-            Log.e("test", "75%");
-            // 75% chance
+            Log.e("test", "85%");
+            // 85% chance
             handler.postDelayed(runnable, 2000);
         }
 
@@ -487,9 +568,44 @@ public class WhacAMoleActivity extends AppCompatActivity {
                         if (activeMole == imageButton) {
                             //imageButton.setImageResource(R.drawable.ic_mole_hole);
 
-                            imageButton.setImageResource(R.drawable.mole_hit);
+                            if (minusMole) {
+                                imageButton.setImageResource(R.drawable.hit_basic_mole);
 
-                            scoreText.setText(String.valueOf(Integer.parseInt(scoreText.getText().toString()) + 1));
+//                                if ((Integer.parseInt(scoreText.getText().toString()) - 1) > 0) {
+//                                    scoreText.setText(String.valueOf(Integer.parseInt(scoreText.getText().toString()) - 1));
+//                                } else {
+//                                    scoreText.setText("0");
+//                                }
+                                if (star_third.isEnabled()) { // 첫번째 별 활성화시
+                                    // 첫번째 별 차감
+                                    star_third.setEnabled(false);
+                                    star_third.setImageResource(R.drawable.whac_amole_star_empty);
+                                } else if (star_second.isEnabled()) { // 두번째 별 활성화시
+                                    // 두번째 별 차감
+                                    star_second.setEnabled(false);
+                                    star_second.setImageResource(R.drawable.whac_amole_star_empty);
+                                } else if (star_first.isEnabled()) { // 세번째 별 활성화시
+                                    // 세번째 별 차감
+                                    star_first.setEnabled(false);
+                                    star_first.setImageResource(R.drawable.whac_amole_star_empty);
+
+                                    // 두더지 홀 비활성화 및 초기화
+                                    defaultHoles();
+                                    disableHoles();
+
+                                    // 모든 별이 비활성화
+                                    gameHandler.removeCallbacksAndMessages(null);
+
+                                    Toast.makeText(getApplicationContext(), "GAME OVER", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                imageButton.setImageResource(R.drawable.hit_sunglasses_mole);
+
+                                scoreText.setText(String.valueOf(Integer.parseInt(scoreText.getText().toString()) + 1));
+
+                                touch_check = true;
+                            }
+
                             imageButton.setEnabled(false);
 
                             new Handler().postDelayed(() -> {
@@ -497,6 +613,11 @@ public class WhacAMoleActivity extends AppCompatActivity {
                             },200);
                         } else {
                             // 두더지가 아닌 홀을 누르면 별 감점
+//                            if ((Integer.parseInt(scoreText.getText().toString()) - 1) > 0) {
+//                                scoreText.setText(String.valueOf(Integer.parseInt(scoreText.getText().toString()) - 1));
+//                            } else {
+//                                scoreText.setText("0");
+//                            }
                             if (star_third.isEnabled()) { // 첫번째 별 활성화시
                                 // 첫번째 별 차감
                                 star_third.setEnabled(false);
@@ -511,12 +632,18 @@ public class WhacAMoleActivity extends AppCompatActivity {
                                 star_first.setImageResource(R.drawable.whac_amole_star_empty);
 
                                 // 두더지 홀 비활성화 및 초기화
+
                                 defaultHoles();
                                 disableHoles();
 
                                 // 모든 별이 비활성화
                                 // 타이머 취소하고 게임 끝내기
-                                mainCountDownTimer.cancel();
+                                if (mainCountDownTimer != null) {
+                                    mainCountDownTimer.cancel();
+                                }
+
+                                gameHandler.removeCallbacksAndMessages(null);
+
                                 Toast.makeText(getApplicationContext(), "GAME OVER", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -555,6 +682,10 @@ public class WhacAMoleActivity extends AppCompatActivity {
 
         if (mainCountDownTimer != null) {
             mainCountDownTimer.cancel();
+        }
+
+        if (gameHandler != null) {
+            gameHandler.removeCallbacksAndMessages(null);
         }
     }
 }
