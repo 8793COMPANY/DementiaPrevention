@@ -26,9 +26,17 @@ public class ResultActivity extends AppCompatActivity {
     int score = 0;
     int num;
 
-    int rating;
+    int rating, highest_score;
 
     Button close_btn;
+
+    /*
+    * TODO: 소영님께서 저번에 만들어두신 다시하기 버튼 기능은 아직 지우지 않았어요
+    *       뇌 기능 게임 리스트 순서대로
+    *       두더지게임 - 1
+    *       순서 게임  - 2
+    *       이렇게 번호 매겨서 intent 값 보낼테니 분류작업해주세요
+    * */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +50,7 @@ public class ResultActivity extends AppCompatActivity {
 //        });
 
         rating = getIntent().getIntExtra("rating",0);
+        highest_score = getIntent().getIntExtra("size",0); //최고점은 없을 수 있습니다
 
         score_text = findViewById(R.id.score_text);
         retry_btn = findViewById(R.id.retry_btn);

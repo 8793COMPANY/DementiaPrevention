@@ -8,6 +8,7 @@ import androidx.fragment.app.DialogFragment;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
+<<<<<<< HEAD
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
@@ -15,6 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+=======
+import android.util.Log;
+>>>>>>> bdb660d0db22b8211a7229d05d99169f2f1c1f71
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +35,7 @@ public class UserInfoActivity extends AppCompatActivity {
 
     Button back_btn;
 
+<<<<<<< HEAD
     TextView birthday_input, region_input_box;
 
     AlertDialog dialog;
@@ -46,12 +51,16 @@ public class UserInfoActivity extends AppCompatActivity {
              2. 생년월일 다이얼로그는 대충 틀만 잡아놓고 커스텀한거라 디자인 필요해보임
              3. 지역 고르는 입력창은 소영님께서 만드신 지역선택 기능 연결해주세요
      */
+=======
+    EditText birthday_input, region_input_box;
+>>>>>>> bdb660d0db22b8211a7229d05d99169f2f1c1f71
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
 
+<<<<<<< HEAD
 
         // 정보수집(null)인지 수정(edit)인지 판단
         String type = getIntent().getStringExtra("type");
@@ -62,6 +71,11 @@ public class UserInfoActivity extends AppCompatActivity {
 
         app_icon = findViewById(R.id.app_icon);
         top_section = findViewById(R.id.top_section);
+=======
+        birthday_input = findViewById(R.id.birthday_input);
+        birthday_input.setInputType(0);
+
+>>>>>>> bdb660d0db22b8211a7229d05d99169f2f1c1f71
         region_input_box = findViewById(R.id.region_input_box);
         gender_select_section= findViewById(R.id.gender_select_section);
         birthday_input = findViewById(R.id.birthday_input);
@@ -77,12 +91,14 @@ public class UserInfoActivity extends AppCompatActivity {
 
 
         region_input_box.setInputType(0);
+
         back_btn = findViewById(R.id.back_btn);
         back_btn.setOnClickListener(v->{
             finish();
         });
 
         birthday_input.setOnClickListener(v -> {
+<<<<<<< HEAD
             dialog.show();
         });
 
@@ -94,6 +110,29 @@ public class UserInfoActivity extends AppCompatActivity {
             if (checkedId == R.id.man){
                 findViewById(R.id.woman).setActivated(false);
             }
+=======
+            DialogFragment dialogFragment = new DatePickerFragment(new DatePickerFragment.DatePickerDialogListener() {
+                @Override
+                public void clickBtn(String date) {
+                    Log.e("teset!!", date+"!!");
+                    birthday_input.setText(date);
+                }
+            });
+
+            dialogFragment.show(getSupportFragmentManager(), "datePicker");
+        });
+
+        region_input_box.setOnClickListener(v->{
+            MapDialog mapDialog = new MapDialog(UserInfoActivity.this, 3, "", new MapDialog.MapDialogListener() {
+                @Override
+                public void clickBtn(String si, String gu) {
+                    Log.e("teset!!", si+"!!"+gu);
+                    region_input_box.setText(si + " " + gu);
+                }
+            });
+
+            mapDialog.show();
+>>>>>>> bdb660d0db22b8211a7229d05d99169f2f1c1f71
         });
 
 

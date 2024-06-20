@@ -13,6 +13,17 @@ import androidx.fragment.app.DialogFragment;
 import java.util.Calendar;
 
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+
+    DatePickerDialogListener datePickerDialogListener;
+
+    public DatePickerFragment(DatePickerDialogListener datePickerDialogListener) {
+        this.datePickerDialogListener = datePickerDialogListener;
+    }
+
+    public interface DatePickerDialogListener {
+        void clickBtn(String date);
+    }
+
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         final Calendar c = Calendar.getInstance();
@@ -26,7 +37,10 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     }
 
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-        String msg = year + "년 " + (month+1) + "월 " + day + "일";
-        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+//        String msg = year + "년 " + (month+1) + "월 " + day + "일";
+//        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+
+        String msg = year + "/ " + (month+1) + "/ " + day;
+        datePickerDialogListener.clickBtn(msg);
     }
 }

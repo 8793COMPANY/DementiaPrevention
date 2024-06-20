@@ -47,6 +47,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <GridLayout
+        android:visibility="visible"
         android:id="@+id/grid_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -370,7 +371,7 @@
                 android:fontFamily="@font/pretendard_medium"
                 android:gravity="center"
                 android:textColor="#383838"
-                android:text="제주"
+                android:text="세종"
                 app:layout_constraintWidth_percent="0.313"
                 app:layout_constraintHeight_percent="0.104"
                 app:layout_constraintHorizontal_bias="0"
@@ -380,9 +381,52 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"/>
 
+            <RadioButton
+                android:id="@+id/radio_btn17"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/map_radio_btn_select"
+                android:button="@null"
+                android:layout_row="5"
+                android:layout_column="0"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="center"
+                android:textColor="#383838"
+                android:text="제주"
+                app:layout_constraintWidth_percent="0.313"
+                app:layout_constraintHeight_percent="0.104"
+                app:layout_constraintVertical_bias="1"
+                app:layout_constraintTop_toTopOf="@+id/radio_btn16"
+                app:layout_constraintBottom_toBottomOf="@+id/radio_btn16"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </GridLayout>
+
+    <ScrollView
+        android:visibility="gone"
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toTopOf="@id/guide_top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/guide_left"
+        app:layout_constraintRight_toRightOf="@id/guide_right">
+
+        <GridLayout
+            android:id="@+id/grid_layout2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="@id/guide_top"
+            app:layout_constraintBottom_toBottomOf="@id/guide_bottom"
+            app:layout_constraintLeft_toLeftOf="@id/guide_left"
+            app:layout_constraintRight_toRightOf="@id/guide_right">
+
+        </GridLayout>
+    </ScrollView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide_top"
@@ -403,13 +447,13 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.06" />
+        app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide_right"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.94" />
+        app:layout_constraintGuide_percent="0.95" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

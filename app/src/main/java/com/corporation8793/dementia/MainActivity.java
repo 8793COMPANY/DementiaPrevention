@@ -1,5 +1,7 @@
 package com.corporation8793.dementia;
 
+import static android.provider.Settings.Secure.getString;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -22,6 +24,7 @@ import com.corporation8793.dementia.chat.ChatActivity;
 import com.corporation8793.dementia.databinding.ActivityMainBinding;
 import com.corporation8793.dementia.diagnose.QuestionnaireActivity;
 import com.corporation8793.dementia.diagnose.lately.DiagnoseResultListActivity;
+import com.corporation8793.dementia.game.FindSameColorAndTextActivity;
 import com.corporation8793.dementia.game.SelectGameActivity;
 import com.corporation8793.dementia.game.WhacAMoleActivity;
 import com.corporation8793.dementia.util.Application;
@@ -107,6 +110,8 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             Region.loadData(MainActivity.this);
+
+            //MedicalCenter.loadData(MainActivity.this);
         } catch (IOException e) {
             throw new RuntimeException(e);
         } catch (CsvException e) {
