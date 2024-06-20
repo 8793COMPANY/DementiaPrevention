@@ -24,6 +24,8 @@ import com.corporation8793.dementia.databinding.ActivityOrderNumberGameBinding;
 import com.corporation8793.dementia.databinding.GameListLayoutBinding;
 import com.corporation8793.dementia.diagnose.DiagnosticResultActivity;
 import com.corporation8793.dementia.diagnose.QuestionnaireActivity;
+import com.corporation8793.dementia.game.ResultActivity;
+import com.corporation8793.dementia.game.find_different_color.FindDifferentColorGame;
 import com.google.android.gms.common.util.DataUtils;
 
 import java.util.Arrays;
@@ -173,8 +175,11 @@ public class OrderNumberGame extends AppCompatActivity {
             if (time.equals("00:00")) {
                 // 타이머 초기화
                 if (current_pos == out_size){
-//                    finish();
-                    Toast.makeText(getApplicationContext(),"맞춘 개수:"+right_number+"개", Toast.LENGTH_SHORT).show();
+                    finish();
+                    Intent intent = new Intent(OrderNumberGame.this, ResultActivity.class);
+                    intent.putExtra("size",out_size);
+                    intent.putExtra("rating",right_number);
+                    startActivity(intent);
                 }else{
                     current_pos++;
                     timeReset();

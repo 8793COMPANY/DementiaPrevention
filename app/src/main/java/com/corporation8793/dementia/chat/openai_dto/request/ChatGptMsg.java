@@ -10,10 +10,6 @@ public class ChatGptMsg {
     @SerializedName("content") public Object content = null;
 
 
-
-
-//    @SerializedName("content") public ChatGptContentImage content_img = null;
-
     public ChatGptMsg(String role, String content) {
         this.role = role;
         this.content = content;

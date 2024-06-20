@@ -71,6 +71,7 @@ class PatternLockView : GridLayout {
     private var cells: ArrayList<Cell> = ArrayList()
     private var selectedCells: ArrayList<Cell> = ArrayList()
 
+    private  var selectedColors = mutableMapOf<Int,Int>()
     private var linePaint: Paint = Paint()
     private var linePath: Path = Path()
 
@@ -80,6 +81,10 @@ class PatternLockView : GridLayout {
     private var isSecureMode = false
 
     private var onPatternListener: OnPatternListener? = null
+
+    private var score : Int = 0
+
+    private var control_activity : FindSameThingGame? = null
 
     constructor(context: Context) : super(context)
 
@@ -225,9 +230,15 @@ class PatternLockView : GridLayout {
 
     }
 
-    private fun setupCells() {
-        val random = Random()
-        val value: List<Int> = listOf(0, 0, 4, 4, 3,2,1,0,3,0, 4, 4, 3,2,1,0)
+    public fun setupCells() {
+
+        val value =  mutableListOf<Int>()
+        for (i in 0..16){
+            val random = Random()
+            val num = random.nextInt(5)
+            value.add(num)
+        }
+
         var count = 0;
         for(i in 0..(plvRowCount-1)) {
             for(j in 0..(plvColumnCount-1)) {
@@ -259,11 +270,12 @@ class PatternLockView : GridLayout {
 
     }
 
-    private fun reset() {
+    public fun reset() {
         for(cell in selectedCells) {
             cell.reset()
         }
         selectedCells.clear()
+        selectedColors.clear()
         linePaint.color = regularLineColor
         linePath.reset()
 
@@ -271,6 +283,13 @@ class PatternLockView : GridLayout {
         lastY = 0f
 
         invalidate()
+    }
+
+    public fun init(){
+        cells.clear()
+        removeAllViews()
+        reset()
+        setupCells()
     }
 
     fun enableSecureMode() {
@@ -307,18 +326,35 @@ class PatternLockView : GridLayout {
         var count =0
         var first_cell = selectedCells.get(0)
 
-        var already_cells = selectedCells.stream().filter{
-            it.number_list == 5
-        }.count().toInt()
+        selectedCells.forEach {
+            if (!selectedColors.contains(it.number_list)){
+                Log.e("selected in","not contains")
+                selectedColors.put(it.number_list, 1)
+            }else{
+                Log.e("selected in","contains")
+                var count = selectedColors[it.number_list]
+                if (count != null) {
+                    selectedColors.put(it.number_list,count+1)
+                }
+            }
+        }
 
 
-        var correct_cell_size = selectedCells.stream().filter{
-            it.number_list == first_cell.number_list
-        }.count().toInt()
+        var value_check = true
+        if (selectedColors.size >2){
+            value_check = false
+        }
 
-        Log.e("correct size",correct_cell_size.toString())
-        if (correct_cell_size+already_cells == selectedCells.size){
-            if(first_cell.number_list == 5){
+        var already_cells =0
+        var already_check = false
+        if (selectedColors.contains(5)){
+            already_cells = selectedColors[5]!!
+            already_check = true
+        }
+
+
+        if ((value_check && already_check) || selectedColors.size == 1){
+            if(already_cells == selectedCells.size){
                 reset()
                 return
             }
@@ -329,7 +365,7 @@ class PatternLockView : GridLayout {
                 cell.text = "x"
             }
             invalidate()
-
+            control_activity?.setScore((selectedCells.size - already_cells) *2)
             postDelayed({
                 reset()
             }, errorDuration.toLong())
@@ -358,6 +394,25 @@ class PatternLockView : GridLayout {
 
         if (all_cell_size == cells.size){
             textview?.setText("게임 끝")
+            if (control_activity?.current_pos == control_activity?.out_size){
+                postDelayed({
+
+                    //핸들러 메세지 전달 종료
+                    control_activity?.handler?.removeCallbacksAndMessages(null)
+                    control_activity?.go_result_activity(score)
+                }, errorDuration.toLong())
+            }else{
+                textview?.setText("잘하셨어요!")
+                control_activity?.timeSetting()
+                postDelayed({
+                    init()
+                    invalidate()
+                    control_activity?.timeStart()
+                }, errorDuration.toLong())
+            }
+
+
+
         }
     }
 
@@ -392,6 +447,10 @@ class PatternLockView : GridLayout {
 
     fun setTextView(view: TextView){
         textview = view
+    }
+
+    fun setActivity(view: FindSameThingGame){
+        control_activity = view
     }
 
     interface OnPatternListener {

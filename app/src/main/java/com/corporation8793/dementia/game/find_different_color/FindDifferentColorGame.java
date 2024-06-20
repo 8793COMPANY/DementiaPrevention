@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -20,7 +21,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.corporation8793.dementia.R;
+import com.corporation8793.dementia.diagnose.DiagnosticResultActivity;
+import com.corporation8793.dementia.diagnose.QuestionnaireActivity;
+import com.corporation8793.dementia.game.ResultActivity;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -30,13 +35,13 @@ public class FindDifferentColorGame extends AppCompatActivity {
     long setTime;
 
     // 기본 3초로 설정
-    private static final Long SET_TIME = 7L;
+    private static final Long SET_TIME = 10L;
 
     TextView counting_rest;
     Button close_btn;
     ProgressBar time_progress;
 
-    int out_size = 10;
+    int out_size = 5;
 
     int current_pos =1;
 
@@ -47,6 +52,13 @@ public class FindDifferentColorGame extends AppCompatActivity {
     ConstraintLayout parent_container;
 
     int right_number=0;
+    int randomIndex;
+
+    int counting= 0;
+    GridLayout color_list;
+
+    ArrayList<Button> buttons = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +66,7 @@ public class FindDifferentColorGame extends AppCompatActivity {
         setContentView(R.layout.activity_find_different_color);
 
         game_explain_text = findViewById(R.id.game_explain_text);
-        GridLayout color_list = findViewById(R.id.color_list);
+        color_list = findViewById(R.id.color_list);
         parent_container = (ConstraintLayout) color_list.getChildAt(0);
 
         View top_section = findViewById(R.id.top_section);
@@ -66,7 +78,7 @@ public class FindDifferentColorGame extends AppCompatActivity {
         counting_rest.setText(current_pos+"/"+out_size);
 
         Random randomInt = new Random();
-        int randomIndex = randomInt.nextInt(9);
+        randomIndex = randomInt.nextInt(9);
 
         int childCount = parent_container.getChildCount();
         Log.e("childCount",childCount+"");
@@ -74,6 +86,7 @@ public class FindDifferentColorGame extends AppCompatActivity {
 
             Button container = (Button) parent_container.getChildAt(i);
             container.setTag(i);
+            buttons.add(container);
 
             if (i == randomIndex){
                 container.setBackgroundTintList(getResources().getColorStateList(different_color));
@@ -85,10 +98,15 @@ public class FindDifferentColorGame extends AppCompatActivity {
 
             container.setOnClickListener(v->{
                 Log.e("container","onclick");
-                container.setEnabled(false);
+                setBtnEnabled(false);
                 timeReset();
+
+
+
                 if (Integer.parseInt(container.getTag().toString()) == randomIndex){
                     game_explain_text.setText("정답!");
+                    counting++;
+
                 }else {
                     game_explain_text.setText("ㅠㅠ");
                 }
@@ -96,10 +114,21 @@ public class FindDifferentColorGame extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        current_pos++;
-                        game_explain_text.setText("혼자 다른 색상을 찾아보세요");
-                        setting_btn_value(parent_container);
-                        timeStart();
+                        if (current_pos == out_size){
+                            timeReset();
+                            finish();
+                            Intent intent = new Intent(FindDifferentColorGame.this, ResultActivity.class);
+                            intent.putExtra("size",out_size);
+                            intent.putExtra("rating",counting);
+                            startActivity(intent);
+                            return;
+                        }else {
+                            current_pos++;
+                            game_explain_text.setText("혼자 다른 색상을 찾아보세요");
+                            setting_btn_value(parent_container);
+                            timeStart();
+                            counting_rest.setText(current_pos + "/" + out_size);
+                        }
                     }
                 },1000);
 
@@ -115,10 +144,17 @@ public class FindDifferentColorGame extends AppCompatActivity {
         timeStart();
     }
 
+    void setBtnEnabled(boolean check){
+        for (int i=0; i< buttons.size(); i++){
+            buttons.get(i).setEnabled(check);
+            buttons.get(i).setClickable(check);
+        }
+    }
+
     void setting_btn_value(ConstraintLayout parent_container) {
 
         Random randomInt = new Random();
-        int randomIndex = randomInt.nextInt(9);
+         randomIndex= randomInt.nextInt(9);
 
         int childCount = parent_container.getChildCount();
         Log.e("childCount", childCount + "");
@@ -126,7 +162,7 @@ public class FindDifferentColorGame extends AppCompatActivity {
 
             Button container = (Button) parent_container.getChildAt(i);
             container.setTag(i);
-            container.setEnabled(true);
+            setBtnEnabled(true);
 
             if (i == randomIndex) {
                 container.setBackgroundTintList(getResources().getColorStateList(different_color));
@@ -151,7 +187,12 @@ public class FindDifferentColorGame extends AppCompatActivity {
                 // 타이머 초기화
                 if (current_pos == out_size){
 //                    finish();
-                    Toast.makeText(getApplicationContext(),"맞춘 개수:"+right_number+"개", Toast.LENGTH_SHORT).show();
+                    timeReset();
+                    finish();
+                    Intent intent = new Intent(FindDifferentColorGame.this, ResultActivity.class);
+                    intent.putExtra("size",out_size);
+                    intent.putExtra("rating",counting);
+                    startActivity(intent);
                 }else{
                     current_pos++;
                     timeReset();

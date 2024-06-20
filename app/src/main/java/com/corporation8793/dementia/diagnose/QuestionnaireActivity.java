@@ -67,7 +67,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
     public String [] answer_list = {"하지않음","아니요","아니요","아니요","아니요","아니요","아니요","아니요"};
 
     int answer_count = 0;
-     static String current_answer = "";
+    static String current_answer = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,13 +139,14 @@ public class QuestionnaireActivity extends AppCompatActivity {
         next_end_btn.setOnClickListener(v->{
             Log.e("check value answer_list", answer_list[current_pos-1]);
             Log.e("check value current_answer", current_answer);
+            next_end_btn.setEnabled(false);
             if (answer_list[current_pos-1].equals(current_answer)){
 
                 answer_count++;
             }
 
 
-            if (current_pos >= 8){
+            if (current_pos -1 >= 7){
                 timeReset();
                 finish();
                 Intent intent = new Intent(QuestionnaireActivity.this, DiagnosticResultActivity.class);
@@ -159,13 +160,14 @@ public class QuestionnaireActivity extends AppCompatActivity {
                 next_end_btn.setEnabled(false);
             }
 
-
+            next_end_btn.setEnabled(true);
         });
 
 
     }
 
     void setCurrentAnswer(String str){
+        Log.e("choice in",str);
         current_answer = str;
     }
 
@@ -178,6 +180,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        handler = null;
 
     }
 
@@ -208,6 +211,8 @@ public class QuestionnaireActivity extends AppCompatActivity {
             if (time.equals("00:00")) {
                 // 타이머 초기화
                 if (current_pos == quiz_size){
+                    Log.e("check","time");
+                    timeReset();
                     finish();
                     Intent intent = new Intent(QuestionnaireActivity.this, DiagnosticResultActivity.class);
                     startActivity(intent);
@@ -217,8 +222,9 @@ public class QuestionnaireActivity extends AppCompatActivity {
                     transaction_fragment();
                     counting_rest.setText(current_pos+"/"+quiz_size);
                     next_end_btn.setEnabled(false);
-                    if (current_pos == 10)
+                    if (current_pos == 8)
                         next_end_btn.setText("제출");
+                    next_end_btn.setEnabled(false);
                 }
 
             } else {
