@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -51,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
         Init.settingTTS(getApplicationContext());
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
+
+        if (!MySharedPreferences.getBoolean(getApplicationContext(),"first_check")){
+            Intent intent = new Intent(MainActivity.this, UserInfoActivity.class);
+            startActivity(intent);
+        }
 
 
 
@@ -165,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
 
         drawerLayout.findViewById(R.id.user_info_modify_section).setOnClickListener(v->{
             Intent intent = new Intent(MainActivity.this, UserInfoActivity.class);
+            intent.putExtra("type","edit");
             startActivity(intent);
         });
 
@@ -178,6 +187,8 @@ public class MainActivity extends AppCompatActivity {
             drawerLayout.closeDrawers();
             Toast.makeText(getApplicationContext(),"로그아웃",Toast.LENGTH_SHORT).show();
         });
+
+
     }
 
     @SuppressLint("HandlerLeak")
@@ -210,10 +221,15 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-//    public void sendMessage() {
-//        Message message = new Message();
-//        handler.sendMessageDelayed(message, 10);
-//    }
+
+    @Override
+    public void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(Gravity.END)){
+            drawerLayout.closeDrawers();
+        }else{
+            finish();
+        }
+    }
 
     // 시간 시작
     public void timeStart() {

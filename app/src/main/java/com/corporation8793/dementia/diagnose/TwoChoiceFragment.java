@@ -91,7 +91,7 @@ public class TwoChoiceFragment extends Fragment {
             Log.e("~~","choice1 click");
             if(binding.choice1.getChoice()){
                 ((QuestionnaireActivity)getActivity()).next_end_btn.setEnabled(false);
-                ((QuestionnaireActivity)getActivity()).current_answer = binding.choice1.getChoiceText();
+                ((QuestionnaireActivity)getActivity()).current_answer = "";
                 binding.choice1.setChoice(false);
                 binding.choice1.choice.setSelected(false);
             }else{
@@ -99,7 +99,7 @@ public class TwoChoiceFragment extends Fragment {
                 binding.choice1.setChoice(true);
                 binding.choice1.choice.setSelected(true);
                 ((QuestionnaireActivity)getActivity()).next_end_btn.setEnabled(true);
-                ((QuestionnaireActivity)getActivity()).current_answer = "";
+                ((QuestionnaireActivity)getActivity()).current_answer = binding.choice1.getChoiceText();
             }
         });
 
@@ -108,8 +108,8 @@ public class TwoChoiceFragment extends Fragment {
             if(binding.choice2.getChoice()){
 
                 ((QuestionnaireActivity)getActivity()).next_end_btn.setEnabled(false);
-                ((QuestionnaireActivity)getActivity()).setCurrentAnswer(binding.choice2.getChoiceText());
-                Log.e("activity","choice2 click"+((QuestionnaireActivity)getActivity()).current_answer);
+                ((QuestionnaireActivity)getActivity()).current_answer = "";
+
                 binding.choice2.setChoice(false);
                 binding.choice2.choice.setSelected(false);
             }else{
@@ -117,8 +117,11 @@ public class TwoChoiceFragment extends Fragment {
                 binding.choice2.setChoice(true);
                 binding.choice2.choice.setSelected(true);
                 ((QuestionnaireActivity)getActivity()).next_end_btn.setEnabled(true);
-                ((QuestionnaireActivity)getActivity()).current_answer = "";
+                ((QuestionnaireActivity)getActivity()).setCurrentAnswer(binding.choice2.getChoiceText());
+
             }
+
+            Log.e("activity","choice2 click"+((QuestionnaireActivity)getActivity()).current_answer);
         });
 
 
@@ -127,17 +130,18 @@ public class TwoChoiceFragment extends Fragment {
             Log.e("~~","choice3 click"+ binding.choice3.getChoiceText());
             if(binding.choice3.getChoice()){
                 ((QuestionnaireActivity)getActivity()).next_end_btn.setEnabled(false);
-                ((QuestionnaireActivity)getActivity()).setCurrentAnswer(binding.choice3.getChoiceText());
-                Log.e("activity","choice3 click"+((QuestionnaireActivity)getActivity()).current_answer);
                 binding.choice3.setChoice(false);
                 binding.choice3.choice.setSelected(false);
+                ((QuestionnaireActivity)getActivity()).current_answer = "";
             }else{
                 choice_init();
                 binding.choice3.setChoice(true);
                 binding.choice3.choice.setSelected(true);
                 ((QuestionnaireActivity)getActivity()).next_end_btn.setEnabled(true);
-                ((QuestionnaireActivity)getActivity()).current_answer = "";
+                ((QuestionnaireActivity)getActivity()).setCurrentAnswer(binding.choice3.getChoiceText());
             }
+
+            Log.e("activity","choice3 click"+((QuestionnaireActivity)getActivity()).current_answer);
         });
 
         ((QuestionnaireActivity)getActivity()).speakText(question_text);

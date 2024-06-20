@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -25,6 +26,10 @@ public class ResultActivity extends AppCompatActivity {
     int score = 0;
     int num;
 
+    int rating;
+
+    Button close_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +41,15 @@ public class ResultActivity extends AppCompatActivity {
 //            return insets;
 //        });
 
+        rating = getIntent().getIntExtra("rating",0);
+
         score_text = findViewById(R.id.score_text);
         retry_btn = findViewById(R.id.retry_btn);
-        main_btn = findViewById(R.id.main_btn);
+        main_btn = findViewById(R.id.out_btn);
+        close_btn = findViewById(R.id.close_btn);
+
+
+
 
         if (!TextUtils.isEmpty(getIntent().getStringExtra(WhacAMoleActivity.FINAL_SCORE_VALUE_EXTRA))) {
             score = Integer.parseInt(getIntent().getStringExtra(WhacAMoleActivity.FINAL_SCORE_VALUE_EXTRA));
@@ -51,6 +62,9 @@ public class ResultActivity extends AppCompatActivity {
 
             num = 2;
         }
+
+        score_text.setText(rating+"");
+
 
         retry_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +90,11 @@ public class ResultActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
+        });
+
+
+        close_btn.setOnClickListener(v->{
+            finish();
         });
     }
 }

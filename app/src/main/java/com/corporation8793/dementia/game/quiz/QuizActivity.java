@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.databinding.DataBindingUtil;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,6 +22,8 @@ import android.widget.Toast;
 import com.corporation8793.dementia.R;
 import com.corporation8793.dementia.databinding.ActivityQuizBinding;
 import com.corporation8793.dementia.diagnose.QuestionnaireActivity;
+import com.corporation8793.dementia.game.ResultActivity;
+import com.corporation8793.dementia.game.order_number.OrderNumberGame;
 
 import java.util.Random;
 
@@ -46,6 +49,8 @@ public class QuizActivity extends AppCompatActivity {
 
     int current_pos =1;
     ActivityQuizBinding binding;
+
+    int right_number = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +81,7 @@ public class QuizActivity extends AppCompatActivity {
         });
 
         binding.confirmBtn.setOnClickListener(v->{
+            //TODO : 정답 확인 기능 코드 필요
             choice_init();
             binding.confirmBtn.setEnabled(false);
             current_pos++;
@@ -156,6 +162,10 @@ public class QuizActivity extends AppCompatActivity {
                 // 타이머 초기화
                 if (current_pos == quiz_size){
                     finish();
+                    Intent intent = new Intent(QuizActivity.this, ResultActivity.class);
+                    intent.putExtra("size",quiz_size);
+                    intent.putExtra("rating",right_number);
+                    startActivity(intent);
                 }else{
                     choice_init();
                     binding.confirmBtn.setEnabled(false);

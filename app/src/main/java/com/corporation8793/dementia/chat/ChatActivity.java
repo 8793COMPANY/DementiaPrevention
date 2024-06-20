@@ -25,9 +25,13 @@ import com.corporation8793.dementia.chat.openai_dto.response.ChatGptResponse;
 import com.google.android.material.appbar.AppBarLayout;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -52,10 +56,38 @@ public class ChatActivity extends AppCompatActivity {
     AppBarLayout top_section;
     boolean isOpen = false;
 
+
+    long mNow;
+    Date mDate;
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
+
+    Map<Integer, String> day_week = new HashMap<Integer, String>() {{
+        put(1, "일요일");
+        put(2, "월요일");
+        put(3, "화요일");
+        put(4, "수요일");
+        put(5, "목요일");
+        put(6, "금요일");
+        put(7, "토요일");
+    }};
+
+
+    public static final int DATE = 0;
+    public static final int DAY_OF_WEEK = 1;
+
+    public static final int TIME = 2;
+
+
+    /*TODO : 1. 마지막으로 채팅한 메세지 날짜와 현재 채팅 메세지의 날짜가 다르면 날짜 데이터 추가해줘야함
+             2. 메세지 Room DB 저장
+             3. chat-gpt api에게 응답 다 받을 때까지 입력 못 하게 막기
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
 
         GPT_KEY =  getString(R.string.GPT_KEY);
 
@@ -88,7 +120,7 @@ public class ChatActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this); // 리사이클러뷰의 레이아웃을 정해줄 레이아웃 매니저
         chatting.setLayoutManager(layoutManager); // 리사이클러뷰에 리니어 레이아웃 매니저를 사용함
 
-        chat_list.add(new ChatModel(2,"2024년 5월 17일 금요일"));
+        chat_list.add(new ChatModel(2,getTime(DATE) + " " + getTime(DAY_OF_WEEK)));
         chat_list.add(new ChatModel(0,"안녕"));
         chat_list.add(new ChatModel(0,"반가워!"));
         chat_list.add(new ChatModel(1,"나도 반가워!"));
@@ -154,13 +186,30 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
+
+    private String getTime(int type){
+        mNow = System.currentTimeMillis();
+        mDate = new Date(mNow);
+
+        if (type == DATE){
+
+            return mFormat.format(mDate);
+        }else if (type == DAY_OF_WEEK){
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(mDate);
+            return day_week.get(cal.get(Calendar.DAY_OF_WEEK));
+        }
+        return "";
+    }
+
+
     int get_height(){
         Display display = getWindowManager().getDefaultDisplay();  // in Activity
         /* getActivity().getWindowManager().getDefaultDisplay() */ // in Fragment
         Point size = new Point();
         display.getRealSize(size); // or getSize(size)
-        int width = size.y;
-        return  width;
+        int height = size.y;
+        return  height;
     }
 
     View.OnLayoutChangeListener onLayoutChangeListener = new View.OnLayoutChangeListener() {
@@ -240,10 +289,10 @@ public class ChatActivity extends AppCompatActivity {
 
     void send_text_msg(String msg){
 
-        ChatGptMsg msg_img = new ChatGptMsg("user",msg);
+        ChatGptMsg msg_img = new ChatGptMsg("user",msg);  // request 메세지 만들기
 
         List<ChatGptMsg> msgs = new ArrayList<>();
-        msgs.add(msg_img);
+        msgs.add(msg_img);  // request 메세지를 List에 담기
 
 
         ChatGptRequest request = create_request(msgs);
@@ -253,19 +302,6 @@ public class ChatActivity extends AppCompatActivity {
                 Call<ChatGptResponse> repos = service.listAnswer(headers, request);
                 Response<ChatGptResponse> list = repos.execute();
                 if (list.isSuccessful()) {
-//                    Log.e("list", list.code() + "");
-//                    Log.e("list", list.isSuccessful() + "");
-//                    Log.e("list", list.message());
-//                    Log.e("list id", list.body().id + "");
-//                    Log.e("list object", list.body().object + "");
-//                    Log.e("list created", list.body().created + "");
-//                    Log.e("list model", list.body().model + "");
-//                    Log.e("list finish_reason", list.body().created + "");
-//                    Log.e("list index", list.body().choices.get(0).index + "");
-//                    Log.e("list index", list.body().choices.get(0).msg.role + "");
-//                    Log.e("list index", list.body().choices.get(0).msg.content + "");
-//                    Log.e("list longprobs", list.body().choices.get(0).longprobs + "");
-//                    Log.e("list finish_reason", list.body().choices.get(0).finish_reason + "");
 
                     chat_list.add(new ChatModel(0, list.body().choices.get(0).msg.content.toString()));
                     adapter.notifyItemInserted(chat_list.size() - 1);

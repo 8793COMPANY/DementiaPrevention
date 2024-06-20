@@ -1,17 +1,23 @@
 package com.corporation8793.dementia.diagnose.lately;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
+import android.view.WindowManager;
+import android.widget.Button;
 
 import com.corporation8793.dementia.R;
 import com.corporation8793.dementia.chat.ChatItemDecoration;
+import com.corporation8793.dementia.diagnose.MyValueFormatter;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -29,11 +35,15 @@ public class DiagnoseResultListActivity extends AppCompatActivity {
     RecyclerView diagnose_list;
     DiagnoseListAdapter adapter;
 
+    ConstraintLayout test_section;
+
+    Button close_btn;
+
     ArrayList<DiagnoseList> chat_list = new ArrayList<>();
 
     LineChart chart;
 
-    int [] lately = {8,2,5,6,7,4,1,7,0};
+    int [] lately = {8,2,5,6,7,4,1,7,0,5};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +55,19 @@ public class DiagnoseResultListActivity extends AppCompatActivity {
         display.getRealSize(size); // or getSize(size)
         int height = size.y;
 
+
+        int lately_diagnose_progress_size = ((int)(height / 1280) * 500);
         int item_size = ((int)(height / 1280) * 150);
 
+        test_section = findViewById(R.id.test_section);
         chart = findViewById(R.id.graph_view);
+        close_btn = findViewById(R.id.close_btn);
+
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+        params.height = lately_diagnose_progress_size;
+
+        test_section.setLayoutParams(params);
+
         diagnose_list = (RecyclerView)findViewById(R.id.diagnose_list);
         diagnose_list.setHasFixedSize(true); // 변경하지 않음 -> 항목의 높이가 바뀌지 않아야 비용이 적게 드므로 성능이 좋음
 
@@ -77,30 +97,27 @@ public class DiagnoseResultListActivity extends AppCompatActivity {
         chart.getDescription().setEnabled(false);
         Description des = chart.getDescription();
         des.setEnabled(false);
-//        des.setText("Real-Time DATA");
-//        des.setTextSize(15f);
-//        des.setTextColor(Color.BLACK);
 
-// touch gestures (false-비활성화)
+
+
         chart.setTouchEnabled(false);
-
-// scaling and dragging (false-비활성화)
         chart.setDragEnabled(false);
         chart.setScaleEnabled(false);
 
-//auto scale
-        chart.setAutoScaleMinMaxEnabled(true);
 
-// if disabled, scaling can be done on x- and y-axis separately
+        chart.setAutoScaleMinMaxEnabled(true);
         chart.setPinchZoom(false);
 
-//X축
-//        chart.getXAxis().setDrawGridLines(true);
+
+        //x축
         chart.getXAxis().setDrawAxisLine(false);
         chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         chart.getXAxis().setEnabled(true);
         chart.getXAxis().setDrawGridLines(false);
         chart.getXAxis().setTextColor(getResources().getColor(R.color.gray_535353));
+
+        chart.getXAxis().setYOffset(20f);
+        chart.getXAxis().setLabelCount(10,true);
 
 
         chart.getXAxis().setValueFormatter(new ValueFormatter() {
@@ -110,30 +127,43 @@ public class DiagnoseResultListActivity extends AppCompatActivity {
                 return ((int)value+1)+"";
             }
         });
-//Legend
+
+
         Legend l = chart.getLegend();
         l.setEnabled(false);
-;
 
-//Y축
+        //y축
         YAxis leftAxis = chart.getAxisLeft();
+        leftAxis.setAxisMaximum(10);
         leftAxis.setEnabled(true);
-//        leftAxis.setTextColor(getResources().getColor(R.color.gray_535353));
-//        leftAxis.setDrawGridLines(true);
+        leftAxis.setZeroLineColor(R.color.white);
 
+        leftAxis.setLabelCount(3,true);
 
-//        leftAxis.setGridColor(getResources().getColor(R.color.gray_868686));
-//        leftAxis.enableGridDashedLine(10f, 10f, 0f);
-//        leftAxis.setAxisMinimum(0f); //최솟값
+        leftAxis.setValueFormatter(new ValueFormatter() {
+
+            @Override
+            public String getFormattedValue(float value) {
+                String str = "";
+                Log.e("value",value+"");
+                if (value == 10) {
+                    str = "상";
+                }else if (value>4 && value <5){
+                    str = "중";
+                }else if (value < 0){
+                    str = "하";
+                }
+
+                Log.e("value",value+"");
+                return str;
+            }
+        });
+
+        leftAxis.setDrawAxisLine(false);
 
         YAxis rightAxis = chart.getAxisRight();
         rightAxis.setEnabled(false);
-//        rightAxis.setTextColor(getResources().getColor(R.color.gray_868686));
 
-//        chart.getAxisLeft().setValueFormatter();
-
-
-// don't forget to refresh the drawing
         chart.invalidate();
 
         for (int i=0; i< lately.length; i++){

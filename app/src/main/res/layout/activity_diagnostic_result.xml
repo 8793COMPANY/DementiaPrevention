@@ -164,6 +164,21 @@
 
 
     <TextView
+        android:id="@+id/user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="홍길동님은"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:fontFamily="@font/pretendard_medium"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintTop_toBottomOf="@+id/diagnose_result_progress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        ></TextView>
+
+
+    <TextView
         android:id="@+id/result_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -171,10 +186,8 @@
         android:textColor="@color/black"
         android:gravity="center"
         android:fontFamily="@font/pretendard_medium"
-        android:text="홍길동님은\n치매 안심입니다."
-        app:layout_constraintVertical_bias="0.1"
-        app:layout_constraintTop_toBottomOf="@+id/diagnose_result_progress"
-        app:layout_constraintBottom_toBottomOf="parent"></TextView>
+        android:text="치매 안심입니다."
+        app:layout_constraintTop_toBottomOf="@+id/user_name"></TextView>
 
 
 
@@ -193,6 +206,7 @@
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintWidth_percent="0.65"
         android:layout_marginBottom="20dp"
+        app:layout_constraintVertical_bias="0.4"
         app:layout_constraintDimensionRatio="478:110"
         app:layout_constraintTop_toBottomOf="@+id/result_text"
         app:layout_constraintBottom_toTopOf="@+id/go_main_activity"
