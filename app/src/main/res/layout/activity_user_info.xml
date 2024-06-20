@@ -278,7 +278,7 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     android:singleLine="true"
-                    android:enabled="false"
+                    android:enabled="true"
                     ></EditText>
             </androidx.constraintlayout.widget.ConstraintLayout>
 

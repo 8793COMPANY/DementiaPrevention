@@ -86,7 +86,6 @@ public class MapDialog extends Dialog {
                         // 세종시 선택시 바로 닫기(구 없음)
                         if (select_si.equals("세종특별자치시")) {
                             mapDialogListener.clickBtn(Application.region_long_to_short(select_si), "-");
-                            mapDialogListener.clickBtn(Application.region_long_to_short(select_si), "-");
                             dismiss();
                         } else {
                             grid_layout.setVisibility(View.GONE);
@@ -109,7 +108,7 @@ public class MapDialog extends Dialog {
                 } else {
                     dismiss();
                 }
-            } else { // 구 선택
+            } else if (num == 2) { // 구 선택
                 if (select_check2) {
                     select_check2 = false;
 
@@ -117,6 +116,34 @@ public class MapDialog extends Dialog {
                     dismiss();
                 } else {
                     dismiss();
+                }
+            } else { // num == 3(마이페이지 생년월일 정보)
+                if (first_check) {
+                    if (select_check) {
+                        select_check = false;
+
+                        // 세종시 선택시 바로 닫기(구 없음)
+                        if (select_si.equals("세종특별자치시")) {
+                            mapDialogListener.clickBtn(Application.region_long_to_short(select_si), "-");
+                            dismiss();
+                        } else {
+                            grid_layout.setVisibility(View.GONE);
+                            scrollView.setVisibility(View.VISIBLE);
+                        }
+
+                        close_btn.setText("닫기");
+                    } else {
+                        if (select_check2) {
+                            select_check2 = false;
+
+                            mapDialogListener.clickBtn(select_si, select_gu);
+                            dismiss();
+                        } else {
+                            Toast.makeText(context, "거주하는 지역을 선택해주세요.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                } else {
+                    Toast.makeText(context, "거주하는 지역을 선택해주세요.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -141,7 +168,12 @@ public class MapDialog extends Dialog {
                 Log.e("radioButton text", radioButton.getText().toString());
 
                 radioButton.setChecked(true);
-                close_btn.setText("확인");
+
+                if (num == 3) {
+                    close_btn.setText("다음");
+                } else {
+                    close_btn.setText("확인");
+                }
 
                 first_check = true;
                 select_check = true;
@@ -202,7 +234,7 @@ public class MapDialog extends Dialog {
         if (num == 1) { // 시 선택
             grid_layout.setVisibility(View.VISIBLE);
             scrollView.setVisibility(View.GONE);
-        } else { // 구 선택
+        } else if (num == 2) { // 구 선택
             grid_layout.setVisibility(View.GONE);
             scrollView.setVisibility(View.VISIBLE);
 
@@ -211,6 +243,9 @@ public class MapDialog extends Dialog {
 
             // 구버튼 생성
             createGu(before_si);
+        } else { // num == 3(마이페이지 생년월일 정보)
+            grid_layout.setVisibility(View.VISIBLE);
+            scrollView.setVisibility(View.GONE);
         }
 
         // 네비게이션바 숨기기
