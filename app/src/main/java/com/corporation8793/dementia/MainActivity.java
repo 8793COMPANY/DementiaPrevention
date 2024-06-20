@@ -21,6 +21,8 @@ import android.widget.TextView;
 
 import com.corporation8793.dementia.chat.ChatActivity;
 import com.corporation8793.dementia.databinding.ActivityMainBinding;
+import com.corporation8793.dementia.diagnose.QuestionnaireActivity;
+import com.corporation8793.dementia.diagnose.lately.DiagnoseResultListActivity;
 import com.corporation8793.dementia.game.FindSameColorAndTextActivity;
 import com.corporation8793.dementia.game.SelectGameActivity;
 import com.corporation8793.dementia.game.WhacAMoleActivity;
@@ -29,6 +31,7 @@ import com.opencsv.exceptions.CsvException;
 
 import android.os.Handler;
 import android.os.Message;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -69,18 +72,12 @@ public class MainActivity extends AppCompatActivity {
 
         binding.diagnoseBtn.btn.setOnClickListener(v->{
             Log.e("hello","diagnosebtn");
-//            Intent intent = new Intent(MainActivity.this, QuestionnaireActivity.class);
-//            startActivity(intent);
-
-            Intent intent = new Intent(MainActivity.this, WhacAMoleActivity.class);
+            Intent intent = new Intent(MainActivity.this, QuestionnaireActivity.class);
             startActivity(intent);
         });
 
         binding.gameBtn.btn.setOnClickListener(v->{
-//            Intent intent = new Intent(MainActivity.this, SelectGameActivity.class);
-//            startActivity(intent);
-
-            Intent intent = new Intent(MainActivity.this, FindSameColorAndTextActivity.class);
+            Intent intent = new Intent(MainActivity.this, SelectGameActivity.class);
             startActivity(intent);
         });
 
@@ -163,6 +160,28 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 //finish();
             }
+        });
+
+
+        //마이페이지
+        drawerLayout.findViewById(R.id.close_btn).setOnClickListener(v->{
+            drawerLayout.closeDrawers();
+        });
+
+        drawerLayout.findViewById(R.id.user_info_modify_section).setOnClickListener(v->{
+            Intent intent = new Intent(MainActivity.this, UserInfoActivity.class);
+            startActivity(intent);
+        });
+
+        drawerLayout.findViewById(R.id.latest_diagnose_list_section).setOnClickListener(v->{
+            Intent intent = new Intent(MainActivity.this, DiagnoseResultListActivity.class);
+            startActivity(intent);
+        });
+
+
+        drawerLayout.findViewById(R.id.logout).setOnClickListener(v->{
+            drawerLayout.closeDrawers();
+            Toast.makeText(getApplicationContext(),"로그아웃",Toast.LENGTH_SHORT).show();
         });
     }
 

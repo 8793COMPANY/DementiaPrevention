@@ -307,12 +307,17 @@ class PatternLockView : GridLayout {
         var count =0
         var first_cell = selectedCells.get(0)
 
+        var already_cells = selectedCells.stream().filter{
+            it.number_list == 5
+        }.count().toInt()
+
+
         var correct_cell_size = selectedCells.stream().filter{
             it.number_list == first_cell.number_list
         }.count().toInt()
 
         Log.e("correct size",correct_cell_size.toString())
-        if (correct_cell_size == selectedCells.size){
+        if (correct_cell_size+already_cells == selectedCells.size){
             if(first_cell.number_list == 5){
                 reset()
                 return

@@ -23,14 +23,19 @@ public class SelectGameActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this,R.layout.activity_select_game);
 
+        binding.whackAMole.game.setOnClickListener(v->{
+            Intent intent = new Intent(SelectGameActivity.this, WhacAMoleActivity.class);
+            startActivity(intent);
+        });
+
 
         binding.colorPuzzle.game.setOnClickListener(v -> {
             Intent intent = new Intent(SelectGameActivity.this, FindSameThingGame.class);
             startActivity(intent);
         });
         binding.selectRightColorName.game.setOnClickListener(v -> {
-//            Intent intent = new Intent(SelectGameActivity.this, .class);
-//            startActivity(intent);
+            Intent intent = new Intent(SelectGameActivity.this, FindSameColorAndTextActivity.class);
+            startActivity(intent);
         });
         binding.quizGame.game.setOnClickListener(v -> {
             Intent intent = new Intent(SelectGameActivity.this, QuizActivity.class);

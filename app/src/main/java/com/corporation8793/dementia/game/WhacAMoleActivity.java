@@ -632,7 +632,6 @@ public class WhacAMoleActivity extends AppCompatActivity {
                                 star_first.setImageResource(R.drawable.whac_amole_star_empty);
 
                                 // 두더지 홀 비활성화 및 초기화
-
                                 defaultHoles();
                                 disableHoles();
 

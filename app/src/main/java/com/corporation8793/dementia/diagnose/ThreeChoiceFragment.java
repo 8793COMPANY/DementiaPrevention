@@ -1,4 +1,4 @@
-package com.corporation8793.dementia;
+package com.corporation8793.dementia.diagnose;
 
 import android.os.Bundle;
 
@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.corporation8793.dementia.R;
 import com.corporation8793.dementia.databinding.FragmentThreeChoiceBinding;
 
 /**
@@ -32,14 +33,17 @@ public class ThreeChoiceFragment extends Fragment {
 
     String question_number, question_text;
 
+    int question_icon;
+
     public ThreeChoiceFragment() {
         // Required empty public constructor
     }
 
-    public ThreeChoiceFragment(String question_number, String question_text) {
+    public ThreeChoiceFragment(String question_number, Diagnose diagnose) {
         // Required empty public constructor
         this.question_number = question_number;
-        this.question_text = question_text;
+        this.question_text = diagnose.title;
+        this.question_icon = diagnose.drawable;
     }
 
     /**
@@ -75,6 +79,8 @@ public class ThreeChoiceFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_three_choice, container, false);
 
+
+        binding.questionImg.setBackgroundResource(question_icon);
         binding.questionNumber.setText("Q"+question_number+".");
         binding.questionText.setText(question_text);
 
@@ -85,6 +91,7 @@ public class ThreeChoiceFragment extends Fragment {
             Log.e("~~","choice1 click");
             if(binding.choice1.getChoice()){
                 ((QuestionnaireActivity)getActivity()).next_end_btn.setEnabled(false);
+                ((QuestionnaireActivity)getActivity()).current_answer = binding.choice1.getChoiceText();
                 binding.choice1.setChoice(false);
                 binding.choice1.choice.setSelected(false);
             }else{
@@ -92,6 +99,7 @@ public class ThreeChoiceFragment extends Fragment {
                 binding.choice1.setChoice(true);
                 binding.choice1.choice.setSelected(true);
                 ((QuestionnaireActivity)getActivity()).next_end_btn.setEnabled(true);
+                ((QuestionnaireActivity)getActivity()).current_answer = "";
             }
         });
 
@@ -99,6 +107,7 @@ public class ThreeChoiceFragment extends Fragment {
             Log.e("~~","choice2 click");
             if(binding.choice2.getChoice()){
                 ((QuestionnaireActivity)getActivity()).next_end_btn.setEnabled(false);
+                ((QuestionnaireActivity)getActivity()).current_answer = binding.choice2.getChoiceText();
                 binding.choice2.setChoice(false);
                 binding.choice2.choice.setSelected(false);
             }else{
@@ -106,6 +115,7 @@ public class ThreeChoiceFragment extends Fragment {
                 binding.choice2.setChoice(true);
                 binding.choice2.choice.setSelected(true);
                 ((QuestionnaireActivity)getActivity()).next_end_btn.setEnabled(true);
+                ((QuestionnaireActivity)getActivity()).current_answer = "";
             }
         });
 
@@ -114,6 +124,7 @@ public class ThreeChoiceFragment extends Fragment {
             Log.e("~~","choice3 click");
             if(binding.choice3.getChoice()){
                 ((QuestionnaireActivity)getActivity()).next_end_btn.setEnabled(false);
+                ((QuestionnaireActivity)getActivity()).current_answer = binding.choice3.getChoiceText();
                 binding.choice3.setChoice(false);
                 binding.choice3.choice.setSelected(false);
             }else{
@@ -121,6 +132,7 @@ public class ThreeChoiceFragment extends Fragment {
                 binding.choice3.setChoice(true);
                 binding.choice3.choice.setSelected(true);
                 ((QuestionnaireActivity)getActivity()).next_end_btn.setEnabled(true);
+                ((QuestionnaireActivity)getActivity()).current_answer = "";
             }
         });
 

@@ -9,9 +9,9 @@ import android.util.Log;
 import java.util.Locale;
 
 public class Init {
-    static TextToSpeech textToSpeech;
+    static public TextToSpeech textToSpeech;
 
-    static void settingTTS(Context context){
+    static public void settingTTS(Context context){
         textToSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -27,7 +27,7 @@ public class Init {
         });
     }
 
-    static void destroyTTS(){
+    static public void destroyTTS(){
         if (textToSpeech !=null){
             textToSpeech.stop();
             textToSpeech.shutdown();

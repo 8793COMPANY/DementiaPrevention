@@ -1,6 +1,4 @@
-package com.corporation8793.dementia;
-
-import static android.speech.tts.TextToSpeech.ERROR;
+package com.corporation8793.dementia.diagnose;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,9 +18,12 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.corporation8793.dementia.Init;
+import com.corporation8793.dementia.R;
 import com.corporation8793.dementia.databinding.ActivityQuestionnaireBinding;
 
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuestionnaireActivity extends AppCompatActivity {
 
@@ -34,7 +35,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
     long setTime;
 
     // 기본 3초로 설정
-    private static final Long SET_TIME = 2L;
+    private static final Long SET_TIME = 5L;
 
 
 
@@ -47,18 +48,33 @@ public class QuestionnaireActivity extends AppCompatActivity {
     Button close_btn;
     ProgressBar time_progress;
 
-    int quiz_size = 10;
+    int quiz_size = 8;
 
     int current_pos =1;
 
 
+    ArrayList<Diagnose> questionnaire_list = new ArrayList<>();
+
+    String [] titles = {"음주는 얼마나 자주하시나요?","약 먹는 시간을\n여러 번 놓친 적이 있다.","자신의 전화번호를 모른다.","자신의 주소를 모른다.","글을 읽고 쉽게 문맥을\n파악하기 어려운 적이 있다.",
+    "5분 전에 무슨 일이 있었는지\n기억하지 못한다.","갈수록 말수가 감소하는\n경향이 있다.","자주 가던 공간이 낯설다고\n느낀 적이 있다."};
+
+
+    int [] drawables = {R.drawable.questionnaire_icon1,R.drawable.questionnaire_icon2,R.drawable.questionnaire_icon3,R.drawable.questionnaire_icon4,
+            R.drawable.questionnaire_icon5,R.drawable.questionnaire_icon6,R.drawable.questionnaire_icon7,R.drawable.questionnaire_icon8};
+
+    int [] choice_count ={3,2,2,2,2,2,2,2};
+
+    public String [] answer_list = {"하지않음","아니요","아니요","아니요","아니요","아니요","아니요","아니요"};
+
+    int answer_count = 0;
+     static String current_answer = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_questionnaire);
         fragmentManager = getSupportFragmentManager();
-        ActivityQuestionnaireBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_questionnaire);
+        ActivityQuestionnaireBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_questionnaire);
 
         next_end_btn = binding.nextEndBtn;
         time_progress = binding.topSection.findViewById(R.id.time_progress);
@@ -70,6 +86,11 @@ public class QuestionnaireActivity extends AppCompatActivity {
         textToSpeech  = Init.textToSpeech;
 
         counting_rest.setText(current_pos+"/"+quiz_size);
+
+        for (int i=0; i< quiz_size; i++){
+            Diagnose diagnose = new Diagnose(titles[i], drawables[i], choice_count[i]);
+            questionnaire_list.add(diagnose);
+        }
 
         textToSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
             @Override
@@ -104,7 +125,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
             Log.e("error","first in");
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
-                    .add(R.id.fragment_container_view, new ThreeChoiceFragment(current_pos+"",question_text), null)
+                    .add(R.id.fragment_container_view, new ThreeChoiceFragment(current_pos+"",questionnaire_list.get(current_pos-1)), null)
                     .commit();
 //            speakText(question_text);
 
@@ -116,14 +137,36 @@ public class QuestionnaireActivity extends AppCompatActivity {
 
 
         next_end_btn.setOnClickListener(v->{
-            current_pos++;
-            timeReset();
-            transaction_fragment();
-            counting_rest.setText(current_pos+"/"+quiz_size);
-            next_end_btn.setEnabled(false);
+            Log.e("check value answer_list", answer_list[current_pos-1]);
+            Log.e("check value current_answer", current_answer);
+            if (answer_list[current_pos-1].equals(current_answer)){
+
+                answer_count++;
+            }
+
+
+            if (current_pos >= 8){
+                timeReset();
+                finish();
+                Intent intent = new Intent(QuestionnaireActivity.this, DiagnosticResultActivity.class);
+                intent.putExtra("rating",answer_count);
+                startActivity(intent);
+            }else{
+                current_pos++;
+                timeReset();
+                transaction_fragment();
+                counting_rest.setText(current_pos+"/"+quiz_size);
+                next_end_btn.setEnabled(false);
+            }
+
+
         });
 
 
+    }
+
+    void setCurrentAnswer(String str){
+        current_answer = str;
     }
 
     void speakText(String text){
@@ -139,9 +182,16 @@ public class QuestionnaireActivity extends AppCompatActivity {
     }
 
     void transaction_fragment(){
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_view, new ThreeChoiceFragment(current_pos+"","안녕하세요?"), null)
-                .commitAllowingStateLoss();
+        if (questionnaire_list.get(current_pos -1).choice_count == 2){
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_view, new TwoChoiceFragment(current_pos+"",questionnaire_list.get(current_pos-1)), null)
+                    .commitAllowingStateLoss();
+        }else{
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_view, new ThreeChoiceFragment(current_pos+"",questionnaire_list.get(current_pos-1)), null)
+                    .commitAllowingStateLoss();
+        }
+
     }
 
 
@@ -203,7 +253,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
         handler.removeCallbacksAndMessages(null);
 
         //long 변환한 시간 초기화
-        setTime = 0;
+        setTime(SET_TIME);
 
         //프로그레스바 프로그레스 초기화
         time_progress.setMax((int)setTime);
