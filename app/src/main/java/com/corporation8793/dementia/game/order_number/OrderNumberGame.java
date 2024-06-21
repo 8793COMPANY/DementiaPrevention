@@ -177,6 +177,7 @@ public class OrderNumberGame extends AppCompatActivity {
                 if (current_pos == out_size){
                     finish();
                     Intent intent = new Intent(OrderNumberGame.this, ResultActivity.class);
+                    intent.putExtra("type","2");
                     intent.putExtra("size",out_size);
                     intent.putExtra("rating",right_number);
                     startActivity(intent);

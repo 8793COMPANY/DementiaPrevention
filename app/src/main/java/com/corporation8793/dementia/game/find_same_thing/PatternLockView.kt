@@ -399,6 +399,7 @@ class PatternLockView : GridLayout {
 
                     //핸들러 메세지 전달 종료
                     control_activity?.handler?.removeCallbacksAndMessages(null)
+                    control_activity?.finish()
                     control_activity?.go_result_activity(score)
                 }, errorDuration.toLong())
             }else{

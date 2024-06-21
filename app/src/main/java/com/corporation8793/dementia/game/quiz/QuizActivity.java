@@ -163,6 +163,7 @@ public class QuizActivity extends AppCompatActivity {
                 if (current_pos == quiz_size){
                     finish();
                     Intent intent = new Intent(QuizActivity.this, ResultActivity.class);
+                    intent.putExtra("type","5");
                     intent.putExtra("size",quiz_size);
                     intent.putExtra("rating",right_number);
                     startActivity(intent);

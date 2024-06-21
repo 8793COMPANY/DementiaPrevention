@@ -15,9 +15,7 @@ import android.widget.Button;
 
 import com.corporation8793.dementia.R;
 import com.corporation8793.dementia.chat.ChatItemDecoration;
-import com.corporation8793.dementia.diagnose.MyValueFormatter;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -169,6 +167,11 @@ public class DiagnoseResultListActivity extends AppCompatActivity {
         for (int i=0; i< lately.length; i++){
             addEntry(lately[i]);
         }
+
+
+        close_btn.setOnClickListener(v->{
+            finish();
+        });
 
 
     }

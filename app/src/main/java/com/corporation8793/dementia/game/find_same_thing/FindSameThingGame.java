@@ -99,6 +99,7 @@ public class FindSameThingGame extends AppCompatActivity {
     }
     void go_result_activity(int rating){
         Intent intent = new Intent(FindSameThingGame.this, ResultActivity.class);
+        intent.putExtra("type","6");
         intent.putExtra("size",out_size);
         intent.putExtra("rating",score);
         startActivity(intent);
@@ -155,9 +156,10 @@ public class FindSameThingGame extends AppCompatActivity {
             if (time.equals("00:00")) {
                 // 타이머 초기화
                 if (current_pos == out_size){
-//                    finish();
+                    finish();
                     timeReset();
                     Intent intent = new Intent(FindSameThingGame.this, ResultActivity.class);
+                    intent.putExtra("type","6");
                     intent.putExtra("size",out_size);
                     intent.putExtra("rating",score);
                     startActivity(intent);

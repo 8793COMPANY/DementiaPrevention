@@ -118,6 +118,7 @@ public class FindDifferentColorGame extends AppCompatActivity {
                             timeReset();
                             finish();
                             Intent intent = new Intent(FindDifferentColorGame.this, ResultActivity.class);
+                            intent.putExtra("type","3");
                             intent.putExtra("size",out_size);
                             intent.putExtra("rating",counting);
                             startActivity(intent);
@@ -190,6 +191,7 @@ public class FindDifferentColorGame extends AppCompatActivity {
                     timeReset();
                     finish();
                     Intent intent = new Intent(FindDifferentColorGame.this, ResultActivity.class);
+                    intent.putExtra("type","3");
                     intent.putExtra("size",out_size);
                     intent.putExtra("rating",counting);
                     startActivity(intent);

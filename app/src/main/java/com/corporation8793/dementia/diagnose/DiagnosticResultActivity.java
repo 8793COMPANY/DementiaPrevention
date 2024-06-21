@@ -2,6 +2,7 @@ package com.corporation8793.dementia.diagnose;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -12,7 +13,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.corporation8793.dementia.MainActivity;
 import com.corporation8793.dementia.R;
+import com.corporation8793.dementia.diagnose.lately.DiagnoseResultListActivity;
 
 public class DiagnosticResultActivity extends AppCompatActivity {
 
@@ -77,7 +80,8 @@ public class DiagnosticResultActivity extends AppCompatActivity {
 
         go_lately_diagnose_list.setOnClickListener(v->{
             finish();
-
+            Intent intent = new Intent(DiagnosticResultActivity.this, DiagnoseResultListActivity.class);
+            startActivity(intent);
         });
 
         go_main_activity.setOnClickListener(v->{
