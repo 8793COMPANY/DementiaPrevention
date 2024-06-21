@@ -165,7 +165,7 @@ public class FindSameThingGame extends AppCompatActivity {
             if (time.equals("00:00")) {
                 // 타이머 초기화
                 if (current_pos == out_size){
-//                    finish();
+                    finish();
                     timeReset();
                     Intent intent = new Intent(FindSameThingGame.this, ResultActivity.class);
                     intent.putExtra("type", 6);

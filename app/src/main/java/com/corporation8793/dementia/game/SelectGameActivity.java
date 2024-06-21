@@ -33,6 +33,7 @@ public class SelectGameActivity extends AppCompatActivity {
         });
 
 
+
         binding.colorPuzzle.game.setOnClickListener(v -> {
             Intent intent = new Intent(SelectGameActivity.this, FindSameThingGame.class);
             startActivity(intent);

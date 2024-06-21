@@ -14,17 +14,22 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.corporation8793.dementia.util.Application;
+
 import java.util.Calendar;
 
 public class UserInfoActivity extends AppCompatActivity {
 
+
     Button back_btn, confirm_btn;
+
     TextView birthday_input, region_input_box;
     AlertDialog dialog;
     RadioGroup gender_select_section;
@@ -39,10 +44,12 @@ public class UserInfoActivity extends AppCompatActivity {
              3. 지역 고르는 입력창은 소영님께서 만드신 지역선택 기능 연결해주세요
      */
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
+
 
         // 정보수집(null)인지 수정(edit)인지 판단
         String type = getIntent().getStringExtra("type");
@@ -83,7 +90,13 @@ public class UserInfoActivity extends AppCompatActivity {
         });
 
         birthday_input.setOnClickListener(v -> {
+
             dialog.show();
+//            Window window = dialog.getWindow();
+//
+//            int x = (int) (Application.displaySize_X * 0.55f);
+//            int y = (int) (Application.displaySize_Y * 0.4f);
+//            window.setLayout(x, y);
         });
 
         gender_select_section.setOnCheckedChangeListener((group, checkedId) -> {
@@ -94,6 +107,7 @@ public class UserInfoActivity extends AppCompatActivity {
             if (checkedId == R.id.man){
                 findViewById(R.id.woman).setActivated(false);
             }
+
             DialogFragment dialogFragment = new DatePickerFragment(new DatePickerFragment.DatePickerDialogListener() {
                 @Override
                 public void clickBtn(String date) {
@@ -115,6 +129,7 @@ public class UserInfoActivity extends AppCompatActivity {
             });
 
             mapDialog.show();
+
         });
 
 
@@ -193,6 +208,7 @@ public class UserInfoActivity extends AppCompatActivity {
         params.width=(get_width() / 720) * 500;;
         params.height= (get_height() / 1280) * 440;
         dialog.getWindow().setAttributes(params);
+
 
 
         return dialog;

@@ -230,6 +230,8 @@ class PatternLockView : GridLayout {
 
     }
 
+
+    // TODO: 색상 초기화
     public fun setupCells() {
 
         val value =  mutableListOf<Int>()
@@ -317,6 +319,7 @@ class PatternLockView : GridLayout {
                 y <= view.bottom - innerPadding
     }
 
+    //TODO: 원 연결하고 난 후 돌아가는 확인 메소드
     private fun onFinish() {
         Log.e("in","onfinish")
         lastX = 0f
@@ -386,6 +389,8 @@ class PatternLockView : GridLayout {
 //        }
     }
 
+
+    // TODO: onfinish() 끝난 후 점수 추가 및 사이클 돌건지 아님 결과 점수 화면으로 넘어갈건지
     fun finish_game() {
 
         var all_cell_size = cells.stream().filter{
@@ -401,6 +406,7 @@ class PatternLockView : GridLayout {
 
                     //핸들러 메세지 전달 종료
                     control_activity?.handler?.removeCallbacksAndMessages(null)
+                    control_activity?.finish()
                     control_activity?.go_result_activity(score)
                 }, errorDuration.toLong())
             }else{

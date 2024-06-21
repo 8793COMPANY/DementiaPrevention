@@ -32,6 +32,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -44,7 +45,7 @@ public class ChatActivity extends AppCompatActivity {
     ChatAdapter adapter;
 
     EditText text_input_box;
-    Button send_btn;
+    Button send_btn, close_btn;
 
     ArrayList<ChatModel> chat_list = new ArrayList<>();
 
@@ -52,6 +53,7 @@ public class ChatActivity extends AppCompatActivity {
     HashMap<String, String> headers = new HashMap<>();
 
     ConstraintLayout chatting_section;
+    Button mic_btn; // 음성인식 버튼
 
     AppBarLayout top_section;
     boolean isOpen = false;
@@ -60,6 +62,7 @@ public class ChatActivity extends AppCompatActivity {
     long mNow;
     Date mDate;
     SimpleDateFormat mFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
+    SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm");
 
     Map<Integer, String> day_week = new HashMap<Integer, String>() {{
         put(1, "일요일");
@@ -81,6 +84,7 @@ public class ChatActivity extends AppCompatActivity {
     /*TODO : 1. 마지막으로 채팅한 메세지 날짜와 현재 채팅 메세지의 날짜가 다르면 날짜 데이터 추가해줘야함
              2. 메세지 Room DB 저장
              3. chat-gpt api에게 응답 다 받을 때까지 입력 못 하게 막기
+             4. google 내장 stt api 연동
      */
 
     @Override
@@ -103,6 +107,8 @@ public class ChatActivity extends AppCompatActivity {
 
         text_input_box = findViewById(R.id.text_input_box);
         send_btn = findViewById(R.id.send_btn);
+        close_btn = findViewById(R.id.close_btn);
+        mic_btn = findViewById(R.id.mic_btn);
 
         top_section = findViewById(R.id.top_section);
 
@@ -120,11 +126,11 @@ public class ChatActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this); // 리사이클러뷰의 레이아웃을 정해줄 레이아웃 매니저
         chatting.setLayoutManager(layoutManager); // 리사이클러뷰에 리니어 레이아웃 매니저를 사용함
 
-        chat_list.add(new ChatModel(2,getTime(DATE) + " " + getTime(DAY_OF_WEEK)));
-        chat_list.add(new ChatModel(0,"안녕"));
-        chat_list.add(new ChatModel(0,"반가워!"));
-        chat_list.add(new ChatModel(1,"나도 반가워!"));
-        chat_list.add(new ChatModel(1,"기분이 어때?"));
+        chat_list.add(new ChatModel(2,getTime(DATE) + " " + getTime(DAY_OF_WEEK), "none"));
+        chat_list.add(new ChatModel(0,"안녕", getTime(TIME)));
+        chat_list.add(new ChatModel(0,"반가워!", getTime(TIME)));
+        chat_list.add(new ChatModel(1,"나도 반가워!", getTime(TIME)));
+        chat_list.add(new ChatModel(1,"기분이 어때?", getTime(TIME)));
 
         adapter = new ChatAdapter(chat_list); // chatArrayList를 어댑터로 연결, 회원의 이메일도 넘김
         chatting.setAdapter(adapter); // 리사이클뷰에 어댑터를 설정
@@ -148,11 +154,9 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
+        close_btn.setOnClickListener(v->{
+            finish();
+        });
 
 
 
@@ -168,13 +172,15 @@ public class ChatActivity extends AppCompatActivity {
             if (text_input_box.getText().toString().trim().equals("")){
 
             }else{
-                chat_list.add(new ChatModel(1,text_input_box.getText().toString()));
+                chat_list.add(new ChatModel(1,text_input_box.getText().toString(),getTime(TIME)));
                 adapter.notifyItemInserted(chat_list.size()-1);
                 send_text_msg(text_input_box.getText().toString());
                 text_input_box.setText("");
                 chatting.smoothScrollToPosition(chat_list.size()-1);
             }
         });
+
+
 
 
 
@@ -190,17 +196,25 @@ public class ChatActivity extends AppCompatActivity {
     private String getTime(int type){
         mNow = System.currentTimeMillis();
         mDate = new Date(mNow);
-
+        Calendar cal = Calendar.getInstance();
         if (type == DATE){
 
             return mFormat.format(mDate);
         }else if (type == DAY_OF_WEEK){
-            Calendar cal = Calendar.getInstance();
             cal.setTime(mDate);
             return day_week.get(cal.get(Calendar.DAY_OF_WEEK));
+        }else if (type == TIME){
+            int hour = cal.get ( cal.HOUR_OF_DAY ) ;
+            int min = cal.get ( cal.MINUTE );
+            int AmPm = cal.get ( cal.AM_PM );
+            String stringAmPm[] = {"오전","오후"};
+
+            return stringAmPm[AmPm]+" "+timeFormat.format(mDate);
         }
+
         return "";
     }
+
 
 
     int get_height(){
@@ -278,7 +292,7 @@ public class ChatActivity extends AppCompatActivity {
 //                    Log.e("list longprobs", list.body().choices.get(0).longprobs + "");
 //                    Log.e("list finish_reason", list.body().choices.get(0).finish_reason + "");
 
-                    chat_list.add(new ChatModel(0,list.body().choices.get(0).msg.content.toString()));
+                    chat_list.add(new ChatModel(0,list.body().choices.get(0).msg.content.toString(), getTime(TIME)));
                     adapter.notifyItemInserted(chat_list.size()-1);
                 }
             } catch (IOException e) {
@@ -303,7 +317,7 @@ public class ChatActivity extends AppCompatActivity {
                 Response<ChatGptResponse> list = repos.execute();
                 if (list.isSuccessful()) {
 
-                    chat_list.add(new ChatModel(0, list.body().choices.get(0).msg.content.toString()));
+                    chat_list.add(new ChatModel(0, list.body().choices.get(0).msg.content.toString(), getTime(TIME)));
                     adapter.notifyItemInserted(chat_list.size() - 1);
                 }
             } catch (IOException e) {

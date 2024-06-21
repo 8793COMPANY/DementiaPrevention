@@ -53,6 +53,12 @@ public class QuizActivity extends AppCompatActivity {
     int right_number = 0;
     boolean cycle_check = false;
 
+
+    /*
+        TODO: 10번 반복되긴 하지만 정답 맞추는 기능은 구현되지 않음
+              세희님께서 디자인 해주시면 diagnose 패키지에 있는 문진표 관련 코드 참고해서 추가하시면 됩니다
+    */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

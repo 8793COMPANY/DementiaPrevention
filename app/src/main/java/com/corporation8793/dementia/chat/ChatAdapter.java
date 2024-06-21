@@ -58,6 +58,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ChatAdapter.ViewHolder holder, int position) {
         holder.textView.setText(mDataset.get(position).message);
+
+        if (getItemViewType(position) != DATE){
+            holder.time.setText(mDataset.get(position).time);
+        }
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -71,12 +75,16 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
+        private TextView time;
 
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
 
             textView = (TextView) view.findViewById(R.id.message);
+            if (getItemViewType() != DATE){
+                time = view.findViewById(R.id.send_time);
+            }
         }
 
         public TextView getTextView() {

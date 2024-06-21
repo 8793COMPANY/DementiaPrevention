@@ -79,7 +79,8 @@ public class DiagnosticResultActivity extends AppCompatActivity {
         });
 
         go_lately_diagnose_list.setOnClickListener(v->{
-//            finish();
+
+            finish();
             Intent intent = new Intent(DiagnosticResultActivity.this, DiagnoseResultListActivity.class);
             startActivity(intent);
         });
