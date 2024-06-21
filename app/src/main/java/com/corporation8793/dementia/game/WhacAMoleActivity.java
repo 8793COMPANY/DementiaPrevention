@@ -87,8 +87,8 @@ public class WhacAMoleActivity extends AppCompatActivity {
         cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(WhacAMoleActivity.this, MainActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(WhacAMoleActivity.this, MainActivity.class);
+//                startActivity(intent);
                 finish();
             }
         });
@@ -520,7 +520,9 @@ public class WhacAMoleActivity extends AppCompatActivity {
                             // 모든 별이 비활성화
                             gameHandler.removeCallbacksAndMessages(null);
 
-                            Toast.makeText(getApplicationContext(), "GAME OVER", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "GAME OVER", Toast.LENGTH_SHORT).show();
+
+                            startResultActivity(Integer.parseInt(scoreText.getText().toString()));
                         }
                     }
                 }
@@ -596,7 +598,8 @@ public class WhacAMoleActivity extends AppCompatActivity {
                                     // 모든 별이 비활성화
                                     gameHandler.removeCallbacksAndMessages(null);
 
-                                    Toast.makeText(getApplicationContext(), "GAME OVER", Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(getApplicationContext(), "GAME OVER", Toast.LENGTH_SHORT).show();
+                                    startResultActivity(Integer.parseInt(scoreText.getText().toString()));
                                 }
                             } else {
                                 imageButton.setImageResource(R.drawable.hit_sunglasses_mole);
@@ -643,7 +646,8 @@ public class WhacAMoleActivity extends AppCompatActivity {
 
                                 gameHandler.removeCallbacksAndMessages(null);
 
-                                Toast.makeText(getApplicationContext(), "GAME OVER", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), "GAME OVER", Toast.LENGTH_SHORT).show();
+                                startResultActivity(Integer.parseInt(scoreText.getText().toString()));
                             }
                         }
                     }
@@ -668,9 +672,12 @@ public class WhacAMoleActivity extends AppCompatActivity {
     }
 
     // Start Result Activity when game is finished
-    private void startResultActivity(){
+    private void startResultActivity(int score){
         Intent intent = new Intent(WhacAMoleActivity.this, ResultActivity.class);
-        intent.putExtra(WhacAMoleActivity.FINAL_SCORE_VALUE_EXTRA, scoreText.getText().toString());
+        intent.putExtra(FINAL_SCORE_VALUE_EXTRA, scoreText.getText().toString());
+        intent.putExtra("type", 1);
+        intent.putExtra("size", 0);
+        intent.putExtra("rating", score);
         startActivity(intent);
         finish();
     }

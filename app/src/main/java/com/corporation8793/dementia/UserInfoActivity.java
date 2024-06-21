@@ -5,25 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
 
-import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
-
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -34,12 +28,10 @@ import java.util.Calendar;
 public class UserInfoActivity extends AppCompatActivity {
 
 
-    Button back_btn;
+    Button back_btn, confirm_btn;
 
     TextView birthday_input, region_input_box;
-
     AlertDialog dialog;
-
     RadioGroup gender_select_section;
 
     ImageView app_icon;
@@ -53,7 +45,6 @@ public class UserInfoActivity extends AppCompatActivity {
      */
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +53,6 @@ public class UserInfoActivity extends AppCompatActivity {
 
         // 정보수집(null)인지 수정(edit)인지 판단
         String type = getIntent().getStringExtra("type");
-
 
 
         dialog = createDialog();
@@ -75,7 +65,6 @@ public class UserInfoActivity extends AppCompatActivity {
 
         region_input_box = findViewById(R.id.region_input_box);
         gender_select_section= findViewById(R.id.gender_select_section);
-        birthday_input = findViewById(R.id.birthday_input);
 
 
         if (!TextUtils.isEmpty(type)){
@@ -86,6 +75,12 @@ public class UserInfoActivity extends AppCompatActivity {
             Log.e("check","get");
         }
 
+        confirm_btn = findViewById(R.id.confirm_btn);
+        confirm_btn.setOnClickListener(v->{
+            // 확인 버튼 누르면 메인으로 넘어가기
+            Intent intent = new Intent(UserInfoActivity.this, MainActivity.class);
+            startActivity(intent);
+        });
 
         region_input_box.setInputType(0);
 
@@ -204,10 +199,6 @@ public class UserInfoActivity extends AppCompatActivity {
         month.setOnValueChangedListener((picker, oldVal, newVal) -> {
             day.setMaxValue(28);
         });
-
-
-
-
 
 
         dialog.setView(mView);

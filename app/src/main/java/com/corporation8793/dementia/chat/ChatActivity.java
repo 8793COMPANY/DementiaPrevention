@@ -53,6 +53,7 @@ public class ChatActivity extends AppCompatActivity {
     HashMap<String, String> headers = new HashMap<>();
 
     ConstraintLayout chatting_section;
+    Button mic_btn; // 음성인식 버튼
 
     AppBarLayout top_section;
     boolean isOpen = false;
@@ -83,6 +84,7 @@ public class ChatActivity extends AppCompatActivity {
     /*TODO : 1. 마지막으로 채팅한 메세지 날짜와 현재 채팅 메세지의 날짜가 다르면 날짜 데이터 추가해줘야함
              2. 메세지 Room DB 저장
              3. chat-gpt api에게 응답 다 받을 때까지 입력 못 하게 막기
+             4. google 내장 stt api 연동
      */
 
     @Override
@@ -106,6 +108,7 @@ public class ChatActivity extends AppCompatActivity {
         text_input_box = findViewById(R.id.text_input_box);
         send_btn = findViewById(R.id.send_btn);
         close_btn = findViewById(R.id.close_btn);
+        mic_btn = findViewById(R.id.mic_btn);
 
         top_section = findViewById(R.id.top_section);
 
@@ -176,6 +179,8 @@ public class ChatActivity extends AppCompatActivity {
                 chatting.smoothScrollToPosition(chat_list.size()-1);
             }
         });
+
+
 
 
 

@@ -8,9 +8,10 @@ public class User {
     @PrimaryKey
     public int uid;
 
-    public String nickName;
+    public String name;
     public String region;
     public String ageRange;
+    public String birthday;
 
     public int getUid() {
         return uid;
@@ -20,12 +21,12 @@ public class User {
         this.uid = uid;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getName() {
+        return name;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getRegion() {
@@ -42,5 +43,13 @@ public class User {
 
     public void setAgeRange(String ageRange) {
         this.ageRange = ageRange;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 }

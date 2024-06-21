@@ -34,7 +34,7 @@ public class FindDifferentColorGame extends AppCompatActivity {
     long baseTime;
     long setTime;
 
-    // 기본 3초로 설정
+    // 기본 10초로 설정
     private static final Long SET_TIME = 10L;
 
     TextView counting_rest;
@@ -118,7 +118,7 @@ public class FindDifferentColorGame extends AppCompatActivity {
                             timeReset();
                             finish();
                             Intent intent = new Intent(FindDifferentColorGame.this, ResultActivity.class);
-                            intent.putExtra("type","3");
+                            intent.putExtra("type", 3);
                             intent.putExtra("size",out_size);
                             intent.putExtra("rating",counting);
                             startActivity(intent);
@@ -191,7 +191,7 @@ public class FindDifferentColorGame extends AppCompatActivity {
                     timeReset();
                     finish();
                     Intent intent = new Intent(FindDifferentColorGame.this, ResultActivity.class);
-                    intent.putExtra("type","3");
+                    intent.putExtra("type", 3);
                     intent.putExtra("size",out_size);
                     intent.putExtra("rating",counting);
                     startActivity(intent);
@@ -268,5 +268,14 @@ public class FindDifferentColorGame extends AppCompatActivity {
         // 현재는 초 단위만 계산
         setTime = time * 1000;
         time_progress.setMax((int) setTime);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (handler != null) {
+            handler.removeCallbacksAndMessages(null);
+        }
     }
 }

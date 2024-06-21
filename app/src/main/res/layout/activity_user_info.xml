@@ -282,10 +282,10 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     android:singleLine="true"
+
                     ></TextView>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
