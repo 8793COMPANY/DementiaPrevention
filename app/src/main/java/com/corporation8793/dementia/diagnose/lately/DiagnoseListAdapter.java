@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.corporation8793.dementia.R;
 import com.corporation8793.dementia.chat.ChatModel;
 import com.corporation8793.dementia.util.Application;
+import com.corporation8793.dementia.util.DisplayFontSize;
 
 import java.util.ArrayList;
 
@@ -43,6 +44,7 @@ public class DiagnoseListAdapter extends RecyclerView.Adapter<DiagnoseListAdapte
     @Override
     public void onBindViewHolder(@NonNull DiagnoseListAdapter.ViewHolder holder, int position) {
         holder.textView.setText(mDataset.get(position).date);
+        holder.latest_result.setText(mDataset.get(position).result);
 
         ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams)holder.itemView.getLayoutParams();
         layoutParams.height = height;
@@ -60,12 +62,17 @@ public class DiagnoseListAdapter extends RecyclerView.Adapter<DiagnoseListAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView textView;
+        TextView latest_result;
 
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
 
             textView = (TextView) view.findViewById(R.id.latest_date);
+            textView.setTextSize(DisplayFontSize.font_size_x_25);
+
+            latest_result = view.findViewById(R.id.latest_result);
+            latest_result.setTextSize(DisplayFontSize.font_size_x_30);
         }
 
         public TextView getTextView() {

@@ -61,6 +61,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
+        Application.FullScreenMode(MapActivity.this);
+
         select_si = findViewById(R.id.select_si);
         select_gu = findViewById(R.id.select_gu);
         close_btn = findViewById(R.id.close_btn);
@@ -116,13 +118,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         Log.e("center_list", center_list.get(i).address);
                         Log.e("center_list", center_list.get(i).center_point.latitude+"");
                         Log.e("center_list", center_list.get(i).center_point.longitude+"");
+                        Log.e("center_list", center_list.get(i).center_number);
 
                         // 마커 찍기
                         markers[i] = new Marker();
                         markers[i].setPosition(new LatLng(center_list.get(i).center_point.latitude, center_list.get(i).center_point.longitude));
                         markers[i].setCaptionText(center_list.get(i).name);
                         markers[i].setMap(mNaverMap);
-                        markers[i].setTag(center_list.get(i).address);
+                        markers[i].setTag(center_list.get(i).address + "\n전화번호 : " + center_list.get(i).center_number);
 
                         int finalI = i;
                         markers[i].setOnClickListener(overlay -> {
@@ -143,7 +146,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                                         markers[j].setCaptionText(before_name + "\n" + center_list.get(i).name);
                                         markers[j].setTag(before_name + " : " + before_tag + "\n" +
-                                                center_list.get(i).name + " : " + center_list.get(i).address);
+                                                center_list.get(i).name + " : " + center_list.get(i).address + "\n전화번호 : " + center_list.get(i).center_number);
                                     }
                                 }
                             }
@@ -196,13 +199,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         Log.e("center_list", center_list.get(i).gu);
                         Log.e("center_list", center_list.get(i).center_point.latitude+"");
                         Log.e("center_list", center_list.get(i).center_point.longitude+"");
+                        Log.e("center_list", center_list.get(i).center_number);
 
                         // 마커 찍기
                         markers[i] = new Marker();
                         markers[i].setPosition(new LatLng(center_list.get(i).center_point.latitude, center_list.get(i).center_point.longitude));
                         markers[i].setCaptionText(center_list.get(i).name);
                         markers[i].setMap(mNaverMap);
-                        markers[i].setTag(center_list.get(i).address);
+                        markers[i].setTag(center_list.get(i).address + "\n전화번호 : " + center_list.get(i).center_number);
 
                         int finalI = i;
                         markers[i].setOnClickListener(overlay -> {
@@ -224,7 +228,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                         if (!before_name.equals(center_list.get(i).name)) {
                                             markers[j].setCaptionText(before_name + "\n" + center_list.get(i).name);
                                             markers[j].setTag(before_name + " : " + before_tag + "\n" +
-                                                    center_list.get(i).name + " : " + center_list.get(i).address);
+                                                    center_list.get(i).name + " : " + center_list.get(i).address + "\n전화번호 : " + center_list.get(i).center_number);
                                         }
                                     }
                                 }
@@ -568,13 +572,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             Log.e("center_list", center_list.get(i).address);
             Log.e("center_list", center_list.get(i).center_point.latitude+"");
             Log.e("center_list", center_list.get(i).center_point.longitude+"");
+            Log.e("center_list", center_list.get(i).center_number);
 
             // 마커 찍기
             markers[i] = new Marker();
             markers[i].setPosition(new LatLng(center_list.get(i).center_point.latitude, center_list.get(i).center_point.longitude));
             markers[i].setCaptionText(center_list.get(i).name);
             markers[i].setMap(mNaverMap);
-            markers[i].setTag(center_list.get(i).address);
+            markers[i].setTag(center_list.get(i).address + "\n전화번호 : " + center_list.get(i).center_number);
 
             int finalI = i;
             markers[i].setOnClickListener(overlay -> {
@@ -595,7 +600,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
                             markers[j].setCaptionText(before_name + "\n" + center_list.get(i).name);
                             markers[j].setTag(before_name + " : " + before_tag + "\n" +
-                                    center_list.get(i).name + " : " + center_list.get(i).address);
+                                    center_list.get(i).name + " : " + center_list.get(i).address + "\n전화번호 : " + center_list.get(i).center_number);
                         }
                     }
                 }

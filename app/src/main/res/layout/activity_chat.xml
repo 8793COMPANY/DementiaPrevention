@@ -7,38 +7,37 @@
     android:background="@color/white"
     tools:context=".chat.ChatActivity">
 
-
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/top_section"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="0dp"
         app:layout_constraintHeight_percent="0.1"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintHeight_percent="0.1"
             android:background="@color/gray_f7f7f7"
-            app:layout_constraintTop_toTopOf="parent"
-            android:fitsSystemWindows="true"
-            android:layout_alignParentTop="true"
-            >
+            android:layout_alignParentTop="true">
 
             <ImageView
                 android:id="@+id/chat_icon"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                android:background="@drawable/speech_bubble_icon"
+                android:src="@drawable/speech_bubble_icon"
                 app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintWidth_percent="0.69"
                 app:layout_constraintTop_toTopOf="@+id/chat_text"
                 app:layout_constraintBottom_toBottomOf="@+id/chat_text"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/chat_text"></ImageView>
-
+                app:layout_constraintRight_toLeftOf="@+id/chat_text" />
 
             <TextView
                 android:id="@+id/chat_text"
@@ -52,8 +51,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/chat_icon"></TextView>
-
+                app:layout_constraintLeft_toRightOf="@+id/chat_icon" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/close_btn"
@@ -68,15 +66,11 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                ></androidx.appcompat.widget.AppCompatButton>
+                app:layout_constraintBottom_toBottomOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </com.google.android.material.appbar.AppBarLayout>
-
-
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/chatting_section"
@@ -94,7 +88,6 @@
             app:layout_constraintBottom_toTopOf="@+id/text_input_area"
             app:layout_constraintLeft_toLeftOf="@+id/guide_left"
             app:layout_constraintRight_toRightOf="@+id/guide_right"></androidx.recyclerview.widget.RecyclerView>
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/text_input_area"
@@ -136,8 +129,6 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/text_input_box"></androidx.appcompat.widget.AppCompatButton>
 
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -164,15 +155,12 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.05"></androidx.constraintlayout.widget.Guideline>
 
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guide_right"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.95"></androidx.constraintlayout.widget.Guideline>
-
-
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guide_bottom"
@@ -181,11 +169,6 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.98"></androidx.constraintlayout.widget.Guideline>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,8 @@ public class MedicalCenterDetail {
 
     public  CenterPoint center_point;
 
+    public String center_number = "";
+
     public MedicalCenterDetail() {
 
     }

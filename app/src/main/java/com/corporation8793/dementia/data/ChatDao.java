@@ -9,8 +9,16 @@ import java.util.List;
 
 @Dao
 public interface ChatDao {
-    @Query("SELECT * FROM Chat")
-    List<Chat> getAll();
+
+    @Query("SELECT * FROM chat")
+    List<Chat> findAll();
+
+    // int type, String message
+    @Query("SELECT * FROM chat where type=:type")
+    Chat findByType(int type);
+
+    @Query("SELECT * FROM chat where message=:message")
+    Chat findByMessage(String message);
 
     @Insert
     void insert(Chat chat);

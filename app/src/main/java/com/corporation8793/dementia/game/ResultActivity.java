@@ -9,15 +9,18 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.corporation8793.dementia.MySharedPreferences;
 import com.corporation8793.dementia.R;
 import com.corporation8793.dementia.game.find_different_color.FindDifferentColorGame;
 import com.corporation8793.dementia.game.find_same_thing.FindSameThingGame;
 import com.corporation8793.dementia.game.order_number.OrderNumberGame;
 import com.corporation8793.dementia.game.quiz.QuizActivity;
+import com.corporation8793.dementia.util.Application;
+import com.corporation8793.dementia.util.DisplayFontSize;
 
 public class ResultActivity extends AppCompatActivity {
 
-    TextView score_text, high_score_text;
+    TextView score_text, high_score_text, diagnose_result, result_text;
     Button retry_btn, out_btn, close_btn;
 
     // type : 게임 유형, rating : 정답 점수, highest_score : 최고 점수
@@ -27,7 +30,7 @@ public class ResultActivity extends AppCompatActivity {
     Intent intent;
 
     /*
-    * TODO: 소영님께서 저번에 만들어두신 다시하기 버튼 기능은 아직 지우지 않았어요
+    * TODO: 저번에 만들어두신 다시하기 버튼 기능은 아직 지우지 않았어요
     *       뇌 기능 게임 리스트 순서대로
     *       두더지게임 - 1
     *       순서 게임  - 2
@@ -40,11 +43,26 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
+        Application.FullScreenMode(ResultActivity.this);
+
+        diagnose_result = findViewById(R.id.diagnose_result);
+        diagnose_result.setTextSize(DisplayFontSize.font_size_x_40);
+        result_text = findViewById(R.id.result_text);
+        result_text.setTextSize(DisplayFontSize.font_size_x_40);
+
         score_text = findViewById(R.id.score_text);
+        score_text.setTextSize(DisplayFontSize.font_size_x_92);
+
         high_score_text = findViewById(R.id.high_score_text);
+        high_score_text.setTextSize(DisplayFontSize.font_size_x_66);
+
         retry_btn = findViewById(R.id.retry_btn);
+        retry_btn.setTextSize(DisplayFontSize.font_size_x_36);
         out_btn = findViewById(R.id.out_btn);
+        out_btn.setTextSize(DisplayFontSize.font_size_x_36);
+
         close_btn = findViewById(R.id.close_btn);
+        close_btn.setTextSize(DisplayFontSize.font_size_x_32);
 
         // 게임 유형
         type = getIntent().getIntExtra("type", 0);
@@ -69,6 +87,30 @@ public class ResultActivity extends AppCompatActivity {
 
                     score_text.setText(rating+"");
                     high_score_text.setText("/" + highest_score);
+
+                    // 점수 저장
+                    if (MySharedPreferences.getString(ResultActivity.this, "scoreOtherNumber") == null
+                            || MySharedPreferences.getString(ResultActivity.this, "scoreOtherNumber").isEmpty()) { // 처음 시작하는 경우
+                        // 바로 점수 저장
+                        Log.e("testtttt", "null");
+                        MySharedPreferences.setString(ResultActivity.this, "scoreOtherNumber", String.valueOf(rating));
+                    } else {
+                        // 이전 점수가 있는 경우 비교해서 저장
+                        Log.e("testtttt", "not null");
+                        Log.e("test~", MySharedPreferences.getString(ResultActivity.this, "scoreOtherNumber"));
+
+                        int highScore = Integer.parseInt(MySharedPreferences.getString(ResultActivity.this, "scoreOtherNumber"));
+
+                        Log.e("testtttt", "highScore : " + highScore);
+                        Log.e("testtttt", "score : " + rating);
+
+                        if (highScore < rating) {
+                            Log.e("testtttt", "high");
+                            MySharedPreferences.setString(ResultActivity.this, "scoreOtherNumber", String.valueOf(rating));
+                        } else {
+                            Log.e("testtttt", "low");
+                        }
+                    }
                     break;
                 case 3: // 다른 색상 찾기 게임
                     total = rating + "/" + highest_score;
@@ -76,6 +118,30 @@ public class ResultActivity extends AppCompatActivity {
 
                     score_text.setText(rating+"");
                     high_score_text.setText("/" + highest_score);
+
+                    // 점수 저장
+                    if (MySharedPreferences.getString(ResultActivity.this, "scoreFindDifferentColor") == null
+                            || MySharedPreferences.getString(ResultActivity.this, "scoreFindDifferentColor").isEmpty()) { // 처음 시작하는 경우
+                        // 바로 점수 저장
+                        Log.e("testtttt", "null");
+                        MySharedPreferences.setString(ResultActivity.this, "scoreFindDifferentColor", String.valueOf(rating));
+                    } else {
+                        // 이전 점수가 있는 경우 비교해서 저장
+                        Log.e("testtttt", "not null");
+                        Log.e("test~", MySharedPreferences.getString(ResultActivity.this, "scoreFindDifferentColor"));
+
+                        int highScore = Integer.parseInt(MySharedPreferences.getString(ResultActivity.this, "scoreFindDifferentColor"));
+
+                        Log.e("testtttt", "highScore : " + highScore);
+                        Log.e("testtttt", "score : " + rating);
+
+                        if (highScore < rating) {
+                            Log.e("testtttt", "high");
+                            MySharedPreferences.setString(ResultActivity.this, "scoreFindDifferentColor", String.valueOf(rating));
+                        } else {
+                            Log.e("testtttt", "low");
+                        }
+                    }
                     break;
                 case 4: // 색상 일치 게임
                     String total = rating + "/" + highest_score;
@@ -83,6 +149,30 @@ public class ResultActivity extends AppCompatActivity {
 
                     score_text.setText(rating+"");
                     high_score_text.setText("/" + highest_score);
+
+                    // 점수 저장
+                    if (MySharedPreferences.getString(ResultActivity.this, "scoreFindSameColorAndText") == null
+                            || MySharedPreferences.getString(ResultActivity.this, "scoreFindSameColorAndText").isEmpty()) { // 처음 시작하는 경우
+                        // 바로 점수 저장
+                        Log.e("testtttt", "null");
+                        MySharedPreferences.setString(ResultActivity.this, "scoreFindSameColorAndText", String.valueOf(rating));
+                    } else {
+                        // 이전 점수가 있는 경우 비교해서 저장
+                        Log.e("testtttt", "not null");
+                        Log.e("test~", MySharedPreferences.getString(ResultActivity.this, "scoreFindSameColorAndText"));
+
+                        int highScore = Integer.parseInt(MySharedPreferences.getString(ResultActivity.this, "scoreFindSameColorAndText"));
+
+                        Log.e("testtttt", "highScore : " + highScore);
+                        Log.e("testtttt", "score : " + rating);
+
+                        if (highScore < rating) {
+                            Log.e("testtttt", "high");
+                            MySharedPreferences.setString(ResultActivity.this, "scoreFindSameColorAndText", String.valueOf(rating));
+                        } else {
+                            Log.e("testtttt", "low");
+                        }
+                    }
                     break;
                 case 5: // ox 퀴즈 게임
                     total = rating + "/" + highest_score;
@@ -97,6 +187,30 @@ public class ResultActivity extends AppCompatActivity {
 
                     score_text.setText(rating+"");
                     high_score_text.setText("/" + highest_score);
+
+                    // 점수 저장
+                    if (MySharedPreferences.getString(ResultActivity.this, "scoreFindSameThing") == null
+                            || MySharedPreferences.getString(ResultActivity.this, "scoreFindSameThing").isEmpty()) { // 처음 시작하는 경우
+                        // 바로 점수 저장
+                        Log.e("testtttt", "null");
+                        MySharedPreferences.setString(ResultActivity.this, "scoreFindSameThing", String.valueOf(rating));
+                    } else {
+                        // 이전 점수가 있는 경우 비교해서 저장
+                        Log.e("testtttt", "not null");
+                        Log.e("test~", MySharedPreferences.getString(ResultActivity.this, "scoreFindSameThing"));
+
+                        int highScore = Integer.parseInt(MySharedPreferences.getString(ResultActivity.this, "scoreFindSameThing"));
+
+                        Log.e("testtttt", "highScore : " + highScore);
+                        Log.e("testtttt", "score : " + rating);
+
+                        if (highScore < rating) {
+                            Log.e("testtttt", "high");
+                            MySharedPreferences.setString(ResultActivity.this, "scoreFindSameThing", String.valueOf(rating));
+                        } else {
+                            Log.e("testtttt", "low");
+                        }
+                    }
                     break;
                 default:
                     break;

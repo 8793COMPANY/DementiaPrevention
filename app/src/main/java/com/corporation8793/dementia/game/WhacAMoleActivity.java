@@ -8,6 +8,8 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,12 +25,13 @@ import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.corporation8793.dementia.MainActivity;
+import com.corporation8793.dementia.MySharedPreferences;
 import com.corporation8793.dementia.game.pulse_countdown.OnCountdownCompleted;
 import com.corporation8793.dementia.game.pulse_countdown.PulseCountDown;
 import com.corporation8793.dementia.R;
 import com.corporation8793.dementia.util.Application;
 import com.corporation8793.dementia.util.DisplayFontSize;
-import com.jackandphantom.circularprogressbar.CircleProgressbar;
+//import com.jackandphantom.circularprogressbar.CircleProgressbar;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -54,7 +57,7 @@ public class WhacAMoleActivity extends AppCompatActivity {
 
     PulseCountDown startGameCountDownTimer;
     CountDownTimer mainCountDownTimer;
-    CircleProgressbar timer_progressbar;
+//    CircleProgressbar timer_progressbar;
     Handler gameHandler;
 
     boolean moleIsActive = false, countDownWorks = false;
@@ -63,6 +66,8 @@ public class WhacAMoleActivity extends AppCompatActivity {
     boolean minusMole = false, touch_check = false;
 
     public static final String FINAL_SCORE_VALUE_EXTRA = "FINAL_SCORE_VALUE_EXTRA";
+
+    WhacAMoleResultDialog whacAMoleResultDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +120,7 @@ public class WhacAMoleActivity extends AppCompatActivity {
         ninethMole = findViewById(R.id.ninethMoleBtn);
 
         startGameCountDownTimer = findViewById(R.id.pulseCountDown);
-        timer_progressbar = findViewById(R.id.timer_progressbar);
+//        timer_progressbar = findViewById(R.id.timer_progressbar);
 
         // 모든 두더지 홀 기본 이미지 적용
         defaultHoles();
@@ -211,7 +216,7 @@ public class WhacAMoleActivity extends AppCompatActivity {
     private void startTimer(int time){
         // Interval - 1 second
         // Timer - 30 seconds
-        timer_progressbar.setMaxProgress((float) time);
+//        timer_progressbar.setMaxProgress((float) time);
         mainCountDownTimer = new CountDownTimer(time, 1) {
             public void onTick(long millisUntilFinished) {
                 countDownWorks = true;
@@ -253,13 +258,13 @@ public class WhacAMoleActivity extends AppCompatActivity {
                 Log.e("test", millisUntilFinished+"");
 
                 countDownTimerText.setText(stringSeconds + "초");
-                timer_progressbar.setProgress(millisUntilFinished);
+//                timer_progressbar.setProgress(millisUntilFinished);
             }
 
             // 게임이 끝나면 0.000
             public void onFinish() {
                 countDownTimerText.setText("0초");
-                timer_progressbar.setProgress(0);
+//                timer_progressbar.setProgress(0);
                 // 결과 페이지로 이동
                 //startResultActivity();
             }
@@ -673,14 +678,67 @@ public class WhacAMoleActivity extends AppCompatActivity {
 
     // Start Result Activity when game is finished
     private void startResultActivity(int score){
-        Intent intent = new Intent(WhacAMoleActivity.this, ResultActivity.class);
-        intent.putExtra(FINAL_SCORE_VALUE_EXTRA, scoreText.getText().toString());
-        intent.putExtra("type", 1);
-        intent.putExtra("size", 0);
-        intent.putExtra("rating", score);
-        startActivity(intent);
-        finish();
+//        Intent intent = new Intent(WhacAMoleActivity.this, ResultActivity.class);
+//        intent.putExtra(FINAL_SCORE_VALUE_EXTRA, scoreText.getText().toString());
+//        intent.putExtra("type", 1);
+//        intent.putExtra("size", 0);
+//        intent.putExtra("rating", score);
+//        startActivity(intent);
+//        finish();
+
+        whacAMoleResultDialog = new WhacAMoleResultDialog(WhacAMoleActivity.this, score, retry_listener, finish_listener);
+
+        // 점수 저장
+        if (MySharedPreferences.getString(WhacAMoleActivity.this, "scoreWhacAMole") == null
+                || MySharedPreferences.getString(WhacAMoleActivity.this, "scoreWhacAMole").isEmpty()) { // 처음 시작하는 경우
+            // 바로 점수 저장
+            Log.e("testtttt", "null");
+            MySharedPreferences.setString(WhacAMoleActivity.this, "scoreWhacAMole", String.valueOf(score));
+        } else {
+            // 이전 점수가 있는 경우 비교해서 저장
+            Log.e("testtttt", "not null");
+            Log.e("test~", MySharedPreferences.getString(WhacAMoleActivity.this, "scoreWhacAMole"));
+
+            int highScore = Integer.parseInt(MySharedPreferences.getString(WhacAMoleActivity.this, "scoreWhacAMole"));
+
+            Log.e("testtttt", "highScore : " + highScore);
+            Log.e("testtttt", "score : " + score);
+
+            if (highScore < score) {
+                Log.e("testtttt", "high");
+                MySharedPreferences.setString(WhacAMoleActivity.this, "scoreWhacAMole", String.valueOf(score));
+            } else {
+                Log.e("testtttt", "low");
+            }
+        }
+
+        // 하단 네비게이션 바 올라오지 않도록 설정
+        Window window = whacAMoleResultDialog.getWindow();
+        if (window != null) {
+            window.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+        }
+
+        whacAMoleResultDialog.show();
+        whacAMoleResultDialog.setCancelable(false);
     }
+
+    private final View.OnClickListener retry_listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(WhacAMoleActivity.this, WhacAMoleActivity.class);
+            startActivity(intent);
+            whacAMoleResultDialog.dismiss();
+            finish();
+        }
+    };
+
+    private final View.OnClickListener finish_listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            whacAMoleResultDialog.dismiss();
+            finish();
+        }
+    };
 
     @Override
     protected void onDestroy() {

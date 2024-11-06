@@ -114,7 +114,7 @@
                     android:gravity="center"
                     android:fontFamily="@font/pretendard_medium"
                     android:text="프로필 정보를 수정해주세요"
-                    app:layout_constraintVertical_bias="0.1"
+                    app:layout_constraintVertical_bias="0.05"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"></TextView>
 
@@ -352,8 +352,7 @@
                 android:layout_height="0dp"
                 android:text="확인"
                 android:textColor="@color/white"
-                android:background="@drawable/correct_btn_off"
-                android:backgroundTint="@color/mint_00b3bc"
+                android:background="@drawable/user_info_button_off"
                 app:layout_constraintVertical_bias="0.9"
                 app:layout_constraintHeight_percent="0.1"
                 app:layout_constraintLeft_toLeftOf="@id/left_guideline"

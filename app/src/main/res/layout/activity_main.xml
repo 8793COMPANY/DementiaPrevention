@@ -142,8 +142,6 @@
 <!--                app:layout_constraintBottom_toBottomOf="parent"-->
 <!--                app:layout_constraintRight_toLeftOf="@+id/menu_btn"></ImageButton>-->
 
-
-
             <ImageButton
                 android:id="@+id/menu_btn"
                 android:layout_width="0dp"
@@ -154,8 +152,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"></ImageButton>
-
-            
             
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -163,7 +159,7 @@
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="홍길동님,"
+            android:text="홍갈동님,"
             android:textStyle="bold"
             android:fontFamily="@font/pretendard_bold"
             android:textColor="@color/black"
@@ -186,13 +182,20 @@
             android:id="@+id/latest_diagnose"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="#e0fafc"
+            android:background="@drawable/main_list_background"
             app:layout_constraintVertical_bias="0.05"
-            app:layout_constraintHeight_percent="0.11"
+            app:layout_constraintHeight_percent="0.12"
             app:layout_constraintTop_toBottomOf="@+id/user_name"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="@+id/guide_left"
             app:layout_constraintRight_toRightOf="@+id/guide_right">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/middle_guide_top"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.23"/>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/middle_guide_center"
@@ -201,7 +204,6 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.5"></androidx.constraintlayout.widget.Guideline>
 
-
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/middle_guide_left"
                 android:layout_width="0dp"
@@ -209,14 +211,12 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.06"></androidx.constraintlayout.widget.Guideline>
 
-
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/middle_guide_right"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.95"></androidx.constraintlayout.widget.Guideline>
-
 
             <ImageView
                 android:id="@+id/diagnose_icon"
@@ -229,7 +229,6 @@
                 app:layout_constraintLeft_toLeftOf="@+id/middle_guide_left"
                 app:layout_constraintBottom_toBottomOf="parent"></ImageView>
 
-
             <TextView
                 android:id="@+id/latest_date"
                 android:layout_width="wrap_content"
@@ -237,14 +236,13 @@
                 android:fontFamily="@font/pretendard_light"
                 android:text="2025년 4월 10일"
                 android:textColor="@color/black"
-                app:layout_constraintVertical_bias="0.8"
+                app:layout_constraintVertical_bias="0"
                 app:layout_constraintHorizontal_bias="0.1"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="@+id/middle_guide_center"
+                app:layout_constraintTop_toTopOf="@+id/middle_guide_top"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/diagnose_icon"
                 app:layout_constraintRight_toRightOf="parent"
                 ></TextView>
-
 
             <TextView
                 android:id="@+id/latest_result"
@@ -257,8 +255,7 @@
                 app:layout_constraintVertical_bias="0"
                 app:layout_constraintTop_toBottomOf="@+id/middle_guide_center"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="@+id/latest_date"></TextView>
-
+                app:layout_constraintLeft_toLeftOf="@+id/latest_date" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -269,7 +266,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:titleText="@{`진단하기`}"
-            app:introText="@{`내 주변 병원을\n찾아보세요`}"
+            app:introText="@{`간편한 자가진단\n테스트`}"
             app:foo="@{0}"
             app:icon="@{@drawable/home_diagnose_btn_icon}"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -306,7 +303,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:titleText="@{`치매안심센터`}"
-            app:introText="@{`간편한 자가진단\n테스트`}"
+            app:introText="@{`내 주변 병원을\n찾아보세요`}"
             app:foo="@{1}"
             app:icon="@{@drawable/home_find_center_btn_icon}"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -325,7 +322,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:titleText="@{`대화하기`}"
-            app:introText="@{`치매안내센터를\n안내해드려요`}"
+            app:introText="@{`챗봇과\n대화해보세요`}"
             app:foo="@{1}"
             app:icon="@{@drawable/home_chat_btn_icon}"
             app:layout_constraintHorizontal_chainStyle="spread_inside"

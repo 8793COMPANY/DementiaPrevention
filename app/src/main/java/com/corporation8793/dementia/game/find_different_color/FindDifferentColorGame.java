@@ -24,6 +24,8 @@ import com.corporation8793.dementia.R;
 import com.corporation8793.dementia.diagnose.DiagnosticResultActivity;
 import com.corporation8793.dementia.diagnose.QuestionnaireActivity;
 import com.corporation8793.dementia.game.ResultActivity;
+import com.corporation8793.dementia.util.Application;
+import com.corporation8793.dementia.util.DisplayFontSize;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,14 +67,22 @@ public class FindDifferentColorGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_different_color);
 
+        Application.FullScreenMode(FindDifferentColorGame.this);
+
         game_explain_text = findViewById(R.id.game_explain_text);
+        game_explain_text.setTextSize(DisplayFontSize.font_size_x_46);
+
         color_list = findViewById(R.id.color_list);
         parent_container = (ConstraintLayout) color_list.getChildAt(0);
 
         View top_section = findViewById(R.id.top_section);
 
         counting_rest = top_section.findViewById(R.id.counting_rest);
+        counting_rest.setTextSize(DisplayFontSize.font_size_x_32);
+
         close_btn = top_section.findViewById(R.id.close_btn);
+        close_btn.setTextSize(DisplayFontSize.font_size_x_32);
+
         time_progress = top_section.findViewById(R.id.time_progress);
 
         counting_rest.setText(current_pos+"/"+out_size);

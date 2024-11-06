@@ -33,7 +33,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"></TextView>
 
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/close_btn"
             android:layout_width="0dp"
@@ -48,14 +47,13 @@
             app:layout_constraintBottom_toBottomOf="@+id/counting_rest"
             ></androidx.appcompat.widget.AppCompatButton>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="홍길동님"
+        android:text="홍갈동님"
         android:textSize="20dp"
         android:textColor="@color/black"
         android:fontFamily="@font/pretendard_semibold"
@@ -64,7 +62,6 @@
         app:layout_constraintTop_toBottomOf="@+id/top_section"
         app:layout_constraintBottom_toBottomOf="parent"
         ></TextView>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/user_info_modify_section"
@@ -79,8 +76,7 @@
         android:backgroundTint="@color/mint_00b3bc"
         app:layout_constraintTop_toBottomOf="@+id/user_name"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        >
+        app:layout_constraintRight_toRightOf="parent">
 
         <TextView
             android:id="@+id/user_info_modify"
@@ -111,11 +107,8 @@
             app:layout_constraintLeft_toRightOf="@+id/user_info_modify"
             app:layout_constraintRight_toRightOf="parent"></ImageView>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-    
-    
-    
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/latest_diagnose_list_section"
         android:layout_width="match_parent"
@@ -132,6 +125,12 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.07"></androidx.constraintlayout.widget.Guideline>
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/medium_guide"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.18" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/right_guide"
@@ -139,7 +138,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.93"></androidx.constraintlayout.widget.Guideline>
-
 
         <ImageView
             android:id="@+id/latest_diagnose_list_icon"
@@ -152,18 +150,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="@+id/left_guide"></ImageView>
 
-
         <TextView
             android:id="@+id/latest_diagnose_list_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="최근 진단 리스트"
-            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/latest_diagnose_list_icon"
+            app:layout_constraintLeft_toLeftOf="@+id/medium_guide"
             app:layout_constraintRight_toLeftOf="@+id/more_btn"></TextView>
-
 
         <ImageView
             android:id="@+id/more_btn"
@@ -177,7 +173,6 @@
             app:layout_constraintRight_toRightOf="@+id/right_guide"></ImageView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/logout"
@@ -195,6 +190,12 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.07"></androidx.constraintlayout.widget.Guideline>
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/logout_medium"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.18" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/logout_right_guide"
@@ -202,7 +203,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.93"></androidx.constraintlayout.widget.Guideline>
-
 
         <ImageView
             android:id="@+id/logout_icon"
@@ -215,20 +215,94 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="@+id/logout_left_guide"></ImageView>
 
-
         <TextView
             android:id="@+id/logout_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="로그아웃"
-            app:layout_constraintHorizontal_bias="0.1"
+            app:layout_constraintHorizontal_bias="0"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/logout_icon"></TextView>
+            app:layout_constraintLeft_toLeftOf="@+id/logout_medium"></TextView>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/font_section"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.18"
+        app:layout_constraintVertical_bias="0.001"
+        app:layout_constraintTop_toBottomOf="@+id/logout"
+        app:layout_constraintBottom_toBottomOf="parent">
 
+        <TextView
+            android:id="@+id/font_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="글씨 크기"
+            android:textColor="@color/mint_00b3bc"
+            android:textSize="26dp"
+            android:gravity="center"
+            android:fontFamily="@font/pretendard_semibold"
+            android:includeFontPadding="false"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/font_select_section"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/font_select_section"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintWidth_percent="0.85"
+            app:layout_constraintDimensionRatio="570:60"
+            app:layout_constraintTop_toBottomOf="@+id/font_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <RadioButton
+                android:id="@+id/big"
+                android:checked="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="크게"
+                android:button="@null"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:background="@drawable/selector_gender_button"
+                android:textColor="@drawable/selector_gender_button_text"
+                android:layout_marginRight="5dp" />
+
+            <RadioButton
+                android:id="@+id/medium"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="중간"
+                android:button="@null"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:background="@drawable/selector_gender_button"
+                android:textColor="@drawable/selector_gender_button_text"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"/>
+
+            <RadioButton
+                android:id="@+id/small"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="작게"
+                android:button="@null"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:background="@drawable/selector_gender_button"
+                android:textColor="@drawable/selector_gender_button_text"
+                android:layout_marginLeft="5dp" />
+        </RadioGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

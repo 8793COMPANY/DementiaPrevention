@@ -16,16 +16,14 @@
             app:layout_constraintVertical_bias="0"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHeight_percent="0.16"></include>
-
+            app:layout_constraintHeight_percent="0.16" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@+id/top_section"
-            app:layout_constraintBottom_toTopOf="@+id/next_end_btn"></androidx.fragment.app.FragmentContainerView>
-
+            app:layout_constraintBottom_toTopOf="@+id/next_end_btn" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/next_end_btn"
@@ -38,11 +36,13 @@
             android:fontFamily="@font/pretendard_semibold"
             app:layout_constraintHeight_percent="0.09"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@drawable/next_end_btn_selector"></androidx.appcompat.widget.AppCompatButton>
+            android:background="@drawable/next_end_btn_selector" />
 
-
-
-
+        <ImageView
+            android:id="@+id/ready_view"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

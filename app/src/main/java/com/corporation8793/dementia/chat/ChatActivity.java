@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.corporation8793.dementia.R;
 import com.corporation8793.dementia.chat.openai_dto.request.ChatGptContentImage;
@@ -22,6 +23,8 @@ import com.corporation8793.dementia.chat.openai_dto.request.ChatGptMsg;
 import com.corporation8793.dementia.chat.openai_dto.request.ChatGptRequest;
 import com.corporation8793.dementia.chat.openai_dto.request.ChatImage;
 import com.corporation8793.dementia.chat.openai_dto.response.ChatGptResponse;
+import com.corporation8793.dementia.util.Application;
+import com.corporation8793.dementia.util.DisplayFontSize;
 import com.google.android.material.appbar.AppBarLayout;
 
 import java.io.IOException;
@@ -46,6 +49,7 @@ public class ChatActivity extends AppCompatActivity {
 
     EditText text_input_box;
     Button send_btn, close_btn;
+    TextView chat_text;
 
     ArrayList<ChatModel> chat_list = new ArrayList<>();
 
@@ -57,7 +61,6 @@ public class ChatActivity extends AppCompatActivity {
 
     AppBarLayout top_section;
     boolean isOpen = false;
-
 
     long mNow;
     Date mDate;
@@ -74,12 +77,10 @@ public class ChatActivity extends AppCompatActivity {
         put(7, "토요일");
     }};
 
-
     public static final int DATE = 0;
     public static final int DAY_OF_WEEK = 1;
 
     public static final int TIME = 2;
-
 
     /*TODO : 1. 마지막으로 채팅한 메세지 날짜와 현재 채팅 메세지의 날짜가 다르면 날짜 데이터 추가해줘야함
              2. 메세지 Room DB 저장
@@ -92,6 +93,7 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+        Application.FullScreenMode(ChatActivity.this);
 
         GPT_KEY =  getString(R.string.GPT_KEY);
 
@@ -105,9 +107,18 @@ public class ChatActivity extends AppCompatActivity {
 
         service = retrofit.create(GptService.class);
 
+        chat_text = findViewById(R.id.chat_text);
+        chat_text.setTextSize(DisplayFontSize.font_size_x_38);
+
         text_input_box = findViewById(R.id.text_input_box);
+        text_input_box.setTextSize(DisplayFontSize.font_size_x_32);
+
         send_btn = findViewById(R.id.send_btn);
+        send_btn.setTextSize(DisplayFontSize.font_size_x_32);
+
         close_btn = findViewById(R.id.close_btn);
+        close_btn.setTextSize(DisplayFontSize.font_size_x_32);
+
         mic_btn = findViewById(R.id.mic_btn);
 
         top_section = findViewById(R.id.top_section);
@@ -307,6 +318,7 @@ public class ChatActivity extends AppCompatActivity {
 
         List<ChatGptMsg> msgs = new ArrayList<>();
         msgs.add(msg_img);  // request 메세지를 List에 담기
+
 
 
         ChatGptRequest request = create_request(msgs);

@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -26,6 +27,8 @@ import com.corporation8793.dementia.diagnose.DiagnosticResultActivity;
 import com.corporation8793.dementia.diagnose.QuestionnaireActivity;
 import com.corporation8793.dementia.game.ResultActivity;
 import com.corporation8793.dementia.game.find_different_color.FindDifferentColorGame;
+import com.corporation8793.dementia.util.Application;
+import com.corporation8793.dementia.util.DisplayFontSize;
 import com.google.android.gms.common.util.DataUtils;
 
 import java.util.Arrays;
@@ -74,14 +77,28 @@ public class OrderNumberGame extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_order_number_game);
 
+        Application.FullScreenMode(OrderNumberGame.this);
+
         counting_rest = binding.topSection.findViewById(R.id.counting_rest);
+        counting_rest.setTextSize(DisplayFontSize.font_size_x_32);
+
         close_btn = binding.topSection.findViewById(R.id.close_btn);
+        close_btn.setTextSize(DisplayFontSize.font_size_x_32);
+
         time_progress = binding.topSection.findViewById(R.id.time_progress);
 
+        binding.gameExplainText.setTextSize(DisplayFontSize.font_size_x_46);
+        binding.first.setTextSize(DisplayFontSize.font_size_x_44);
+        binding.second.setTextSize(DisplayFontSize.font_size_x_44);
+        binding.third.setTextSize(DisplayFontSize.font_size_x_44);
+        binding.fourth.setTextSize(DisplayFontSize.font_size_x_44);
+        binding.fifth.setTextSize(DisplayFontSize.font_size_x_44);
+        binding.sixth.setTextSize(DisplayFontSize.font_size_x_44);
+        binding.seventh.setTextSize(DisplayFontSize.font_size_x_44);
+        binding.eighth.setTextSize(DisplayFontSize.font_size_x_44);
+        binding.ninth.setTextSize(DisplayFontSize.font_size_x_44);
 
         counting_rest.setText(current_pos+"/"+out_size);
-
-
 
         list = Arrays.asList(number);
         reset();
@@ -203,7 +220,9 @@ public class OrderNumberGame extends AppCompatActivity {
 
             int randomNum = (int) (Math.random() * 3);
             container.setText(number[shuffle.get(i)][randomNum]);
-            container.setBackgroundColor(getResources().getColor(R.color.green_c8ff71));
+            // 원래 코드
+//            container.setBackgroundColor(getResources().getColor(R.color.green_c8ff71));
+            container.setBackgroundColor(Color.parseColor("#a1e19f"));
             container.setEnabled(true);
         }
     }

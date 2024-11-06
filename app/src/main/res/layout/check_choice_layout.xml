@@ -6,7 +6,6 @@
     <data>
         <import type="android.view.View"/>
 
-
         <variable
             name="choiceText"
             type="String" />
@@ -14,48 +13,55 @@
         <variable
             name="choice"
             type="java.lang.Boolean" />
-
-
     </data>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/choice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/check_choice_selector">
 
+        <TextView
+            android:id="@+id/choice_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{choiceText}"
+            android:textColor="@color/black"
+            android:textSize="23dp"
+            android:fontFamily="@font/pretendard_semibold"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@id/guide_left"
+            app:layout_constraintRight_toRightOf="parent" />
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/choice"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/check_choice_selector"
-    >
+        <ImageView
+            android:visibility="@{choice ? View.VISIBLE : View.GONE}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/check_on_test"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.07"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@+id/guide_right" />
 
-    <TextView
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_left"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.08"/>
 
-        android:id="@+id/choice_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@{choiceText}"
-        android:textColor="@color/black"
-        android:textSize="23dp"
-        android:fontFamily="@font/pretendard_semibold"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        ></TextView>
-    
-    <ImageView
-        android:visibility="@{choice ? View.VISIBLE : View.GONE}"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/check_on_test"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintWidth_percent="0.07"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/choice_text"
-        app:layout_constraintRight_toRightOf="parent"></ImageView>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_right"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95"/>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

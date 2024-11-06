@@ -61,9 +61,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-
+            android:layout_height="match_parent">
 
             <Button
                 android:id="@+id/first"
@@ -72,7 +70,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:textColor="@color/black"
-                android:backgroundTint="@color/green_c8ff71"
+                android:backgroundTint="#a1e19f"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintWidth_percent="0.28"
                 android:layout_rowWeight="1"
@@ -82,8 +80,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/fourth"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/second"
-                ></Button>
+                app:layout_constraintRight_toLeftOf="@+id/second">
+            </Button>
 
             <Button
                 android:id="@+id/second"
@@ -91,7 +89,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:textColor="@color/black"
-                android:backgroundTint="@color/green_c8ff71"
+                android:backgroundTint="#a1e19f"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintWidth_percent="0.28"
                 android:layout_rowWeight="1"
@@ -110,7 +108,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:textColor="@color/black"
-                android:backgroundTint="@color/green_c8ff71"
+                android:backgroundTint="#a1e19f"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintWidth_percent="0.28"
                 android:layout_rowWeight="1"
@@ -149,7 +147,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:textColor="@color/black"
-                android:backgroundTint="@color/green_c8ff71"
+                android:backgroundTint="#a1e19f"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintWidth_percent="0.28"
                 android:layout_rowWeight="1"
@@ -167,7 +165,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:textColor="@color/black"
-                android:backgroundTint="@color/green_c8ff71"
+                android:backgroundTint="#a1e19f"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintWidth_percent="0.28"
                 android:layout_rowWeight="1"
@@ -185,7 +183,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:textColor="@color/black"
-                android:backgroundTint="@color/green_c8ff71"
+                android:backgroundTint="#a1e19f"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintWidth_percent="0.28"
                 android:layout_rowWeight="1"
@@ -216,7 +214,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:textColor="@color/black"
-                android:backgroundTint="@color/green_c8ff71"
+                android:backgroundTint="#a1e19f"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintWidth_percent="0.28"
@@ -235,7 +233,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:textColor="@color/black"
-                android:backgroundTint="@color/green_c8ff71"
+                android:backgroundTint="#a1e19f"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintWidth_percent="0.28"
                 android:layout_rowWeight="1"
@@ -253,7 +251,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:textColor="@color/black"
-                android:backgroundTint="@color/green_c8ff71"
+                android:backgroundTint="#a1e19f"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintWidth_percent="0.28"
                 android:layout_rowWeight="1"

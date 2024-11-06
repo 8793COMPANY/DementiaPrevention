@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -26,6 +27,8 @@ import com.corporation8793.dementia.game.ResultActivity;
 import com.corporation8793.dementia.game.SelectGameActivity;
 import com.corporation8793.dementia.game.WhacAMoleActivity;
 import com.corporation8793.dementia.game.order_number.OrderNumberGame;
+import com.corporation8793.dementia.util.Application;
+import com.corporation8793.dementia.util.DisplayFontSize;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +68,7 @@ public class FindSameThingGame extends AppCompatActivity {
         //        setContentView(R.layout.activity_find_same_thing_game);
         ActivityFindSameThingGameBinding binding = DataBindingUtil.setContentView(this,R.layout.activity_find_same_thing_game);
 
+        Application.FullScreenMode(FindSameThingGame.this);
 
         patternLockView = findViewById(R.id.patternLockView);
 
@@ -74,7 +78,13 @@ public class FindSameThingGame extends AppCompatActivity {
 
 
         counting_rest = binding.topSection.findViewById(R.id.counting_rest);
+        counting_rest.setTextSize(DisplayFontSize.font_size_x_32);
+
         close_btn = binding.topSection.findViewById(R.id.close_btn);
+        close_btn.setTextSize(DisplayFontSize.font_size_x_32);
+
+        binding.noticeText.setTextSize(DisplayFontSize.font_size_x_46);
+
         time_progress = binding.topSection.findViewById(R.id.time_progress);
 
         counting_rest.setText(current_pos+"/"+out_size);

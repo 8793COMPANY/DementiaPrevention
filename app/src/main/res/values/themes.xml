@@ -7,5 +7,8 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
-    <style name="Theme.DementiaPrevention" parent="Base.Theme.DementiaPrevention" />
+    <style name="Theme.DementiaPrevention" parent="Base.Theme.DementiaPrevention">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 </resources>

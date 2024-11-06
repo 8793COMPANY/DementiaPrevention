@@ -55,14 +55,14 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.285" />
+        app:layout_constraintGuide_percent="0.41" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guide_top_progress"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.517" />
+        app:layout_constraintGuide_percent="0.743" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

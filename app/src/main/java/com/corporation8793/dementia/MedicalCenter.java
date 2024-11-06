@@ -33,8 +33,8 @@ public class MedicalCenter {
         Log.e("test222", "allContent : " + allContent.size());
 
         for(String content[] : allContent){
-            // 치매센터명 0, 소재지도로명주소 2, 소재지지번주소 3, 위도 4, 경도 5
-            Log.e("csv", content[0]+","+ content[2]+","+ content[3]+","+content[4]+","+content[5]);
+            // 치매센터명 0, 소재지도로명주소 2, 소재지지번주소 3, 위도 4, 경도 5, 운영기관 전화번호 15
+            Log.e("csv", content[0]+","+ content[2]+","+ content[3]+","+content[4]+","+content[5]+","+content[15]);
 
             // 첫줄 제외
             if (!content[0].equals("치매센터명")) {
@@ -56,6 +56,7 @@ public class MedicalCenter {
 
                 MedicalCenterDetail item = new MedicalCenterDetail();
                 item.name = content[0];
+                item.center_number = content[15];
 
                 if (content[0].equals("대전서구치매안심센터")) {
                     item.si = "대전광역시";
@@ -174,6 +175,7 @@ public class MedicalCenter {
                                 item.gu = s2.gu;
                                 item.address = s2.address;
                                 item.center_point = s2.center_point;
+                                item.center_number = s2.center_number;
 
                                 center_list.add(item);
                             });
@@ -198,6 +200,7 @@ public class MedicalCenter {
                                 item.gu = s2.gu;
                                 item.address = s2.address;
                                 item.center_point = s2.center_point;
+                                item.center_number = s2.center_number;
 
                                 center_list.add(item);
                             });
@@ -222,6 +225,7 @@ public class MedicalCenter {
                                 item.gu = s2.gu;
                                 item.address = s2.address;
                                 item.center_point = s2.center_point;
+                                item.center_number = s2.center_number;
 
                                 center_list.add(item);
                             });
@@ -243,6 +247,7 @@ public class MedicalCenter {
                             item.gu = s2.gu;
                             item.address = s2.address;
                             item.center_point = s2.center_point;
+                            item.center_number = s2.center_number;
 
                             center_list.add(item);
                         });
@@ -266,6 +271,7 @@ public class MedicalCenter {
                                 item.gu = s2.gu;
                                 item.address = s2.address;
                                 item.center_point = s2.center_point;
+                                item.center_number = s2.center_number;
 
                                 center_list.add(item);
                             });

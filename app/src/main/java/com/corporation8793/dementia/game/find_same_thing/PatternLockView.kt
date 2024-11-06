@@ -20,7 +20,8 @@ import java.util.Random
 class PatternLockView : GridLayout {
 
     companion object {
-        const val DEFAULT_RADIUS_RATIO = 0.3f
+//        const val DEFAULT_RADIUS_RATIO = 0.3f
+        const val DEFAULT_RADIUS_RATIO = 0.5f
         const val DEFAULT_LINE_WIDTH = 2f // unit: dp
         const val DEFAULT_SPACING = 12f // unit: dp
         const val DEFAULT_ROW_COUNT = 4
@@ -398,7 +399,7 @@ class PatternLockView : GridLayout {
         }.count().toInt()
 
         if (all_cell_size == cells.size){
-            textview?.setText("게임 끝")
+            textview?.setText("게임 끝!")
             if (control_activity?.current_pos == control_activity?.out_size){
                 postDelayed({
                     // 정답이면 1점 추가

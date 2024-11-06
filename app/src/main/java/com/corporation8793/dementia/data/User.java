@@ -5,13 +5,20 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class User {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int uid;
 
     public String name;
     public String region;
     public String ageRange;
     public String birthday;
+
+    public User(String name, String region, String ageRange, String birthday) {
+        this.name = name;
+        this.region = region;
+        this.ageRange = ageRange;
+        this.birthday = birthday;
+    }
 
     public int getUid() {
         return uid;

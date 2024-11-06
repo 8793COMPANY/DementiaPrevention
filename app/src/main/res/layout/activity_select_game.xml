@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.corporation8793.dementia.game.SelectGameViewModel" />
+    </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,6 +13,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:scrollbars="vertical"
     tools:context=".game.SelectGameActivity">
 
     <include
@@ -19,16 +25,15 @@
         app:layout_constraintVertical_bias="0"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent="0.1"></include>
+        app:layout_constraintHeight_percent="0.1" />
 
     <include
         android:id="@+id/whack_a_mole"
         layout="@layout/game_list_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-
         app:gameTitle="@{`두더지 게임`}"
-        app:highScore="@{`최고점수 : 420`}"
+        app:highScore="@{viewModel.scoreWhacAMole}"
         app:gameIcon="@{@drawable/mole_game_icon}"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintHorizontal_bias="0"
@@ -42,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:gameTitle="@{`순서 게임`}"
-        app:highScore="@{`최고점수 : 420`}"
+        app:highScore="@{viewModel.scoreOtherNumber}"
         app:gameIcon="@{@drawable/order_number_game_icon}"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintHorizontal_bias="0"
@@ -50,17 +55,13 @@
         app:layout_constraintDimensionRatio="720:120"
         app:layout_constraintTop_toBottomOf="@+id/whack_a_mole"/>
 
-
-
-
-
     <include
         android:id="@+id/find_different_color_game"
         layout="@layout/game_list_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:gameTitle="@{`다른 색상 찾기`}"
-        app:highScore="@{`최고점수 : 420`}"
+        app:highScore="@{viewModel.scoreFindDifferentColor}"
         app:gameIcon="@{@drawable/find_different_color_game}"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintHorizontal_bias="0"
@@ -74,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:gameTitle="@{`색상 일치 게임`}"
-        app:highScore="@{`최고점수 : 420`}"
+        app:highScore="@{viewModel.scoreFindSameColorAndText}"
         app:gameIcon="@{@drawable/select_right_color_game_icon}"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintHorizontal_bias="0"
@@ -88,7 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:gameTitle="@{`ox 퀴즈`}"
-        app:highScore="@{`최고점수 : 420`}"
+        app:highScore="@{viewModel.scoreQuiz}"
         app:gameIcon="@{@drawable/quiz_icon}"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintHorizontal_bias="0"
@@ -96,36 +97,19 @@
         app:layout_constraintDimensionRatio="720:120"
         app:layout_constraintTop_toBottomOf="@+id/select_right_color_name"/>
 
-
-
     <include
         android:id="@+id/color_puzzle"
         layout="@layout/game_list_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:gameTitle="@{`색상 퍼즐`}"
-        app:highScore="@{`최고점수 : 420`}"
+        app:highScore="@{viewModel.scoreFindSameThing}"
         app:gameIcon="@{@drawable/color_puzzle_icon}"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintWidth_percent="0.42"
         app:layout_constraintDimensionRatio="720:120"
         app:layout_constraintTop_toBottomOf="@+id/quiz_game"/>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!--    <Button-->
 <!--        android:id="@+id/select_right_color_name"-->
@@ -135,7 +119,6 @@
 <!--        app:layout_constraintTop_toBottomOf="@+id/color_puzzle"-->
 <!--        app:layout_constraintLeft_toLeftOf="parent"-->
 <!--        ></Button>-->
-
 
 <!--    <Button-->
 <!--        android:id="@+id/quiz_game"-->

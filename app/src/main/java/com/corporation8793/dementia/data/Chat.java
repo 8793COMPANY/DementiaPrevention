@@ -5,11 +5,16 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class Chat {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public int cid;
 
     public int type;
     public String message;
+
+    public Chat(int type, String message) {
+        this.type = type;
+        this.message = message;
+    }
 
     public int getCid() {
         return cid;

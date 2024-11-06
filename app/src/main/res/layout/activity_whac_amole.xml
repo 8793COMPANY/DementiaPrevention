@@ -95,52 +95,52 @@
         app:layout_constraintLeft_toLeftOf="@+id/guide_score_left"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <ProgressBar
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:visibility="gone"
-        android:indeterminate="false"
-        android:progressDrawable="@drawable/whac_amole_progressbar_custom"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintWidth_percent="0.139"
-        app:layout_constraintTop_toTopOf="@+id/timer_progressbar"
-        app:layout_constraintBottom_toBottomOf="@+id/timer_progressbar"
-        app:layout_constraintLeft_toLeftOf="@+id/timer_progressbar"
-        app:layout_constraintRight_toRightOf="@+id/timer_progressbar" />
+<!--    <ProgressBar-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
+<!--        android:visibility="gone"-->
+<!--        android:indeterminate="false"-->
+<!--        android:progressDrawable="@drawable/whac_amole_progressbar_custom"-->
+<!--        app:layout_constraintDimensionRatio="1:1"-->
+<!--        app:layout_constraintWidth_percent="0.139"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/timer_progressbar"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/timer_progressbar"-->
+<!--        app:layout_constraintLeft_toLeftOf="@+id/timer_progressbar"-->
+<!--        app:layout_constraintRight_toRightOf="@+id/timer_progressbar" />-->
 
-    <com.jackandphantom.circularprogressbar.CircleProgressbar
-        android:id="@+id/timer_progressbar"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        app:cpb_roundedCorner="true"
-        app:cpb_backgroundProgressWidth="4"
-        app:cpb_backgroundProgressColor="#d8d8d8"
-        app:cpb_foregroundProgressWidth="10"
-        app:cpb_foregroundProgressColor="#00b3bc"
-        app:cpb_progress="100"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintWidth_percent="0.153"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintTop_toTopOf="@+id/guide_top_timer"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="@+id/guide_score_right" />
+<!--    <com.jackandphantom.circularprogressbar.CircleProgressbar-->
+<!--        android:id="@+id/timer_progressbar"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:visibility="gone"-->
+<!--        app:cpb_roundedCorner="true"-->
+<!--        app:cpb_backgroundProgressWidth="4"-->
+<!--        app:cpb_backgroundProgressColor="#d8d8d8"-->
+<!--        app:cpb_foregroundProgressWidth="10"-->
+<!--        app:cpb_foregroundProgressColor="#00b3bc"-->
+<!--        app:cpb_progress="100"-->
+<!--        app:layout_constraintDimensionRatio="1:1"-->
+<!--        app:layout_constraintWidth_percent="0.153"-->
+<!--        app:layout_constraintHorizontal_bias="1"-->
+<!--        app:layout_constraintVertical_bias="0"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/guide_top_timer"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="@+id/guide_score_right" />-->
 
     <TextView
         android:id="@+id/countDownTimerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:visibility="gone"
         android:fontFamily="@font/pretendard_semibold"
         android:textColor="#000000"
-        android:text="30초"
-        app:layout_constraintTop_toTopOf="@+id/timer_progressbar"
+        android:text="30초" />
+<!--        app:layout_constraintTop_toTopOf="@+id/timer_progressbar"
         app:layout_constraintBottom_toBottomOf="@+id/timer_progressbar"
         app:layout_constraintLeft_toLeftOf="@+id/timer_progressbar"
-        app:layout_constraintRight_toRightOf="@+id/timer_progressbar" />
+        app:layout_constraintRight_toRightOf="@+id/timer_progressbar" />-->
 
 <!--    <TextView-->
 <!--        android:id="@+id/countDownTimerText"-->

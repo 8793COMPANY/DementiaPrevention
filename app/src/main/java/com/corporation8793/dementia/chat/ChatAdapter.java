@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.corporation8793.dementia.R;
+import com.corporation8793.dementia.util.DisplayFontSize;
 
 import java.util.ArrayList;
 
@@ -82,6 +83,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             // Define click listener for the ViewHolder's View
 
             textView = (TextView) view.findViewById(R.id.message);
+//            textView.setTextSize(DisplayFontSize.font_size_x_32);
+
             if (getItemViewType() != DATE){
                 time = view.findViewById(R.id.send_time);
             }
