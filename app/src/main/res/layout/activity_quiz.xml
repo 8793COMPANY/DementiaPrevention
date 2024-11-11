@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".game.quiz.QuizActivity"
@@ -15,7 +15,6 @@
         android:layout_height="0dp"
         app:layout_constraintVertical_bias="0"
         app:layout_constraintTop_toTopOf="parent"
-
         app:layout_constraintHeight_percent="0.16"></include>
 
 
@@ -37,7 +36,6 @@
         android:id="@+id/quiz_img"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/black"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintWidth_percent="0.35"
         app:layout_constraintVertical_bias="0.05"
@@ -51,18 +49,18 @@
         android:id="@+id/quiz_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="토마토는 꽃이 없다?"
-        android:textSize="25dp"
-        android:textColor="@color/black"
-        android:gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:fontFamily="@font/pretendard_semibold"
-        app:layout_constraintVertical_bias="0.05"
+        android:gravity="center"
+        android:text="토마토는 꽃이 없다?"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quiz_img"
-        app:layout_constraintBottom_toBottomOf="parent"></TextView>
-
-
-
-
+        app:layout_constraintVertical_bias="0.049"></TextView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
