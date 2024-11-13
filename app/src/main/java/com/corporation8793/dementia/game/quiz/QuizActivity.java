@@ -187,7 +187,7 @@ public class QuizActivity extends AppCompatActivity {
                         intent.putExtra("type", 5);
                         intent.putExtra("size", quiz_size);
                         intent.putExtra("rating", right_number);
-                        Toast.makeText(QuizActivity.this, "총 점수는 " + right_number, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(QuizActivity.this, "총 점수는 " + right_number, Toast.LENGTH_SHORT).show();
                         startActivity(intent);
                     }
                 });
@@ -395,7 +395,7 @@ public class QuizActivity extends AppCompatActivity {
                     intent.putExtra("type", 5);
                     intent.putExtra("size", quiz_size);
                     intent.putExtra("rating", right_number);
-                    Toast.makeText(QuizActivity.this, "총 점수는 " + right_number, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(QuizActivity.this, "총 점수는 " + right_number, Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                 }
             } else if (!time.equals("00:00")) { // 시간이 0초가 아니면 타이머 계속 진행

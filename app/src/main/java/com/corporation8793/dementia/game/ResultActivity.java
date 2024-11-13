@@ -180,6 +180,30 @@ public class ResultActivity extends AppCompatActivity {
 
                     score_text.setText(rating+"");
                     high_score_text.setText("/" + highest_score);
+
+                    // 점수 저장
+                    if (MySharedPreferences.getString(ResultActivity.this, "scoreQuiz") == null
+                            || MySharedPreferences.getString(ResultActivity.this, "scoreQuiz").isEmpty()) { // 처음 시작하는 경우
+                        // 바로 점수 저장
+                        Log.e("testtttt", "null");
+                        MySharedPreferences.setString(ResultActivity.this, "scoreQuiz", String.valueOf(rating));
+                    } else {
+                        // 이전 점수가 있는 경우 비교해서 저장
+                        Log.e("testtttt", "not null");
+                        Log.e("test~", MySharedPreferences.getString(ResultActivity.this, "scoreQuiz"));
+
+                        int highScore = Integer.parseInt(MySharedPreferences.getString(ResultActivity.this, "scoreQuiz"));
+
+                        Log.e("testtttt", "highScore : " + highScore);
+                        Log.e("testtttt", "score : " + rating);
+
+                        if (highScore < rating) {
+                            Log.e("testtttt", "high");
+                            MySharedPreferences.setString(ResultActivity.this, "scoreQuiz", String.valueOf(rating));
+                        } else {
+                            Log.e("testtttt", "low");
+                        }
+                    }
                     break;
                 case 6: // 색상 퍼즐 게임
                     total = rating + "/" + highest_score;

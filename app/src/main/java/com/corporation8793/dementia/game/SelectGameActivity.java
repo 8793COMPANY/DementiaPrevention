@@ -80,6 +80,17 @@ public class SelectGameActivity extends AppCompatActivity {
             viewModel.setScoreFindSameColorAndText("최고점수 : " + MySharedPreferences.getString(SelectGameActivity.this, "scoreFindSameColorAndText"));
         }
 
+        if (MySharedPreferences.getString(SelectGameActivity.this, "scoreQuiz") == null
+                || MySharedPreferences.getString(SelectGameActivity.this, "scoreQuiz").isEmpty()) { // 처음 시작하는 경우
+            // 기본 0점으로 처리
+            Log.e("testtttt", "null");
+            viewModel.setScoreQuiz("최고점수 : 0");
+        } else {
+            Log.e("testtttt", "not null");
+            Log.e("test~", MySharedPreferences.getString(SelectGameActivity.this, "scoreQuiz"));
+            viewModel.setScoreQuiz("최고점수 : " + MySharedPreferences.getString(SelectGameActivity.this, "scoreQuiz"));
+        }
+
         if (MySharedPreferences.getString(SelectGameActivity.this, "scoreFindSameThing") == null
                 || MySharedPreferences.getString(SelectGameActivity.this, "scoreFindSameThing").isEmpty()) { // 처음 시작하는 경우
             // 기본 0점으로 처리
@@ -191,6 +202,17 @@ public class SelectGameActivity extends AppCompatActivity {
             Log.e("testtttt", "not null");
             Log.e("test~", MySharedPreferences.getString(SelectGameActivity.this, "scoreFindSameColorAndText"));
             binding.selectRightColorName.gameHighestScore.setText("최고점수 : " + MySharedPreferences.getString(SelectGameActivity.this, "scoreFindSameColorAndText"));
+        }
+
+        if (MySharedPreferences.getString(SelectGameActivity.this, "scoreQuiz") == null
+                || MySharedPreferences.getString(SelectGameActivity.this, "scoreQuiz").isEmpty()) { // 처음 시작하는 경우
+            // 기본 0점으로 처리
+            Log.e("testtttt", "null");
+            binding.quizGame.gameHighestScore.setText("최고점수 : 0");
+        } else {
+            Log.e("testtttt", "not null");
+            Log.e("test~", MySharedPreferences.getString(SelectGameActivity.this, "scoreQuiz"));
+            binding.quizGame.gameHighestScore.setText("최고점수 : " + MySharedPreferences.getString(SelectGameActivity.this, "scoreQuiz"));
         }
 
         if (MySharedPreferences.getString(SelectGameActivity.this, "scoreFindSameThing") == null
