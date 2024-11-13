@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/oxquiz_dialog_background">
+
+    <TextView
+        android:id="@+id/dialog_confirm_btn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:height="0dp"
+        android:background="@drawable/oxquiz_dialog_button"
+        android:fontFamily="@font/pretendard_semibold"
+        android:gravity="center"
+        android:text="확인"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_text2"
+        app:layout_constraintWidth_percent="0.9" />
+
+    <TextView
+        android:textColor="@color/black"
+        android:id="@+id/main_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.5"
+        app:layout_constraintHeight_percent="0.1"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/pretendard_semibold"
+        android:gravity="center"
+        android:text="정답입니다!"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/main_text2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:textColor="@color/black"
+        android:id="@+id/main_text2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="34dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/pretendard_semibold"
+        android:gravity="center"
+        android:text="다음 단계에 도전해보세요"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/dialog_confirm_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_text"
+        app:layout_constraintWidth_percent="0.85" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toTopOf="@+id/main_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/quiz_correct_icon" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
