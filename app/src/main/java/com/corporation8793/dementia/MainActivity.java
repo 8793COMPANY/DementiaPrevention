@@ -406,6 +406,18 @@ public class MainActivity extends AppCompatActivity {
 
         Log.e("Test", "onResume");
 
+        // 사용자 이름 갱신
+        if (Application.user != null) {
+            Log.e("Test", "유저 이름 갱신: " + Application.user.name);
+
+            binding.userName.setText(Application.user.name + "님");
+
+            TextView userNameTextView = drawerView.findViewById(R.id.user_name);
+            userNameTextView.setText(Application.user.name + "님");
+        } else {
+            Log.e("Test", "유저 데이터가 없습니다.");
+        }
+
         result_all_list = DataSetting.getInstance(MainActivity.this).getDiagnoseLists();
         if (!result_all_list.isEmpty()) {
             Log.e("Test", "not null");

@@ -1,3 +1,4 @@
 /build
 local.properties
 /src/main/res/values/key.xml
+*.apk
