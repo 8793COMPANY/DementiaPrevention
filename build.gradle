@@ -3,6 +3,8 @@ plugins {
 //    id 'com.android.application' version '8.1.2' apply false
 //    id 'org.jetbrains.kotlin.android' version '1.9.10' apply false
 
-    id 'com.android.application' version '8.5.2' apply false   // ★ 8.1.2 → 8.5.2
+//    id 'com.android.application' version '8.5.2' apply false   // ★ 8.1.2 → 8.5.2
+
+    id 'com.android.application' version '8.6.1' apply false   // ★ 8.5.2 → 8.6.1
     id 'org.jetbrains.kotlin.android' version '2.0.21' apply false // ★ 1.9.10 → 2.0.21 (권장)
 }
