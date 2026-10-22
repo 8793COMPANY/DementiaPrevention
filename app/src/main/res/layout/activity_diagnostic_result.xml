@@ -18,7 +18,7 @@
 
         <TextView
             android:id="@+id/diagnose_result"
-            android:text="진단 결과"
+            android:text="자가 점검 결과"
             android:textSize="24dp"
             android:textColor="@color/black"
             android:fontFamily="@font/pretendard_semibold"
@@ -191,7 +191,21 @@
         app:layout_constraintTop_toBottomOf="@+id/user_name"></TextView>
 
 
-
+    <TextView
+        android:id="@+id/medical_disclaimer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:text="※ 본 결과는 인지기능 자가점검을 위한 참고 정보이며 의학적 진단 결과가 아닙니다.\n건강 상태가 우려되는 경우 의료 전문가와 상담하시기 바랍니다."
+        android:textSize="13sp"
+        android:textColor="@color/gray_9f9f9f"
+        android:gravity="center"
+        android:fontFamily="@font/pretendard_regular"
+        app:layout_constraintTop_toBottomOf="@+id/result_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -199,7 +213,7 @@
         layout="@layout/check_choice_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="최근 진단리스트 보기"
+        android:text="최근 자가점검 결과 보기"
         android:textSize="18dp"
         android:fontFamily="@font/pretendard_semibold"
         android:background="@drawable/correct_btn_off"
@@ -209,7 +223,7 @@
         android:layout_marginBottom="20dp"
         app:layout_constraintVertical_bias="0.4"
         app:layout_constraintDimensionRatio="478:110"
-        app:layout_constraintTop_toBottomOf="@+id/result_text"
+        app:layout_constraintTop_toBottomOf="@+id/medical_disclaimer"
         app:layout_constraintBottom_toTopOf="@+id/go_main_activity"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"></androidx.appcompat.widget.AppCompatButton>

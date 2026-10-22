@@ -108,18 +108,18 @@ public class DiagnosticResultActivity extends AppCompatActivity {
         if (total_score < 26){
             third.setBackgroundResource(R.drawable.full_star_icon);
             progressBar.setProgress(33);
-            msg = "치매 의심입니다.";
+            msg = "추가 확인이 권장됩니다.";
         }else if (total_score < 35){
             second.setBackgroundResource(R.drawable.full_star_icon);
             third.setBackgroundResource(R.drawable.full_star_icon);
             progressBar.setProgress(66);
-            msg = "치매 보통입니다.";
+            msg = "지속적인 관찰이 권장됩니다.";
         }else{
             first.setBackgroundResource(R.drawable.full_star_icon);
             second.setBackgroundResource(R.drawable.full_star_icon);
             third.setBackgroundResource(R.drawable.full_star_icon);
             progressBar.setProgress(100);
-            msg = "치매 안심입니다.";
+            msg = "현재 점검 결과가 양호합니다.";
         }
 
         // 여기에 디비 저장
@@ -134,10 +134,13 @@ public class DiagnosticResultActivity extends AppCompatActivity {
         DataSetting.getInstance(DiagnosticResultActivity.this).insert_diagnose_list_data(diagnoseList);
 
 
-        int text_chagne_index= msg.indexOf("입니다");
-
         SpannableStringBuilder ssb = new SpannableStringBuilder(msg);
-        ssb.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.yellow_ffbb49)), 0, text_chagne_index, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ssb.setSpan(
+                new ForegroundColorSpan(getResources().getColor(R.color.yellow_ffbb49)),
+                0,
+                msg.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        );
         result_text.setText(ssb);
 
         close_btn.setOnClickListener(v->{
